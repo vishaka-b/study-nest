@@ -36,9 +36,10 @@ function LoginScreen() {
   return (
     <body>
     <h1 className="title">StudyNest</h1>
-      <img src={logo} alt="logo" className="home-logo"/>
+    <div className="home-logo">
+      <img src={logo} alt="logo" className="home-logo-img"/>
+    </div>
     <div>
-      <h2 className="login">Sign In:</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="username"
@@ -47,7 +48,7 @@ function LoginScreen() {
           value={username}
           onChange={handleUsernameChange}
         />
-        <button className="login-button" type="submit">YAY</button>
+        <button className="login-button" type="submit">Sign In</button>
       </form>
     </div>
     </body>

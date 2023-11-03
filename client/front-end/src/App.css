@@ -1,21 +1,9 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.login{
-  text-align: center;
-  color: rgb(109, 44, 19);
-}
 
 .username {
   display:block;
   margin-left: auto;
   margin-right: auto;
+  font-family: 'Georgia', serif;
 
 }
 
@@ -30,9 +18,9 @@
   padding: 10px 15px;
   text-align: center;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 13px;
   background-color: rgb(109, 44, 19);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Comic Sans', cursive;
 
 }
 
@@ -40,6 +28,7 @@ h1 {
   text-align: center;
   color: rgb(109, 44, 19);
   background-color: #E2D9C7;
+  font-family: 'Georgia', serif;
 
 }
 
@@ -51,7 +40,12 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width:50%;
+  width: 35%;
+ 
+}
+
+.home-logo .home-logo-img {
+  width: 100%;
 }
 
 header {
