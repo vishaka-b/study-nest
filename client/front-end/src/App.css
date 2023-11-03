@@ -10,12 +10,12 @@
 h1 {
   text-align: center;
   color: rgb(109, 44, 19);
-  background-color: rgb(228, 212, 196);
+  background-color: #E2D9C7;
 
 }
 
 body {
-  background-color: rgb(228, 212, 196);
+  background-color: #E2D9C7;
 }
 
 .home-logo {
@@ -26,5 +26,5 @@ body {
 }
 
 header {
-  background-color: rgb(228, 212, 196);
+  background-color: #E2D9C7;
 }
