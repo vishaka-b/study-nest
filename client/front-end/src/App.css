@@ -7,6 +7,35 @@
   pointer-events: none;
 }
 
+.login{
+  text-align: center;
+  color: rgb(109, 44, 19);
+}
+
+.username {
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.login-button{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: #E2D9C7;
+  border-radius: 15%;
+  color: white;
+  margin-top: 1%;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  background-color: rgb(109, 44, 19);
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
 h1 {
   text-align: center;
   color: rgb(109, 44, 19);
