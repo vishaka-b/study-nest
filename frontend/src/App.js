@@ -1,25 +1,39 @@
 import logo from './logo.svg';
 import './App.css';
-
+import NavBar from './Navbar';
+import AllGroups from './pages/allgroups';
+import Login from './pages/login';
+import Home from './pages/home';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  let currentPage
+  switch (window.location.pathname){
+    case "/":
+      currentPage = <Home />
+      break
+    case "/allgroups":
+      currentPage = <AllGroups />
+      break
+    case "/login":
+      currentPage = <Login />
+      break
 
+  }
+  return (
+    <>
+     <div className='App'>
+    <NavBar />
+    <div className='container'>{currentPage}</div>
+    
+    
+    </div>
+    
+    
+   
+    
+    </>
+    
+     
+  );
+  
+  }
 export default App;
