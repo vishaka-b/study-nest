@@ -1,0 +1,52 @@
+.username {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Georgia', serif;
+  
+  }
+  
+  .login-button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: #E2D9C7;
+    border-radius: 15%;
+    color: white;
+    margin-top: 1%;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    background-color: rgb(109, 44, 19);
+    font-family: 'Comic Sans', cursive;
+  
+  }
+  
+  h1 {
+    text-align: center;
+    color: rgb(109, 44, 19);
+    background-color: #E2D9C7;
+    font-family: 'Georgia', serif;
+  
+  }
+  
+  body {
+    background-color: #E2D9C7;
+  }
+  
+  .home-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+   
+  }
+  
+  .home-logo .home-logo-img {
+    width: 100%;
+  }
+  
+  header {
+    background-color: #E2D9C7;
+  }
