@@ -4,6 +4,7 @@ import NavBar from './Navbar';
 import AllGroups from './pages/allgroups';
 import Login from './pages/login';
 import Home from './pages/home';
+
 function App() {
   let currentPage
   switch (window.location.pathname){
