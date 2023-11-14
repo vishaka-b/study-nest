@@ -1,7 +1,9 @@
-export default function Widget({course}) {
+export default function Widget({name, course, time}) {
     return (
-        <>
-            <h1>This is a class.</h1>
-        </>
+        <div className="widget">
+            <h1>{name}</h1>
+            <h2>Course: {course}</h2>
+            <h2>Meeting time: {time}</h2>
+        </div>
     )
 }

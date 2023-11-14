@@ -5,7 +5,7 @@ export default function Home(){
         <h1>StudyNest</h1>
         <div>
             <h2 className="homeBody">Groups you're in:</h2>
-            <Widget></Widget>
+            <Widget name={"Code Crackin' Chicks"} course={"COM SCI 35L"} time={"Mon 5:00-7:00pm"}></Widget>
         </div>
         <div> 
             
