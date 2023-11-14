@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(184, 139, 225);
+}
+.container{
+  text-align: center;
+  height: 100%;
+}
+.homeBody{
+  text-align: left;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/*
+This code below is the styling for our nav block
+We are setting a background color, and padding so that they links are nec to each other
+*/
+.nav {
+  background-color: rgb(187, 170, 235);
+  color:rgba(179, 85, 230, 0.934);
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0 1rem;
+  align-items: stretch;
+}
+
+
+.nav a {
+  color: inherit;
+  text-decoration: none;
+  align-items: stretch;
+  height: 100%;
+  display: flex;
+  padding: .25rem;
+}
+
+.nav ul{
+  padding: 0;
+  margin: 0;
+  list-style: none; 
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* This is out Home Title WE want this to be at the right hence size is 2 bigger than the defualt*/
+
+.site-title{
+  font-size: 3rem;
+}
+.site-title:hover{
+  background-color: rgb(177, 156, 232);
+}
+
+/* code to say what the nav li looks like on default */
+.nav li.active{
+  font-size: 2rem;
+  background-color: rgb(	203, 195, 227);
+}
+.nav li:hover{
+  background-color: rgb(152, 70, 228);
+}
+
+.createNewGroup{
+  background-color: rgb(182, 124, 237);
+  font-size: 5rem;
+  gap: 2rem;
+  padding: 0 1rem;
+  align-items: stretch;
+  display: flex;
+
+}
