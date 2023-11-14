@@ -2,10 +2,14 @@ import './Login.css';
 //import logo from './logo.png'
 import React, { useState } from 'react';
 
-export default function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-  return (
+export default function Login({check}) {
+    //const [email, setEmail] = useState("");
+    //const [password, setPassword] = useState("");
+    check = false;
+    function handleSubmit(){
+      check = true;
+    }
+    return (
     <body>
       <div className="title-block">
         <div className="welcome">
@@ -15,7 +19,7 @@ export default function Login() {
       </div>
     <div className="login-wrapper"/>
     <h1 className="login-msg">Please Log In</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           <p>Email</p>
           <input type="email"></input>

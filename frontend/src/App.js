@@ -9,11 +9,39 @@ import React, {useState} from 'react';
 
 
 function App() {
-  let startPage ="/login";
-  const [token, setToken] = useState();
-  if (!token){
-    return <Login setToken={setToken} />
+  let currentPage
+  switch (window.location.pathname){
+    case "/":
+      currentPage = <Home />
+      break
+    case "/allgroups":
+      currentPage = <AllGroups />
+      break
+    case "/login":
+      currentPage = <Login />
+      break
+
   }
+  return (
+    <>
+     <div className='App'>
+    <NavBar />
+    <div className='container'>{currentPage}</div>
+    
+    
+    </div>
+    
+    
+   
+    
+    </>
+    
+     
+  );
+  
+  }
+export default App;
+/*
   return (
    <div className="wrapper">
     <NavBar />
@@ -58,4 +86,14 @@ let currentPage
    
     
     </>
+*/
+/*
+<BrowserRouter>
+      <Routes>
+        <Route path="/home" element={<Home/>}>
+        </Route>
+        <Route path="/allgroups" element={<AllGroups/>}>
+        </Route>
+      </Routes>
+    </BrowserRouter>
 */
