@@ -1,0 +1,112 @@
+
+.homeBody2 {
+    text-align: left;
+    float: left;
+    padding-right: 10px;
+}
+
+.dayOfWeek {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-: 1px;
+}
+
+.meetingDays {
+    margin-bottom: 2px;
+    padding: 1px;
+}
+
+
+.daysOfWeek {
+    display: flex;
+    flex-wrap: wrap;
+    
+  }
+  
+.daysOfWeek label {
+    margin-right: 5px; /* Adjust the spacing between checkboxes as needed */
+    
+}
+
+.groups {
+    float: center;
+}
+
+.popupForm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: rgb(174, 143, 210);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 2%;
+  }
+  
+  .popupForm label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .popupForm input {
+    width: 90%;
+    outline-color: #000000;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+
+  
+  .popupForm button.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #db6262;
+    color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .popupForm button.closeButton:hover {
+    color: #fff;
+    background-color: #f13333;
+
+  }
+
+  .popupForm button.submitButton {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    background-color: #4CAF50;
+
+  }
+
+  .popupForm button.submitButton:hover {
+    color: #fff;
+    background-color: rgb(32, 136, 37);
+
+  }
+  
+  /* Style the "+" button */
+  .createNewGroup {
+    background-color: rgb(187, 170, 235);
+    height:50px;
+    width:50px;
+    color: #000000;
+    padding: 7px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    display: flex;
+    font-size: 2rem;
+
+  }
+/* Hover for the + button */
+  .createNewGroup:hover {
+    background-color: rgba(179, 85, 230, 0.934);
+  }
+  
+ 

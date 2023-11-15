@@ -8,5 +8,9 @@ app.get("/getGroupsYoureIn", (req,res)=> {
     res.send("GROUP 1");
 });
 
+app.get("/getGroupsYouveMade", (req,res)=> {
+    res.send("GROUP 2");
+});
+
 app.listen(5000, ()=>console.log("app is running"));
 
