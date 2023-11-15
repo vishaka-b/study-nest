@@ -2,12 +2,12 @@ import './Login.css';
 //import logo from './logo.png'
 import React, { useState } from 'react';
 
-export default function Login({check}) {
+export default function Login({setToken}) {
     //const [email, setEmail] = useState("");
     //const [password, setPassword] = useState("");
-    check = false;
+
     function handleSubmit(){
-      check = true;
+    
     }
     return (
     <body>
@@ -17,21 +17,24 @@ export default function Login({check}) {
         </div>
         StudyNest!
       </div>
-    <div className="login-wrapper"/>
-    <h1 className="login-msg">Please Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <p>Email</p>
-          <input type="email"></input>
-        </label>
-        <label>
-          <p>Password</p>
-          <input type="password"></input>
-        </label>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+    <div className="login-wrapper">
+      <h1 className="login-msg">Please Log In</h1>
+        <form action="/">
+          <label className="text">
+            <div>Email</div>
+            <input type="email"></input>
+          </label>
+          <label className="text">
+            <div>Password</div>
+            <input type="password"></input>
+          </label>
+          <div>
+            <button className="login-button" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </body>
   );
 }

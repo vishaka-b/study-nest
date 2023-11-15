@@ -1,20 +1,23 @@
+import NavBar from '../Navbar';
 import React from 'react';
 export default function Home(){
-    return (<>
-    
+    return (
+    <div className='homepage'>
+        <NavBar />
         <h1>StudyNest</h1>
-        <div>
+        <div className="groups-in">
             <h2 className="homeBody">Groups you're in:</h2>
         
         </div>
-        <div> 
+        <div className="groups-made"> 
             
             <h2 className="homeBody">Groups you've made:</h2>
-            <button type="button" className="createNewGroup"> + </button>
-
+            <div>
+                <button type="button" className="createNewGroup"> + </button>
+            </div>
             
             </div>
        
         
-        </>)
+        </div>)
 }

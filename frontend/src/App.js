@@ -9,34 +9,23 @@ import React, {useState} from 'react';
 
 
 function App() {
-  let currentPage
-  switch (window.location.pathname){
-    case "/":
-      currentPage = <Home />
-      break
-    case "/allgroups":
-      currentPage = <AllGroups />
-      break
-    case "/login":
-      currentPage = <Login />
-      break
-
-  }
+  const [token, setToken] = useState();
+  let startPage = "/login"
+  //if (!token){
+  //  return (<Login setToken={setToken}/>);
+  //}
   return (
-    <>
-     <div className='App'>
-    <NavBar />
-    <div className='container'>{currentPage}</div>
-    
-    
-    </div>
-    
-    
-   
-    
-    </>
-    
-     
+    <div className="wrapper">
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login/>}></Route>
+        <Route path="/" element={<Home/>}>
+        </Route>
+        <Route path="/allgroups" element={<AllGroups/>}>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+   </div>   
   );
   
   }
