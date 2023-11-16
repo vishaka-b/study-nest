@@ -1,16 +1,9 @@
 import './Login.css';
-//import logo from './logo.png'
-import React, { useState } from 'react';
+//import React, { useState } from 'react';
 
-export default function Login({setToken}) {
-    //const [email, setEmail] = useState("");
-    //const [password, setPassword] = useState("");
-
-    function handleSubmit(){
-    
-    }
+function Login(props) {
     return (
-    <body>
+    <div>
       <div className="title-block">
         <div className="welcome">
           welcome to the
@@ -19,14 +12,14 @@ export default function Login({setToken}) {
       </div>
     <div className="login-wrapper">
       <h1 className="login-msg">Please Log In</h1>
-        <form action="/">
+        <form action='/'>
           <label className="text">
             <div>Email</div>
-            <input type="email"></input>
+            <input type="email"  />
           </label>
           <label className="text">
             <div>Password</div>
-            <input type="password"></input>
+            <input type="password" />
           </label>
           <div>
             <button className="login-button" type="submit">
@@ -35,10 +28,28 @@ export default function Login({setToken}) {
           </div>
         </form>
       </div>
-    </body>
+    </div>
   );
 }
+
 /*
-<div className="home-logo">
-      <img src={logo} alt="logo" className="home-logo-img"/>
-    </div> */
+const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+    async function handleSubmit(e) {
+      e.preventDefualt();
+      const res = fetch('http://localhost:3000/');
+    }
+async function loginUser(email, password) {
+  // check email and password with database
+  // 0 = success, 1 = wrong password, 2 = email not found
+  const url = "http://localhost:5000/login";
+  let res = await fetch(url);
+  res = res.text();
+  console.log(res);
+  return res;
+}
+
+*/
+
+export default Login;
