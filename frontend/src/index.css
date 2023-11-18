@@ -33,7 +33,6 @@ We are setting a background color, and padding so that they links are nec to eac
   align-items: stretch;
 }
 
-
 .nav a {
   color: inherit;
   text-decoration: none;
@@ -78,4 +77,12 @@ We are setting a background color, and padding so that they links are nec to eac
   align-items: stretch;
   display: flex;
 
+}
+
+.widget{
+  background-color: white;
+  box-sizing: border-box;
+  margin: 10%;
+  text-align: left;
+  padding: 20px;
 }

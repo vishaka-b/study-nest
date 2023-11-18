@@ -1,5 +1,6 @@
 import Axios from "axios";
 import React, { useEffect, useState } from 'react';
+import Widget from '../features/widget.js'
 
 export default function Home(){
 
@@ -21,6 +22,7 @@ export default function Home(){
             <h2 className="homeBody">Groups you're in:</h2>
             <h3> {groupsYoureIn} </h3>
         
+            <Widget name={"Code Crackin' Chicks"} course={"COM SCI 35L"} time={"Mon 5:00-7:00pm"}></Widget>
         </div>
         <div> 
             
