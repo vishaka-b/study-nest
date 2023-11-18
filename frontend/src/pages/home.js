@@ -5,7 +5,10 @@ import NavBar from '../Navbar'
 
 
 export default function Home(){
-/*
+
+    const [groupsYoureIn, setGroupsYoureIn] = useState("");
+
+    /*
     const [groupsYoureIn, setGroupsYoureIn] = useState("");
 
     const getGroupsYoureIn=async()=>{
@@ -43,7 +46,8 @@ export default function Home(){
     const handleCloseForm = () => {
         setShowForm(false);
     }
-
+    //use Axios.post 
+    //on backend read the body and add to database and then send a temp response back (200 = allgood)
     const handleFormSubmit = () => {
 
         if (!groupName || !ownersName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day)) {
@@ -73,6 +77,7 @@ export default function Home(){
           });
     }
 
+    /*
     const getGroupsYouveMade=async()=>{
         const response=await Axios.get("http://localhost:5000/getGroupsYouveMade");
         setGroupsYouveMade(response.data);
@@ -81,13 +86,16 @@ export default function Home(){
     useEffect(()=> {
         getGroupsYouveMade()
     }, []);
+    */
+   
+
 
     return (<div className='homepage'>
         <NavBar/>
-        <h1>StudyNest</h1>
+        
+        
         <div>
             <h2 className="groups-in">Groups you're in:</h2>
-        
         </div>
         <div> 
             <div className='groups-made'>
