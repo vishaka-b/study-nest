@@ -8,18 +8,16 @@ export default function Home(){
 
     const [groupsYoureIn, setGroupsYoureIn] = useState("");
 
-    /*
-    const [groupsYoureIn, setGroupsYoureIn] = useState("");
-
     const getGroupsYoureIn=async()=>{
-        const response=await Axios.get("http://localhost:5000/getGroupsYoureIn");
+        const response=await Axios.get("http://localhost:5000/mygroupslist");
         setGroupsYoureIn(response.data);
+        console.log(response.data)
     }
 
     useEffect(()=> {
         getGroupsYoureIn()
     }, []);
-    */
+    
     
     
     const [groupsYouveMade, setGroupsYouveMade] = useState("");
@@ -87,15 +85,17 @@ export default function Home(){
         getGroupsYouveMade()
     }, []);
     */
-   
-
-
+   //<h3> {} ... </h3> is where widgets should go 
     return (<div className='homepage'>
         <NavBar/>
         
         
         <div>
             <h2 className="groups-in">Groups you're in:</h2>
+            
+          
+            <h3>{ groupsYoureIn !== "" && groupsYoureIn[0].groupname}</h3>
+
         </div>
         <div> 
             <div className='groups-made'>
