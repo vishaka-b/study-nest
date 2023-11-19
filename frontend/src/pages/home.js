@@ -96,6 +96,7 @@ export default function Home(){
             
           
             <h3>{ groupsYoureIn !== "" && groupsYoureIn[0].groupname}</h3>
+            <div><Widget /></div>
 
         </div>
         <div> 
