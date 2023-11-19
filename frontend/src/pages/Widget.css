@@ -1,0 +1,73 @@
+#widget-container {
+    position: absolute;
+    top: 300px;    /* Adjust the top distance from the top of the viewport */
+    left: 75px;
+    width: 300px;
+    height: 200px;
+    background-color: #ade6ff;
+    padding: 10px;
+    border: 3px solid #000000;
+    background-image: url('./historynew.avif');
+    background-size: 100% 100%;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+   
+   
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: flex-start; /* Align items to the start (top) of the container */
+   }
+   
+   h1 {
+    margin-top: 0;
+    margin-bottom: 0; /* Remove default margin that may affect the vertical position */
+   }
+   
+   
+   #title-bar {
+    width: 280px;
+    height: 20px;
+   
+   
+    padding: 10px;
+    background-color: #a9cff8; /* Adjust the background color as needed */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+   
+   
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+   }
+   
+   
+   #button-container {
+    margin-top: auto; /* Push the button to the bottom of the container */
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+   }
+   
+   button {
+    /*background-color: #c8eeff;*/
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+   }
+   
+   
+   h2 {
+    margin: 0; /* Reset margin to remove any default margin */
+   }
+   
+   img {
+    width: 300px;
+    height: 200px;
+  }
+  
