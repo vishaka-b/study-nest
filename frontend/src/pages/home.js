@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Widget from '../features/widget.js'
 import './home.css';
 import NavBar from '../Navbar'
+import Widget from './Widget'
 
 
 export default function Home(){
@@ -86,6 +87,8 @@ export default function Home(){
         getGroupsYouveMade()
     }, []);
     */
+   //        <Widget imageUrl={'./chemistryimg.jpeg'}/>
+
    //<h3> {} ... </h3> is where widgets should go 
     return (<div className='homepage'>
         <NavBar/>
@@ -194,7 +197,7 @@ export default function Home(){
           </form>
         </div>
       )}
-            
+             
             </div>
        
         

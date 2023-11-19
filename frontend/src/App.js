@@ -3,10 +3,12 @@ import './App.css';
 import AllGroups from './pages/allgroups';
 import Login from './pages/Login/Login';
 import Home from './pages/home';
+
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import React, {useState} from 'react';
 
 
+ 
 function App() {
   
     return (
@@ -20,6 +22,7 @@ function App() {
       </Routes>
     </BrowserRouter>
    </div>   
+
   );
   
   }
