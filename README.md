@@ -5,7 +5,7 @@
   `git clone https://github.com/vishaka-b/study-nest.git`
 2) cd into study-nest
    `cd study-nest`
-3) go into the frontend folder using cs frontend
+3) go into the frontend folder using `cd frontend`
 4) use `npm install` or `npm i` to install the reuired npm features
 
 ## Connecting to Backend Database
@@ -17,7 +17,7 @@ cd into the folder using `cd backend`
 To start the connection first install mondodb, express and cors.
 To do that use:
 
-`npm install mongo db`
+`npm install mongodb`
 
 `npm install express`
 
