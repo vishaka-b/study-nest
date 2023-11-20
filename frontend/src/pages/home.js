@@ -97,9 +97,13 @@ export default function Home(){
         <div>
             <h2 className="groups-in">Groups you're in:</h2>
             
+            {Array.isArray(groupsYoureIn) && groupsYoureIn.map((group, index) => (
+                <h3 key={index}>{group.groupname}</h3>
+                )
+            )
+            }
             <Feed></Feed>
-          
-            <h3>{ groupsYoureIn !== "" && groupsYoureIn[0].groupname}</h3>
+           
 
         </div>
         <div> 
