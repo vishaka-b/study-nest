@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { useEffect, useState } from 'react';
-import Widget1 from '../features/widget.js'
+import Feed from './Feed.js'
 import './home.css';
 import NavBar from '../Navbar'
 import Widget from './Widget'
@@ -97,7 +97,7 @@ export default function Home(){
         <div>
             <h2 className="groups-in">Groups you're in:</h2>
             
-            <Widget1 name={"Code Crackin' Chicks"} course={"COM SCI 35L"} time={"Mon 5:00-7:00pm"}></Widget1>
+            <Feed></Feed>
           
             <h3>{ groupsYoureIn !== "" && groupsYoureIn[0].groupname}</h3>
 
