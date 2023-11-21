@@ -109,9 +109,5 @@ We are setting a background color, and padding so that they links are nec to eac
 }
 
 .widget{
-  background-color: white;
-  box-sizing: border-box;
-  margin: 10%;
-  text-align: left;
-  padding: 20px;
+  margin-bottom: 24px;
 }

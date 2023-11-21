@@ -1,8 +1,9 @@
 import Axios from "axios";
 import React, { useEffect, useState } from 'react';
-import Widget from '../features/widget.js'
+import Feed from './Feed.js'
 import './home.css';
 import NavBar from '../Navbar'
+import Widget from './Widget'
 
 
 export default function Home(){
@@ -86,6 +87,8 @@ export default function Home(){
         getGroupsYouveMade()
     }, []);
     */
+   //        <Widget imageUrl={'./chemistryimg.jpeg'}/>
+
    //<h3> {} ... </h3> is where widgets should go 
     return (<div className='homepage'>
         <NavBar/>
@@ -94,9 +97,19 @@ export default function Home(){
         <div>
             <h2 className="groups-in">Groups you're in:</h2>
             
+<<<<<<< HEAD
           
             <h3>{ groupsYoureIn !== "" && groupsYoureIn[0].groupname}</h3>
             <div><Widget /></div>
+=======
+            {Array.isArray(groupsYoureIn) && groupsYoureIn.map((group, index) => (
+                <h3 key={index}>{group.groupname}</h3>
+                )
+            )
+            }
+            <Feed></Feed>
+           
+>>>>>>> 3fa402e99e55ca08980d66f6584508b1b6d70525
 
         </div>
         <div> 
@@ -195,7 +208,7 @@ export default function Home(){
           </form>
         </div>
       )}
-            
+             
             </div>
        
         
