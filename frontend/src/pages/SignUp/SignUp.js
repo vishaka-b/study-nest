@@ -1,7 +1,7 @@
-import './Login.css';
+import './SignUp.css';
 //import React, { useState } from 'react';
 
-function Login(props) {
+function SignUp(props) {
     return (
     <div>
       <div className="title-block">
@@ -11,8 +11,8 @@ function Login(props) {
         StudyNest!
       </div>
     <div className="login-wrapper">
-      <h1 className="login-msg">Please Log In</h1>
-        <form action='/Home'>
+      <h1 className="login-msg">Sign Up</h1>
+        <form action='/'>
           <label className="text">
             <div>Email</div>
             <input type="email"  />
@@ -23,11 +23,11 @@ function Login(props) {
           </label>
           <div>
             <button className="login-button" type="submit">
-              Log In
+              Sign Up
             </button>
           </div>
         </form>
-        <div className="sign-up">Not a member? <a className="sign-up" href="/SignUp">Sign Up</a></div>
+        <div className="login-link">Already a member? <a className="login-link" href="/">Log In</a></div>
       </div>
     </div>
   );
@@ -53,4 +53,4 @@ async function loginUser(email, password) {
 
 */
 
-export default Login;
+export default SignUp;

@@ -1,0 +1,84 @@
+.username {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Georgia', serif;
+  
+  }
+  
+  .login-form {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+  
+  }
+  
+  .login-button{
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0;
+    border-radius: 15%;
+    color: rgb(2, 166, 255);
+    margin-top: 3%;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    background-color: white;
+    font-weight: bolder;
+  }
+  
+  .title-block{
+    display: block;
+    margin-left:auto;
+    margin-right: auto;
+    width: 100%;
+    margin-top: 0%;
+    margin-bottom: 5%;
+    font-size: 300%;
+    text-align: center;
+    padding: 40px 0;
+    color: white;
+    background-color: rgb(2, 166, 255);
+    font-family: Impact;
+  }
+  
+  .title-block .welcome {
+    text-align: center;
+    font-size: 50%;
+  }
+  
+  
+  body {
+    background-color: white;
+  }
+  
+  .login-wrapper {
+    display: block;
+    margin-left:auto;
+    margin-right: auto;
+    border-radius: 5%;
+    width: 400px;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    background-color: rgb(2, 166, 255);
+    }
+  
+    .login-wrapper .text {
+      align-items: center;
+      margin-top: 5px;
+    }
+  
+    .login-wrapper .singup-msg {
+      font-size: 30px;
+    }
+
+    .login-link{
+      color:white;
+      padding-top: 5%;
+    }
+  

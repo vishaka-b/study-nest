@@ -1,29 +1,4 @@
-.groups-in {
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .groups-made {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding-left: 10px;
-    padding-right: 30px;
-  }
-  
-  .groups-made .createNewGroup{
-    cursor: pointer;
-    height:fit-content;
-    background-color: rgb(104, 187, 232);
-    font-size: 2rem;
-    align-items: stretch;
-    border-radius: 7%;
-    border:0cap;
-    display: flex;
-  
-  }
-  
+
 .homeBody2 {
     text-align: left;
     float: left;
@@ -64,7 +39,7 @@
     transform: translate(-50%, -50%);
     width: 300px;
     padding: 20px;
-    background-color:rgb(104, 187, 232);
+    background-color: rgb(174, 143, 210);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 2%;
   }
@@ -131,7 +106,5 @@
   }
 /* Hover for the + button */
   .createNewGroup:hover {
-    background-color: rgb(2, 166, 255);
+    background-color: rgba(179, 85, 230, 0.934);
   }
-
-  
