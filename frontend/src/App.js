@@ -3,9 +3,10 @@ import './App.css';
 import AllGroups from './pages/allgroups';
 import Login from './pages/Login/Login';
 import Home from './pages/home';
+import SignUp from './pages/SignUp/SignUp';
 
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import React, {useState} from 'react';
+//import React, {useState} from 'react';
 
 
  
@@ -15,10 +16,11 @@ function App() {
     <div className="wrapper">
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login/>}></Route>
-        <Route path="/" element={<Home/>}></Route>
+        <Route path="/" element={<Login/>}></Route>
+        <Route path="/Home" element={<Home/>}></Route>
         <Route path="/allgroups" element={<AllGroups/>}>
         </Route>
+        <Route path='/SignUp' element={<SignUp/>}></Route>
       </Routes>
     </BrowserRouter>
    </div>   
