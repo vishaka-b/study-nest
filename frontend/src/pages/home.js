@@ -48,7 +48,9 @@ export default function Home(){
     }
     //use Axios.post 
     //on backend read the body and add to database and then send a temp response back (200 = allgood)
+
     const handleFormSubmit = (event) => {
+        //ensures we are at home page (have to add reload screen)
         event.preventDefault();
         if (!groupName || !ownersName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day)) {
             alert("Please fill in all fields before submitting.");
@@ -120,7 +122,7 @@ export default function Home(){
             <h2 className="groups-in">Groups you're in:</h2>
             
           
-           <h3>{ groupsYoureIn !== "" && groupsYoureIn[0].groupname}</h3>
+          
             {Array.isArray(groupsYoureIn) && groupsYoureIn.map((group, index) => (
                 <h3 key={index}>{group.groupName}</h3>
                 )
