@@ -7,7 +7,7 @@ export default function NavBar(){
                 <a href = "/allgroups"> All Groups </a>
                
             </li>
-            <li className="active">  <a href = "/login">Logout</a> </li>
+            <li className="active">  <a href = "/">Logout</a> </li>
         </ul>
     </nav>
 }

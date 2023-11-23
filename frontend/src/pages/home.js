@@ -97,11 +97,8 @@ export default function Home(){
         <div>
             <h2 className="groups-in">Groups you're in:</h2>
             
-<<<<<<< HEAD
           
-            <h3>{ groupsYoureIn !== "" && groupsYoureIn[0].groupname}</h3>
-            <div><Widget /></div>
-=======
+           <h3>{ groupsYoureIn !== "" && groupsYoureIn[0].groupname}</h3>
             {Array.isArray(groupsYoureIn) && groupsYoureIn.map((group, index) => (
                 <h3 key={index}>{group.groupname}</h3>
                 )
@@ -109,7 +106,6 @@ export default function Home(){
             }
             <Feed></Feed>
            
->>>>>>> 3fa402e99e55ca08980d66f6584508b1b6d70525
 
         </div>
         <div> 
