@@ -48,34 +48,56 @@ export default function Home(){
     }
     //use Axios.post 
     //on backend read the body and add to database and then send a temp response back (200 = allgood)
-    const handleFormSubmit = () => {
-
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
         if (!groupName || !ownersName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day)) {
             alert("Please fill in all fields before submitting.");
             return;
         }
-
-        // Handle form submission logic here
-        // You can send the form data to the server or perform any other necessary actions
-        // For example, you can use Axios.post to send the data to the server
-        // After handling the submission, close the form
-
-        
-        setShowForm(false);
-        setGroupName('');
-        setOwnersName('');
-        setSubjectsName('');
-        setMeetingTime('');
-        setMeetingDays({
-            monday: false,
-            tuesday: false,
-            wednesday: false,
-            thursday: false,
-            friday: false,
-            saturday: false,
-            sunday: false,
-          });
-    }
+    
+      
+    
+        // Send a POST request to the server
+        fetch('http://localhost:5000/AddGroups', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                groupName: groupName,
+                ownersName: ownersName,
+                subjectsName: subjectsName,
+                meetingTime: meetingTime,
+                meetingDays: JSON.stringify(Object.values(meetingDays)),
+            }),
+        })
+        .then(response => response.json())
+        .then(result => {
+            alert(result.message);
+            // Handle any additional logic or UI changes after successful submission
+        })
+        .catch(error => {
+            console.error('Error during fetch:', error);
+            // Handle errors here
+        })
+        .finally(() => {
+            // Close the form and reset fields regardless of success or failure
+            setShowForm(false);
+            setGroupName('');
+            setOwnersName('');
+            setSubjectsName('');
+            setMeetingTime('');
+            setMeetingDays({
+                monday: false,
+                tuesday: false,
+                wednesday: false,
+                thursday: false,
+                friday: false,
+                saturday: false,
+                sunday: false,
+            });
+        });
+    };
 
     /*
     const getGroupsYouveMade=async()=>{
@@ -98,7 +120,7 @@ export default function Home(){
             <h2 className="groups-in">Groups you're in:</h2>
             
             {Array.isArray(groupsYoureIn) && groupsYoureIn.map((group, index) => (
-                <h3 key={index}>{group.groupname}</h3>
+                <h3 key={index}>{group.groupName}</h3>
                 )
             )
             }
@@ -121,12 +143,12 @@ export default function Home(){
             {showForm && (
         <div className="popupForm">
           <button className="closeButton" type="button" onClick={handleCloseForm}>X</button>
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={handleFormSubmit} >
             <label className="textName">Group Name:
-              <input type="text" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
+              <input type="text" name="groupName" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
             </label>
             <label className="textName">Owner's Name:
-              <input type="text" value={ownersName} onChange={(e) => setOwnersName(e.target.value)} />
+              <input type="text" name="ownerName" value={ownersName} onChange={(e) => setOwnersName(e.target.value)} />
             </label>
             <label className="textName">Subject's Name:
               <input type="text" value={subjectsName} onChange={(e) => setSubjectsName(e.target.value)} />
