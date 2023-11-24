@@ -27,6 +27,8 @@ app.listen(5000,()=>{
     Mongoclient.connect(CONNECTION_STRING,(error,client)=>{
 
         database=client.db(DATABASENAME);
+       // database.collection("mygroupscollection").createIndex( { ownersName: 1 }, { unique: true } )
+
         console.log("Succesfully connected to MongoDB");
     })
 
@@ -37,20 +39,28 @@ app.listen(5000,()=>{
         console.log(req.body); 
         // Assuming the data is sent as JSON in the request body
         const { groupName, ownersName, subjectsName, meetingTime, meetingDays } = req.body;
-        console.log(groupName)
-        // Perform any necessary validation or processing
-        // ...
+        //console.log(groupName)
+       
         database.collection("mygroupscollection").insertOne({
+            
             groupName : groupName,
-            ownersName: ownersName,
+            ownersName: ownersName ,
             courseName : subjectsName,
             meetingTime: meetingTime,
             meetingDays: meetingDays
         });
         // Send a response back to the client
-        res.json({ message: 'Form data received successfully!' });
+        res.json({ message: 'Succesfully created new Group' });
     });
-
+app.post('/createNewUser', (req, res)=>{
+    console.log(req.body); 
+    const {email, pwd} = req.body;
+    database.collection("myusercollection").insertOne({
+        email: email,
+        pwd: pwd
+    });
+    res.json({ message: 'Succesfully created new User. Please Login with your newest data' });
+})
 //pull all data into this link http://localhost:5000/mygroupslist
 app.get('/mygroupslist',(request,reposnse)=>{
     database.collection("mygroupscollection").find({}).toArray((error,result)=>{
@@ -59,19 +69,15 @@ app.get('/mygroupslist',(request,reposnse)=>{
 
 })
 
-//from mongoDB tutorial video
-/*
-app.post('/backend/todoapp/AddNotes',multer().none(),(request,response)=>{
-    database.collection("todoappcollection").count({},function(error,numOfDocs){
-        database.collection("todoappcollection").insertOne({
-            id: (numOfDocs+1).toString(),
-            description:request.body.newNotes
-        });
-        response.json("Added Succesfully");
-
+app.get('/myuserlist',(request,reposnse)=>{
+    database.collection("myusercollection").find({}).toArray((error,result)=>{
+        reposnse.send(result);
     })
+
 })
 
+//from mongoDB tutorial video
+/*
 app.delete('/backend/todoapp/DeleteNotes' ,(request,response)=>{
     database.collection("todoappcollection").deleteOne({
         id:request.query.id

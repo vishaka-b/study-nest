@@ -20,7 +20,15 @@ export default function Home(){
         getGroupsYoureIn()
     }, []);
     
-    
+    const refreshGroups= async()=>{
+        const response=await Axios.get("http://localhost:5000/mygroupslist");
+        setGroupsYoureIn(response.data);
+        console.log(response.data)
+    }
+
+    useEffect(()=> {
+        refreshGroups()
+    }, []);
     
     const [groupsYouveMade, setGroupsYouveMade] = useState("");
 
@@ -76,11 +84,9 @@ export default function Home(){
         .then(response => response.json())
         .then(result => {
             alert(result.message);
-            // Handle any additional logic or UI changes after successful submission
         })
         .catch(error => {
             console.error('Error during fetch:', error);
-            // Handle errors here
         })
         .finally(() => {
             // Close the form and reset fields regardless of success or failure
@@ -98,6 +104,8 @@ export default function Home(){
                 saturday: false,
                 sunday: false,
             });
+            //refresh itself so users do not need to refresh by hand
+            refreshGroups();
         });
     };
 
@@ -120,14 +128,10 @@ export default function Home(){
         
         <div>
             <h2 className="groups-in">Groups you're in:</h2>
+          
+          
+          
             
-          
-          
-            {Array.isArray(groupsYoureIn) && groupsYoureIn.map((group, index) => (
-                <h3 key={index}>{group.groupName}</h3>
-                )
-            )
-            }
             <Feed></Feed>
            
 
@@ -135,6 +139,16 @@ export default function Home(){
         <div> 
             <div className='groups-made'>
                 <h2 className="homeBody2">Groups you've made:</h2>
+                {Array.isArray(groupsYoureIn) && groupsYoureIn.map((group, index) => (
+                    <div key={index}>
+                <h3 className = "output" >Name: {group.groupName} </h3>
+                <h3 className = "output" >Owner: {group.ownersName} </h3>
+                
+                </div>
+                )) }
+
+
+            
                 <button type="button" className="createNewGroup" onClick={handleCreateNewGroup}> + </button>
             </div>
             
