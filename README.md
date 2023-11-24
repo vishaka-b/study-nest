@@ -14,14 +14,14 @@ Make sure that you have a folder called backend after the cloning from the steps
 
 cd into the folder using `cd backend`
 
-To start the connection first install mondodb, express and cors.
+To start the connection first install mondodb, express, cors, mongoose and body-parse.
 To do that use:
 
 `npm install mongodb`
-
 `npm install express`
-
 `npm install cors`
+`npm install mongoose`
+`npm install body-parser`
 
 Then to start the backend and successfully connect to the data base run: `node index.js`
 You will see Succesfully connected to MongoDB in your terminal if you have followed the above steps.
