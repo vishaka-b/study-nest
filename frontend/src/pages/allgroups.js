@@ -24,10 +24,13 @@ export default function AllGroups(){
     <NavBar />
     <h1>All Groups</h1>
     <p> List of all groups ever made</p>
+    <div>
     {Array.isArray(groupsYoureIn) &&
   groupsYoureIn.map((group, index) => (
-    <h3 key={index}>{group.groupname}</h3>
+    <h3 key={index}>{group.groupName}</h3>
   ))}
+    </div>
+   
     <Widget imageUrl={'./historynew.avif'} groupName={'HIST 3, Lec 2'}/>
     </div>)
 }

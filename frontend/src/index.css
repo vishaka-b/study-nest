@@ -86,16 +86,16 @@ We are setting a background color, and padding so that they links are nec to eac
 }
 
 .groups-made {
-  display: flex;
-  align-items: center;
+  /*display: flex;*/
+  align-items: left;
   gap: 20px;
-  padding-left: 10px;
-  padding-right: 30px;
+  /*padding-left: 10px;
+  padding-right: 30px;*/
 }
 
 .groups-made .createNewGroup{
   cursor: pointer;
-  height:fit-content;
+  height: fit-content;
   background-color: rgb(104, 187, 232);
   font-size: 2rem;
   gap: 2rem;

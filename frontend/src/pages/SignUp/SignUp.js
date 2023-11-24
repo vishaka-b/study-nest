@@ -1,7 +1,35 @@
 import './SignUp.css';
-//import React, { useState } from 'react';
+import React, { useState } from 'react';
 
 function SignUp(props) {
+
+
+  const [email, setEmail] = useState('');
+  const [pwd, setPwd] = useState('');
+
+  const handleUserSubmit= (event) => {
+    event.preventDefault();
+    fetch('http://localhost:5000/createNewUser', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+               
+                pwd: pwd,
+            }),
+        })
+        .then(response => response.json())
+        .then(result => {
+            alert(result.message);
+        })
+        .catch(error => {
+            console.error('Error during fetch:', error);
+        })
+        .finally(() => {
+        });
+  };
     return (
     <div>
       <div className="title-block">
@@ -12,17 +40,17 @@ function SignUp(props) {
       </div>
     <div className="login-wrapper">
       <h1 className="login-msg">Sign Up</h1>
-        <form action='/'>
+        <form action='/' onSubmit={handleUserSubmit} >
           <label className="text">
             <div>Email</div>
-            <input type="email"  />
+            <input type="email"  value={email} onChange={(e) => setEmail(e.target.value)}/>
           </label>
           <label className="text">
             <div>Password</div>
-            <input type="password" />
+            <input type="password" value={pwd} onChange={(e) => setPwd(e.target.value)}/>
           </label>
           <div>
-            <button className="login-button" type="submit">
+            <button className="login-button" type="submit" >
               Sign Up
             </button>
           </div>
