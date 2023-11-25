@@ -3,6 +3,7 @@ import Widget from './Widget'
 //import React from 'react';
 import Axios from "axios";
 import React, { useEffect, useState } from 'react';
+import Widget_Feed from './Widget_Feed';
 
 export default function AllGroups(){
 
@@ -11,7 +12,7 @@ export default function AllGroups(){
     const [filteredGroups, setFilteredGroups] = useState([]);
 
     const getGroupsYoureIn=async()=>{
-        const response=await Axios.get("http://localhost:5000/mygroupslist");
+        const response=await Axios.get("http://localhost:8888/mygroupslist");
         setGroupsYoureIn(response.data);
         setFilteredGroups(response.data);
         console.log(response.data)
@@ -50,6 +51,7 @@ export default function AllGroups(){
     
     return (
     <div className="allgroups">
+
     <NavBar />
     <h1>All Groups</h1>
     <p> List of all groups</p>
