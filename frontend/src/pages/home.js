@@ -11,7 +11,7 @@ export default function Home(){
     const [groupsYoureIn, setGroupsYoureIn] = useState("");
 
     const getGroupsYoureIn=async()=>{
-        const response=await Axios.get("http://localhost:5000/mygroupslist");
+        const response=await Axios.get("http://localhost:8888/mygroupslist");
         setGroupsYoureIn(response.data);
         console.log(response.data)
     }
@@ -21,7 +21,7 @@ export default function Home(){
     }, []);
     
     const refreshGroups= async()=>{
-        const response=await Axios.get("http://localhost:5000/mygroupslist");
+        const response=await Axios.get("http://localhost:8888/mygroupslist");
         setGroupsYoureIn(response.data);
         console.log(response.data)
     }
@@ -68,7 +68,7 @@ export default function Home(){
       
     
         // Send a POST request to the server
-        fetch('http://localhost:5000/AddGroups', {
+        fetch('http://localhost:8888/AddGroups', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ export default function Home(){
 
     /*
     const getGroupsYouveMade=async()=>{
-        const response=await Axios.get("http://localhost:5000/getGroupsYouveMade");
+        const response=await Axios.get("http://localhost:8888/getGroupsYouveMade");
         setGroupsYouveMade(response.data);
     }
 

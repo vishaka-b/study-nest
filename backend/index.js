@@ -23,7 +23,7 @@ const groupSchema = {
 }
 
 const Group = mongoose.model("Note", groupSchema);
-app.listen(5000,()=>{
+app.listen(8888,()=>{
     Mongoclient.connect(CONNECTION_STRING,(error,client)=>{
 
         database=client.db(DATABASENAME);
@@ -61,7 +61,7 @@ app.post('/createNewUser', (req, res)=>{
     });
     res.json({ message: 'Succesfully created new User. Please Login with your newest data' });
 })
-//pull all data into this link http://localhost:5000/mygroupslist
+//pull all data into this link http://localhost:8888/mygroupslist
 app.get('/mygroupslist',(request,reposnse)=>{
     database.collection("mygroupscollection").find({}).toArray((error,result)=>{
         reposnse.send(result);
