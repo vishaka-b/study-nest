@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/Button';
        /* backgroundImage:`url(${imageUrl})`,*/
        //  backgroundImage: "url('./historynew.avif')"
       //}; */
-export default function Widget({imageUrl,groupName, subject}) {
+export default function Widget({imageUrl,groupName, subject, time}) {
     /*return (
         <div id="widget-container">
             <div id="title-bar">
@@ -34,7 +34,7 @@ export default function Widget({imageUrl,groupName, subject}) {
             <Card.Text>
             Course: {subject}
             <br />
-             Meeting time: {'10am'}
+             Meeting time: {time}
             </Card.Text>
            
             <Button variant="primary">+</Button>

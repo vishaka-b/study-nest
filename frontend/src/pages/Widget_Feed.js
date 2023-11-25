@@ -14,8 +14,8 @@ export default function WidgetFeed({groups}) {
               <Col key={index}>
                 <Widget
                   groupName={group.groupName}
-                  subject={group.subject}
-                  time={'10 am'} // Assuming you have a 'time' property in your group object
+                  subject={group.courseName}
+                  time={group.meetingTime} // Assuming you have a 'time' property in your group object
                 />
               </Col>
             ))}
