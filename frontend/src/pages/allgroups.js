@@ -71,7 +71,7 @@ export default function AllGroups(){
     <div>
     {Array.isArray(filteredGroups) &&
   filteredGroups.map((group, index) => (
-    <h3 key={index}>{group.groupName}</h3>
+    <Widget_Feed groups={filteredGroups}/>
   ))}
     </div>
    
