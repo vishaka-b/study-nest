@@ -52,7 +52,7 @@ function Widget(props) {
                 time={props.time}
             />
             <Card className="widget">
-            <Card.Img variant="top" src="holder.js/100px160"/>
+            <Card.Img variant="top" src="CSimage.jpeg"/>
             <Card.Body>
                 <Card.Title>{props.name}</Card.Title>
                 <Card.Text>

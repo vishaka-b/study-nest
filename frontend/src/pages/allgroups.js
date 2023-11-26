@@ -57,23 +57,18 @@ export default function AllGroups(){
     <p> List of all groups</p>
 
     <div>
-        <input
-          type="text"
-          placeholder="Search for group, course, or owner..."
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          onKeyPress={handleKeyPress}
-        />
+      <input
+        type="text"
+        placeholder="Search for group, course, or owner..."
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+        onKeyPress={handleKeyPress}
+      />
         <button onClick={handleSearch}>Search</button>
         <button onClick={handleShowAllGroups}>Show All Groups</button>
-      </div>
-
-    <div>
-    {Array.isArray(filteredGroups) &&
-  filteredGroups.map((group, index) => (
-    <Widget_Feed groups={filteredGroups}/>
-  ))}
     </div>
+    
+    <Widget_Feed groups={filteredGroups}/>
    
     </div>)
 }
