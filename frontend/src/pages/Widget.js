@@ -22,7 +22,7 @@ function MoreModal(props) {
                 <p>
                     Course: {props.course}
                     <br />
-                    Meeting days: {props.days}
+                    Meeting days: {Array.isArray(props.days) ? props.days.join(', ') : props.days}
                     <br />
                     Meeting time: {props.time}
                     <br />
