@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Widget from './Widget';
 
 export default function WidgetFeed({groups}) {
+    const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     return (
         <Container>
           <Row xs={1} md={2} lg={3}>
@@ -16,12 +17,19 @@ export default function WidgetFeed({groups}) {
                   groupName={group.groupName}
                   subject={group.courseName}
                   time={group.meetingTime} // Assuming you have a 'time' property in your group object
+                  creator={group.ownersName}
+                  days={group.meetingDays.substring(1, group.meetingDays.length - 1).split(",").map(function (day, index) {
+                    if (day === "true")
+                        return daysOfWeek[index]
+                    else
+                        return null
+                  }).filter(n => n)}
                 />
               </Col>
             ))}
           </Row>
         </Container>
-      );
+    );
     /*return (
         <Container>
         {groups.map((group, index) => (

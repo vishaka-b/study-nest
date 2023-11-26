@@ -19,15 +19,16 @@ function MoreModal(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h4>{props.course}</h4>
                 <p>
+                    Course: {props.course}
+                    <br />
                     Meeting days: {props.days}
                     <br />
                     Meeting time: {props.time}
                     <br />
                     Creator: {props.creator}
                     <br />
-                    Members: {props.members}
+                    Member(s): {props.members}
                 </p>
             </Modal.Body>
             <Modal.Footer>
@@ -43,7 +44,7 @@ function MoreModal(props) {
        /* backgroundImage:`url(${imageUrl})`,*/
        //  backgroundImage: "url('./historynew.avif')"
       //}; */
-export default function Widget({imageUrl,groupName, subject, time}) {
+export default function Widget({groupName, subject, time, creator, days}) {
     /*return (
         <div id="widget-container">
             <div id="title-bar">
@@ -68,8 +69,9 @@ export default function Widget({imageUrl,groupName, subject, time}) {
                 onHide={() => setModalShow(false)}
                 name={groupName}
                 course={subject}
-                days={time}
+                days={days}
                 time={time}
+                creator={creator}
             />
             <Card className="card-with-background" style={{marginBottom: '24px'}}>
                 <Card.Img variant="top" src={"/images/cs.jpeg"} class="card-img-top" />
@@ -77,6 +79,8 @@ export default function Widget({imageUrl,groupName, subject, time}) {
                     <Card.Title>{groupName}</Card.Title>
                     <Card.Text>
                     Course: {subject}
+                    <br />
+                    Meeting days: {Array.isArray(days) ? days.join(', ') : days}
                     <br />
                     Meeting time: {time}
                     </Card.Text>
