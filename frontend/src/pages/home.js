@@ -148,9 +148,23 @@ export default function Home(){
                 <h1 class="section-title">Groups you've made</h1>
                 {/* <button type="button" className="createNewGroup" onClick={handleCreateNewGroup}>+</button> */}
                 <Button variant="info" onClick={handleCreateNewGroup} style={{marginBottom: '24px'}}>Create new group</Button>
+
                 {Array.isArray(groupsYoureIn) &&
-                    <Widget_Feed groups={groupsYoureIn} />
+                    <Widget_Feed groups={groupsYoureIn.filter(group => group.ownersName == currUser)} />
                 }
+
+                {/*Array.isArray(groupsYoureIn) && groupsYoureIn
+                
+                .filter(group => group.ownersName == currUser)
+                .map((group, index) => (
+                    <div key={index}>
+                <h3 className = "output" >Name: {group.groupName} </h3>
+                <h3 className = "output" >Owner: {group.ownersName} </h3>
+                
+                </div>
+                )) */}
+
+
             </div>
             <div className='groups'>
                 <h3>{groupsYouveMade}</h3>
