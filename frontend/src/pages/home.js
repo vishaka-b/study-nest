@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Home(){
     const currUser = window.sessionStorage.getItem("myUser");
+    console.log(currUser)
     let userName = "";
     if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
         userName = currUser;
@@ -57,6 +58,21 @@ export default function Home(){
         saturday: false,
         sunday: false,
       });
+      const [subjectClassification, setSubjectClassification] = useState({
+        computer_science: false,
+        math: false,
+        history: false,
+        english: false,
+        chemistry: false,
+        physics: false,
+        biology: false,
+        engineering: false,
+        business: false,
+        foreign_language: false,
+        linguistics: false,
+        other: false
+
+      });
 
     const handleCreateNewGroup = () => {
         setShowForm(true);
@@ -65,6 +81,14 @@ export default function Home(){
     const handleCloseForm = () => {
         setShowForm(false);
     }
+
+    const handleSubjectDropdownChange = (e) => {
+        const selectedSubject = e.target.value;
+        setSubjectClassification((prevClassification) => ({
+          ...prevClassification,
+          [selectedSubject]: true
+        }));
+      };
     //use Axios.post 
     //on backend read the body and add to database and then send a temp response back (200 = allgood)
 
@@ -188,7 +212,7 @@ export default function Home(){
             <label className="textName">Owner's Name:
               <input type="text" name="ownerName" value={ownersName} onChange={(e) => setOwnersName(e.target.value)} />
             </label>
-            <label className="textName">Subject's Name:
+            <label className="textName">Course's Name:
               <input type="text" value={subjectsName} onChange={(e) => setSubjectsName(e.target.value)} />
             </label>
             <label className="meetingDays">Meeting Days:</label>
@@ -250,6 +274,28 @@ export default function Home(){
                     Sun
                 </label>
             </div>
+
+            <div>
+            <label htmlFor="subjectDropdown">Select a Subject:</label>
+            <select id="subjectDropdown" onChange={handleSubjectDropdownChange} style={{ width: '232px', height: '40px' }}>
+                <option value="">Select...</option>
+                <option value="computer_science">Computer Science</option>
+                <option value="math">Math</option>
+                <option value="history">History</option>
+                <option value="english">English</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="physics">Physics</option>
+                <option value="biology">Biology</option>
+                <option value="engineering">Engineering</option>
+                <option value="business">Business</option>
+                <option value="foreign_language">Foreign Language</option>
+                <option value="linguistics">Linguistics</option>
+                <option value="other">Other</option>
+
+            </select>
+            </div>
+
+            <p></p>
 
             <label>Hour of the Day:
                 <input
