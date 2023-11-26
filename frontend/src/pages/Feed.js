@@ -23,7 +23,7 @@ function MoreModal(props) {
             <Modal.Body>
                 <h4>{props.course}</h4>
                 <p>
-                    Meeting days: {props.days}
+                    Meeting days: {Array.isArray(props.days) ? props.days.join(' ') : props.days}
                     <br />
                     Meeting time: {props.time}
                     <br />
@@ -52,13 +52,13 @@ function Widget(props) {
                 time={props.time}
             />
             <Card className="widget">
-            <Card.Img variant="top" src="holder.js/100px160"/>
+            <Card.Img variant="top" src="CSimage.jpeg"/>
             <Card.Body>
                 <Card.Title>{props.name}</Card.Title>
                 <Card.Text>
                 Course: {props.course}
                 <br />
-                Meeting days: {props.days}
+                Meeting days: {Array.isArray(props.days) ? props.days.join(' ') : props.days}
                 </Card.Text>
                 
                 <Button variant="primary" onClick={() => setModalShow(true)}>More</Button>

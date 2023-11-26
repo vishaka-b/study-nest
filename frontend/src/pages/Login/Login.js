@@ -1,7 +1,65 @@
 import './Login.css';
 //import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-function Login(props) {
+const myUser = '1234'
+
+
+function Login(props) 
+{
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleLogin = async (event)=>
+  {
+    event.preventDefault();
+
+    if (email === "" && password === "") {
+      alert("Please enter both email and password");
+      return;
+    }
+    if (email === "") {
+      alert("Please enter email");
+      return;
+    }
+    if (password === "") {
+      alert("Please enter password");
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8888/myuserlist?email=${email');
+      const userData = await response.json();
+
+      const trueUser = userData.find(user => user.email === email);
+
+      console.log(trueUser)
+
+      if (!trueUser) {
+        alert('User not found. Please check your email.');
+        return;
+      }
+      
+
+      if (trueUser.pwd === password) {
+        window.sessionStorage.setItem('myUser', email);
+        console.log("Hello there: " + window.sessionStorage.getItem("myUser"));
+        window.location.href = '/Home';
+      }
+      else {
+        alert("Incorrect password. Please try again.");
+      }
+      
+      }
+      catch (error) {
+        console.error('Error during login:', error);
+    alert('An error occurred during login. Please try again.');
+    }
+  }
+
+    
+
+  
+  
     return (
     <div>
       <div className="title-block">
@@ -12,14 +70,14 @@ function Login(props) {
       </div>
     <div className="login-wrapper">
       <h1 className="login-msg">Please Log In</h1>
-        <form action='/Home'>
+        <form action='/Home' onSubmit={handleLogin}>
           <label className="text">
             <div>Email</div>
-            <input type="email"  />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
           </label>
           <label className="text">
             <div>Password</div>
-            <input type="password" />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
           </label>
           <div>
             <button className="login-button" type="submit">

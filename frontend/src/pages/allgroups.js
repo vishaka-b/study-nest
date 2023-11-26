@@ -1,5 +1,6 @@
 import NavBar from '../Navbar';
 import Widget from './Widget'
+import './allgroups.css';
 //import React from 'react';
 import Axios from "axios";
 import React, { useEffect, useState } from 'react';
@@ -54,26 +55,21 @@ export default function AllGroups(){
 
     <NavBar />
     <h1>All Groups</h1>
-    <p> List of all groups</p>
 
-    <div>
-        <input
-          type="text"
-          placeholder="Search for group, course, or owner..."
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          onKeyPress={handleKeyPress}
-        />
-        <button onClick={handleSearch}>Search</button>
-        <button onClick={handleShowAllGroups}>Show All Groups</button>
-      </div>
-
-    <div>
-    {Array.isArray(filteredGroups) &&
-  filteredGroups.map((group, index) => (
-    <Widget_Feed groups={filteredGroups}/>
-  ))}
+    <div class="search-container">
+      <input
+        class="search-input"
+        type="text"
+        placeholder="Search for group, course, or owner..."
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+        onKeyPress={handleKeyPress}
+      />
+        <button onClick={handleSearch} class="search-button">Search</button>
+        <button onClick={handleShowAllGroups} class="show-all-button">Show All Groups</button>
     </div>
+    
+    <Widget_Feed groups={filteredGroups}/>
    
     </div>)
 }
