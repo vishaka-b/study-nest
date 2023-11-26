@@ -54,7 +54,7 @@ export default function AllGroups(){
     <div className="allgroups">
 
     <NavBar />
-    <h1>All Groups</h1>
+    <h1 className='allgroups-title'>All Groups</h1>
 
     <div class="search-container">
       <input

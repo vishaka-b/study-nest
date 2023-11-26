@@ -54,10 +54,11 @@ app.listen(8888,()=>{
     });
 app.post('/createNewUser', (req, res)=>{
     console.log(req.body); 
-    const {email, pwd} = req.body;
+    const {email, pwd, name} = req.body;
     database.collection("myusercollection").insertOne({
         email: email,
-        pwd: pwd
+        pwd: pwd,
+        name: name
     });
     res.json({ message: 'Succesfully created new User. Please Login with your newest data' });
 })

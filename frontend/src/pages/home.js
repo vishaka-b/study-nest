@@ -4,7 +4,7 @@ import Feed from './Feed.js'
 import './home.css';
 import NavBar from '../Navbar'
 import Widget from './Widget'
-import Widget_Feed from './Widget_Feed';
+import WidgetFeed from './Widget_Feed';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,6 +12,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Home(){
     const currUser = window.sessionStorage.getItem("myUser");
+    let userName = "";
+    if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
+        userName = currUser;
+    else
+        userName = window.sessionStorage.getItem("userName");
+
+
     const [groupsYoureIn, setGroupsYoureIn] = useState("");
 
     const getGroupsYoureIn=async()=>{
@@ -136,12 +143,12 @@ export default function Home(){
         <div className='homepage'>
             
             <NavBar/>
-            <h2>{"Welcome to StudyNest " + currUser}</h2>
+            <h2 className="welcome-message">{"Welcome to StudyNest " + userName + "!"}</h2>
             <Container>
             <div>
                 <h1 class="section-title">Groups you're in</h1>
                 {Array.isArray(groupsYoureIn) &&
-                    <Widget_Feed groups={groupsYoureIn} />
+                    <WidgetFeed groups={groupsYoureIn} />
                 }
             </div>
             <div>
@@ -150,7 +157,7 @@ export default function Home(){
                 <Button variant="info" onClick={handleCreateNewGroup} style={{marginBottom: '24px'}}>Create new group</Button>
 
                 {Array.isArray(groupsYoureIn) &&
-                    <Widget_Feed groups={groupsYoureIn.filter(group => group.ownersName == currUser)} />
+                    <WidgetFeed groups={groupsYoureIn.filter(group => group.ownersName === currUser)} />
                 }
 
                 {/*Array.isArray(groupsYoureIn) && groupsYoureIn

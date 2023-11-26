@@ -44,7 +44,7 @@
     transform: translate(-50%, -50%);
     width: 300px;
     padding: 20px;
-    background-color: rgb(174, 143, 210);
+    background-color: rgb(104, 187, 232);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 2%;
   }
@@ -97,7 +97,7 @@
   
   /* Style the "+" button */
   .createNewGroup {
-    background-color: rgb(187, 170, 235);
+    background-color:rgb(104, 187, 232);
     height:50px;
     width:50px;
     color: #000000;
@@ -111,5 +111,15 @@
   }
 /* Hover for the + button */
   .createNewGroup:hover {
-    background-color: rgba(179, 85, 230, 0.934);
+    background-color:  rgb(2, 166, 255);
+  }
+
+  .welcome-message {
+    padding-top: 1%;
+    padding-bottom: 1%;
+  }
+
+  .section-title {
+    padding-bottom: 2%;
+    font-weight: bolder;
   }

@@ -27,7 +27,7 @@ function Login(props)
     }
 
     try {
-      const response = await fetch('http://localhost:8888/myuserlist?email=${email');
+      const response = await fetch('http://localhost:8888/myuserlist?email=${email}');
       const userData = await response.json();
 
       const trueUser = userData.find(user => user.email === email);
@@ -41,8 +41,17 @@ function Login(props)
       
 
       if (trueUser.pwd === password) {
+        let userName = ""
+        if (trueUser.name !== undefined) {
+          userName = trueUser.name;
+        }
+        else
+          userName = trueUser.email
+
         window.sessionStorage.setItem('myUser', email);
+        window.sessionStorage.setItem('userName', userName)
         console.log("Hello there: " + window.sessionStorage.getItem("myUser"));
+
         window.location.href = '/Home';
       }
       else {

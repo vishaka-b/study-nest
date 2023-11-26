@@ -6,16 +6,19 @@ function SignUp(props) {
 
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
+  const [name, setName] = useState('');
 
   const handleUserSubmit= async (event) => {
     event.preventDefault();
 
-    const response = await fetch(`http://localhost:8888/myuserlist?email=${email}`);
-  const userData = await response.json();
-  const userExists = userData.find(user => user.email === email);
-
-  if (userExists) {
-    alert('Username already exists. Please choose a different one.');
+    const response = await fetch(`http://localhost:8888/myuserlist?email=${email}&name=${name}`);
+    const userData = await response.json();
+    const userExists = userData.find(user => user.email === email);
+  if(name === "" || email === "" || pwd === "")  {
+    alert("Please fill out all fields to Sign Up")
+  }
+  else if (userExists) {
+    alert('Email already exists. Please choose a different one.');
   } else {
     fetch('http://localhost:8888/createNewUser', {
             method: "POST",
@@ -24,8 +27,8 @@ function SignUp(props) {
             },
             body: JSON.stringify({
                 email: email,
-               
                 pwd: pwd,
+                name: name
             }),
         })
         .then(response => response.json())
@@ -51,6 +54,10 @@ function SignUp(props) {
     <div className="login-wrapper">
       <h1 className="login-msg">Sign Up</h1>
         <form action='/' onSubmit={handleUserSubmit} >
+        <label className="text">
+            <div>Name</div>
+            <input type="text"  value={name} onChange={(e) => setName(e.target.value)}/>
+          </label>
           <label className="text">
             <div>Email</div>
             <input type="email"  value={email} onChange={(e) => setEmail(e.target.value)}/>
