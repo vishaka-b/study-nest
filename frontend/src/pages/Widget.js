@@ -72,7 +72,7 @@ export default function Widget({imageUrl,groupName, subject, time}) {
                 time={time}
             />
             <Card className="card-with-background" style={{marginBottom: '24px'}}>
-                <Card.Img variant="top" src={"/images/CSimage.jpeg"} class="card-img-top" />
+                <Card.Img variant="top" src={"/images/cs.jpeg"} class="card-img-top" />
                 <Card.Body>
                     <Card.Title>{groupName}</Card.Title>
                     <Card.Text>
