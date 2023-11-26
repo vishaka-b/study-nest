@@ -63,7 +63,10 @@ export default function Home(){
             alert("Please fill in all fields before submitting.");
             return;
         }
-        
+        if (ownersName !== currUser){
+            alert("Owner Name does not match: " + currUser);
+           return; 
+        }
     
       
     
