@@ -96,7 +96,10 @@ export default function Home(){
         //ensures we are at home page (have to add reload screen)
         event.preventDefault();
         if (!groupName || !ownersName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day) || selectedSubject === "") {
-            
+            if (selectedSubject === ""){
+                alert("Please choose a subject from dropdown menu");
+                return;
+            }
             alert("Please fill in all fields before submitting.");
             return;
         }
