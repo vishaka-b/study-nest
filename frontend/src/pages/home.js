@@ -124,6 +124,7 @@ export default function Home(){
                 meetingDays: JSON.stringify(Object.values(meetingDays)),
                 subjectClassification : selectedSubject
             }),
+            
         })
         .then(response => response.json())
         .then(result => {
@@ -135,6 +136,7 @@ export default function Home(){
         .finally(() => {
             // Close the form and reset fields regardless of success or failure
             setShowForm(false);
+            setSelectedSubject("")
             setGroupName('');
             setOwnersName('');
             setSubjectsName('');
