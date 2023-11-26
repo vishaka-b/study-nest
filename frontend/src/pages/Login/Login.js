@@ -8,15 +8,57 @@ const myUser = '1234'
 function Login(props) 
 {
   const [email, setEmail] = useState("");
-  
-  const handleLogin = (event)=>
+  const [password, setPassword] = useState("");
+  const handleLogin = async (event)=>
   {
-   // event.preventDefault();
-    window.sessionStorage.setItem("myUser", email) ;
-    console.log("Hello there: " + window.sessionStorage.getItem("myUser"));
+    event.preventDefault();
+
+    if (email === "" && password === "") {
+      alert("Please enter both email and password");
+      return;
+    }
+    if (email === "") {
+      alert("Please enter email");
+      return;
+    }
+    if (password === "") {
+      alert("Please enter password");
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8888/myuserlist?email=${email');
+      const userData = await response.json();
+
+      const trueUser = userData.find(user => user.email === email);
+
+      console.log(trueUser)
+
+      if (!trueUser) {
+        alert('User not found. Please check your email.');
+        return;
+      }
+      
+
+      if (trueUser.pwd === password) {
+        window.sessionStorage.setItem('myUser', email);
+        console.log("Hello there: " + window.sessionStorage.getItem("myUser"));
+        window.location.href = '/Home';
+      }
+      else {
+        alert("Incorrect password. Please try again.");
+      }
+      
+      }
+      catch (error) {
+        console.error('Error during login:', error);
+    alert('An error occurred during login. Please try again.');
+    }
+  }
+
     
 
-  }
+  
   
     return (
     <div>
@@ -35,7 +77,7 @@ function Login(props)
           </label>
           <label className="text">
             <div>Password</div>
-            <input type="password" />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
           </label>
           <div>
             <button className="login-button" type="submit">

@@ -9,7 +9,7 @@ function SignUp(props) {
 
   const handleUserSubmit= (event) => {
     event.preventDefault();
-    fetch('http://localhost:5000/createNewUser', {
+    fetch('http://localhost:8888/createNewUser', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
