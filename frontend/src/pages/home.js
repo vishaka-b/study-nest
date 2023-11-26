@@ -50,6 +50,20 @@ export default function Home(){
         saturday: false,
         sunday: false,
       });
+      const [subjectClassification, setSubjectClassification] = useState({
+        computer_science: false,
+        math: false,
+        history: false,
+        english: false,
+        chemistry: false,
+        physics: false,
+        biology: false,
+        engineering: false,
+        business: false,
+        foreign_language: false,
+        linguistics: false
+
+      });
 
     const handleCreateNewGroup = () => {
         setShowForm(true);
@@ -58,6 +72,14 @@ export default function Home(){
     const handleCloseForm = () => {
         setShowForm(false);
     }
+
+    const handleSubjectDropdownChange = (e) => {
+        const selectedSubject = e.target.value;
+        setSubjectClassification((prevClassification) => ({
+          ...prevClassification,
+          [selectedSubject]: true
+        }));
+      };
     //use Axios.post 
     //on backend read the body and add to database and then send a temp response back (200 = allgood)
 
@@ -243,6 +265,19 @@ export default function Home(){
                     Sun
                 </label>
             </div>
+
+            <div>
+            <label htmlFor="subjectDropdown">Select a Subject:</label>
+            <select id="subjectDropdown" onChange={handleSubjectDropdownChange} style={{ width: '232px' }}>
+                <option value="">Select...</option>
+                <option value="computer_science">Computer Science</option>
+                <option value="math">Math</option>
+                <option value="history">History</option>
+                {/* Add more options for other subjects */}
+            </select>
+            </div>
+
+            <p></p>
 
             <label>Hour of the Day:
                 <input
