@@ -1,7 +1,23 @@
 import './Login.css';
 //import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-function Login(props) {
+const myUser = '1234'
+
+
+function Login(props) 
+{
+  const [email, setEmail] = useState("");
+  
+  const handleLogin = (event)=>
+  {
+   // event.preventDefault();
+    window.sessionStorage.setItem("myUser", email) ;
+    console.log("Hello there: " + window.sessionStorage.getItem("myUser"));
+    
+
+  }
+  
     return (
     <div>
       <div className="title-block">
@@ -12,10 +28,10 @@ function Login(props) {
       </div>
     <div className="login-wrapper">
       <h1 className="login-msg">Please Log In</h1>
-        <form action='/Home'>
+        <form action='/Home' onSubmit={handleLogin}>
           <label className="text">
             <div>Email</div>
-            <input type="email"  />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
           </label>
           <label className="text">
             <div>Password</div>

@@ -5,9 +5,8 @@ import './home.css';
 import NavBar from '../Navbar'
 import Widget from './Widget'
 
-
 export default function Home(){
-
+    const currUser = window.sessionStorage.getItem("myUser");
     const [groupsYoureIn, setGroupsYoureIn] = useState("");
 
     const getGroupsYoureIn=async()=>{
@@ -63,6 +62,10 @@ export default function Home(){
         if (!groupName || !ownersName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day)) {
             alert("Please fill in all fields before submitting.");
             return;
+        }
+        if (ownersName !== currUser){
+            alert("Owner Name does not match: " + currUser);
+           return; 
         }
     
       
@@ -122,13 +125,17 @@ export default function Home(){
    //        <Widget imageUrl={'./chemistryimg.jpeg'}/>
 
    //<h3> {} ... </h3> is where widgets should go 
-    return (<div className='homepage'>
+   //console.log('User accessed:', window.myUser);
+   return (
+    
+    
+    <div className='homepage'>
         <NavBar/>
         
-        
+        <h2>{"Welcome to StudyNest " + currUser}</h2>
         <div>
             <h2 className="groups-in">Groups you're in:</h2>
-          
+            
           
           
             
@@ -139,7 +146,10 @@ export default function Home(){
         <div> 
             <div className='groups-made'>
                 <h2 className="homeBody2">Groups you've made:</h2>
-                {Array.isArray(groupsYoureIn) && groupsYoureIn.map((group, index) => (
+                {Array.isArray(groupsYoureIn) && groupsYoureIn
+                
+                .filter(group => group.ownersName == currUser)
+                .map((group, index) => (
                     <div key={index}>
                 <h3 className = "output" >Name: {group.groupName} </h3>
                 <h3 className = "output" >Owner: {group.ownersName} </h3>
