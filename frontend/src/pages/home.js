@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Home(){
     const currUser = window.sessionStorage.getItem("myUser");
+    console.log(currUser)
     const [groupsYoureIn, setGroupsYoureIn] = useState("");
 
     const getGroupsYoureIn=async()=>{
@@ -61,7 +62,8 @@ export default function Home(){
         engineering: false,
         business: false,
         foreign_language: false,
-        linguistics: false
+        linguistics: false,
+        other: false
 
       });
 
@@ -203,7 +205,7 @@ export default function Home(){
             <label className="textName">Owner's Name:
               <input type="text" name="ownerName" value={ownersName} onChange={(e) => setOwnersName(e.target.value)} />
             </label>
-            <label className="textName">Subject's Name:
+            <label className="textName">Course's Name:
               <input type="text" value={subjectsName} onChange={(e) => setSubjectsName(e.target.value)} />
             </label>
             <label className="meetingDays">Meeting Days:</label>
@@ -268,12 +270,21 @@ export default function Home(){
 
             <div>
             <label htmlFor="subjectDropdown">Select a Subject:</label>
-            <select id="subjectDropdown" onChange={handleSubjectDropdownChange} style={{ width: '232px' }}>
+            <select id="subjectDropdown" onChange={handleSubjectDropdownChange} style={{ width: '232px', height: '40px' }}>
                 <option value="">Select...</option>
                 <option value="computer_science">Computer Science</option>
                 <option value="math">Math</option>
                 <option value="history">History</option>
-                {/* Add more options for other subjects */}
+                <option value="english">English</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="physics">Physics</option>
+                <option value="biology">Biology</option>
+                <option value="engineering">Engineering</option>
+                <option value="business">Business</option>
+                <option value="foreign_language">Foreign Language</option>
+                <option value="linguistics">Linguistics</option>
+                <option value="other">Other</option>
+
             </select>
             </div>
 
