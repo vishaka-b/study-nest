@@ -4,6 +4,11 @@ import Feed from './Feed.js'
 import './home.css';
 import NavBar from '../Navbar'
 import Widget from './Widget'
+import Widget_Feed from './Widget_Feed';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export default function Home(){
     const currUser = window.sessionStorage.getItem("myUser");
@@ -125,46 +130,33 @@ export default function Home(){
    //        <Widget imageUrl={'./chemistryimg.jpeg'}/>
 
    //<h3> {} ... </h3> is where widgets should go 
-   //console.log('User accessed:', window.myUser);
+   //<Button variant="primary" onClick={handleCreateNewGroup}>+</Button>
+    
    return (
-    
-    
-    <div className='homepage'>
-        <NavBar/>
-        
-        <h2>{"Welcome to StudyNest " + currUser}</h2>
-        <div>
-            <h2 className="groups-in">Groups you're in:</h2>
+        <div className='homepage'>
             
-          
-          
-            
-            <Feed></Feed>
-           
-
-        </div>
-        <div> 
-            <div className='groups-made'>
-                <h2 className="homeBody2">Groups you've made:</h2>
-                {Array.isArray(groupsYoureIn) && groupsYoureIn.filter(group => group.ownersName == currUser).map((group, index) => (
-                    <div key={index}>
-                <h3 className = "output" >Name: {group.groupName} </h3>
-                <h3 className = "output" >Owner: {group.ownersName} </h3>
-                
-                </div>
-                )) }
-
-
-            
-                <button type="button" className="createNewGroup" onClick={handleCreateNewGroup}> + </button>
+            <NavBar/>
+            <h2>{"Welcome to StudyNest " + currUser}</h2>
+            <Container>
+            <div>
+                <h1 class="section-title">Groups you're in</h1>
+                {Array.isArray(groupsYoureIn) &&
+                    <Widget_Feed groups={groupsYoureIn} />
+                }
             </div>
-            
+            <div>
+                <h1 class="section-title">Groups you've made</h1>
+                {/* <button type="button" className="createNewGroup" onClick={handleCreateNewGroup}>+</button> */}
+                <Button variant="info" onClick={handleCreateNewGroup} style={{marginBottom: '24px'}}>Create new group</Button>
+                {Array.isArray(groupsYoureIn) &&
+                    <Widget_Feed groups={groupsYoureIn} />
+                }
+            </div>
             <div className='groups'>
-                <h3 >{groupsYouveMade}</h3>
+                <h3>{groupsYouveMade}</h3>
             </div>
             
-            
-
+            </Container>
             {showForm && (
         <div className="popupForm">
           <button className="closeButton" type="button" onClick={handleCloseForm}>X</button>
@@ -252,8 +244,7 @@ export default function Home(){
              
             </div>
        
-        
-        </div>)
+    )
 } 
 
 /*import NavBar from '../Navbar';
