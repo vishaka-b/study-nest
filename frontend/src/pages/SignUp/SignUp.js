@@ -6,6 +6,7 @@ function SignUp(props) {
 
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
+  const [reTypepwd, setReTypePwd] = useState('');
   const [name, setName] = useState('');
 
   const handleUserSubmit= async (event) => {
@@ -14,12 +15,16 @@ function SignUp(props) {
     const response = await fetch(`http://localhost:8888/myuserlist?email=${email}&name=${name}`);
     const userData = await response.json();
     const userExists = userData.find(user => user.email === email);
-  if(name === "" || email === "" || pwd === "")  {
+  if(name === "" || email === "" || pwd === "" || reTypepwd === "")  {
     alert("Please fill out all fields to Sign Up")
   }
   else if (userExists) {
     alert('Email already exists. Please choose a different one.');
-  } else {
+  } 
+  else if (reTypepwd != pwd){
+    alert('Both passwords to not match please try again')
+  }
+  else {
     fetch('http://localhost:8888/createNewUser', {
             method: "POST",
             headers: {
@@ -65,6 +70,10 @@ function SignUp(props) {
           <label className="text">
             <div>Password</div>
             <input type="password" value={pwd} onChange={(e) => setPwd(e.target.value)}/>
+          </label>
+          <label className="text">
+            <div>Re-Enter Password</div>
+            <input type="password" value={reTypepwd} onChange={(e) => setReTypePwd(e.target.value)}/>
           </label>
           <div>
             <button className="login-button" type="submit" >
