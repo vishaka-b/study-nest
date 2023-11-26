@@ -145,7 +145,7 @@ export default function Home(){
                 <h2 className="homeBody2">Groups you've made:</h2>
                 {Array.isArray(groupsYoureIn) && groupsYoureIn
                 
-                
+                .filter(group => group.ownersName == currUser)
                 .map((group, index) => (
                     <div key={index}>
                 <h3 className = "output" >Name: {group.groupName} </h3>
