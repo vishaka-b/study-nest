@@ -7,8 +7,16 @@ function SignUp(props) {
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
 
-  const handleUserSubmit= (event) => {
+  const handleUserSubmit= async (event) => {
     event.preventDefault();
+
+    const response = await fetch(`http://localhost:8888/myuserlist?email=${email}`);
+  const userData = await response.json();
+  const userExists = userData.find(user => user.email === email);
+
+  if (userExists) {
+    alert('Username already exists. Please choose a different one.');
+  } else {
     fetch('http://localhost:8888/createNewUser', {
             method: "POST",
             headers: {
@@ -29,6 +37,8 @@ function SignUp(props) {
         })
         .finally(() => {
         });
+  }
+
   };
     return (
     <div>
