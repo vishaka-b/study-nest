@@ -22,7 +22,7 @@ function SignUp(props) {
     alert('Email already exists. Please choose a different one.');
   } 
   else if (reTypepwd != pwd){
-    alert('Both passwords to not match please try again')
+    alert('Both passwords to not match. Please try again')
   }
   else {
     fetch('http://localhost:8888/createNewUser', {

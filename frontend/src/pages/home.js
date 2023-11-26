@@ -12,7 +12,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Home(){
     const currUser = window.sessionStorage.getItem("myUser");
-    console.log(currUser)
     let userName = "";
     if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
         userName = currUser;
@@ -73,7 +72,7 @@ export default function Home(){
         other: false
 
       });
-
+    const [selectedSubject, setSelectedSubject   ] = useState("");
     const handleCreateNewGroup = () => {
         setShowForm(true);
     }
@@ -81,13 +80,14 @@ export default function Home(){
     const handleCloseForm = () => {
         setShowForm(false);
     }
-
+    //var selectedSubject = '';
     const handleSubjectDropdownChange = (e) => {
-        const selectedSubject = e.target.value;
+        setSelectedSubject(e.target.value);
         setSubjectClassification((prevClassification) => ({
-          ...prevClassification,
+          prevClassification,
           [selectedSubject]: true
         }));
+        
       };
     //use Axios.post 
     //on backend read the body and add to database and then send a temp response back (200 = allgood)
@@ -95,7 +95,11 @@ export default function Home(){
     const handleFormSubmit = (event) => {
         //ensures we are at home page (have to add reload screen)
         event.preventDefault();
-        if (!groupName || !ownersName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day)) {
+        if (!groupName || !ownersName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day) || selectedSubject === "") {
+            if (selectedSubject === ""){
+                alert("Please choose a subject from dropdown menu");
+                return;
+            }
             alert("Please fill in all fields before submitting.");
             return;
         }
@@ -118,7 +122,9 @@ export default function Home(){
                 subjectsName: subjectsName,
                 meetingTime: meetingTime,
                 meetingDays: JSON.stringify(Object.values(meetingDays)),
+                subjectClassification : selectedSubject
             }),
+            
         })
         .then(response => response.json())
         .then(result => {
@@ -130,6 +136,7 @@ export default function Home(){
         .finally(() => {
             // Close the form and reset fields regardless of success or failure
             setShowForm(false);
+            setSelectedSubject("")
             setGroupName('');
             setOwnersName('');
             setSubjectsName('');

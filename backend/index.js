@@ -38,7 +38,7 @@ app.listen(8888,()=>{
     app.post('/AddGroups', (req, res) => {
         console.log(req.body); 
         // Assuming the data is sent as JSON in the request body
-        const { groupName, ownersName, subjectsName, meetingTime, meetingDays } = req.body;
+        const { groupName, ownersName, subjectsName, meetingTime, meetingDays, subjectClassification } = req.body;
         //console.log(groupName)
        
         database.collection("mygroupscollection").insertOne({
@@ -47,7 +47,9 @@ app.listen(8888,()=>{
             ownersName: ownersName ,
             courseName : subjectsName,
             meetingTime: meetingTime,
-            meetingDays: meetingDays
+            meetingDays: meetingDays,
+            subjectClassification: subjectClassification
+            
         });
         // Send a response back to the client
         res.json({ message: 'Succesfully created new Group' });
