@@ -4,27 +4,22 @@ import Feed from './Feed.js'
 import './home.css';
 import NavBar from '../Navbar'
 import Widget from './Widget'
-import WidgetFeed from './Widget_Feed';
+import Widget_Feed from './Widget_Feed';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default function Home(){
+
     const currUser = window.sessionStorage.getItem("myUser");
-    let userName = "";
-    if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
-        userName = currUser;
-    else
-        userName = window.sessionStorage.getItem("userName");
 
-
+    console.log(currUser)
     const [groupsYoureIn, setGroupsYoureIn] = useState("");
 
     const getGroupsYoureIn=async()=>{
         const response=await Axios.get("http://localhost:8888/mygroupslist");
         setGroupsYoureIn(response.data);
-        console.log(response.data)
     }
 
     useEffect(()=> {
@@ -72,7 +67,8 @@ export default function Home(){
         other: false
 
       });
-    const [selectedSubject, setSelectedSubject   ] = useState("");
+    const [selectedSubject, setSelectedSubject] = useState('other')
+
     const handleCreateNewGroup = () => {
         setShowForm(true);
     }
@@ -80,26 +76,46 @@ export default function Home(){
     const handleCloseForm = () => {
         setShowForm(false);
     }
-    //var selectedSubject = '';
+
     const handleSubjectDropdownChange = (e) => {
-        setSelectedSubject(e.target.value);
+        const selectedSubject = e.target.value;
+        //setSelectedSubject(e.target.value);
+        setSelectedSubject(Object.keys(subjectClassification).find((subject) => subjectClassification[subject]))
+        console.log("SUBJECT: ", selectedSubject)
         setSubjectClassification((prevClassification) => ({
-          prevClassification,
+          ...prevClassification,
           [selectedSubject]: true
         }));
-        
       };
     //use Axios.post 
     //on backend read the body and add to database and then send a temp response back (200 = allgood)
-
+ ///dfsfdsfdd
+ const handleJoin = (event) => {
+    console.log("REACHED")
+    // Make a POST request to your backend to add the current user to the members array
+    fetch('http://localhost:8888/AddMember', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            groupName: "test", // Assuming props.name is the group name
+            newMember: currUser,
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // Handle the response from the backend as needed
+    })
+    .catch(error => {
+        console.error('Error joining group:', error);
+    });
+};
+///dfsdfsfd    
     const handleFormSubmit = (event) => {
         //ensures we are at home page (have to add reload screen)
         event.preventDefault();
-        if (!groupName || !ownersName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day) || selectedSubject === "") {
-            if (selectedSubject === ""){
-                alert("Please choose a subject from dropdown menu");
-                return;
-            }
+        if (!groupName || !ownersName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day)) {
             alert("Please fill in all fields before submitting.");
             return;
         }
@@ -107,8 +123,10 @@ export default function Home(){
             alert("Owner Name does not match: " + currUser);
            return; 
         }
-    
-      
+        if (currUser==null){
+            currUser=""
+        }
+
     
         // Send a POST request to the server
         fetch('http://localhost:8888/AddGroups', {
@@ -122,9 +140,11 @@ export default function Home(){
                 subjectsName: subjectsName,
                 meetingTime: meetingTime,
                 meetingDays: JSON.stringify(Object.values(meetingDays)),
-                subjectClassification : selectedSubject
+                subjectClassification: JSON.stringify(Object.values(subjectClassification)),
+                //selectedSubject: selectedSubject
+                selectedSubject: selectedSubject
+                
             }),
-            
         })
         .then(response => response.json())
         .then(result => {
@@ -136,7 +156,6 @@ export default function Home(){
         .finally(() => {
             // Close the form and reset fields regardless of success or failure
             setShowForm(false);
-            setSelectedSubject("")
             setGroupName('');
             setOwnersName('');
             setSubjectsName('');
@@ -150,6 +169,23 @@ export default function Home(){
                 saturday: false,
                 sunday: false,
             });
+            setSubjectClassification({
+                computer_science: false,
+                math: false,
+                history: false,
+                english: false,
+                chemistry: false,
+                physics: false,
+                biology: false,
+                engineering: false,
+                business: false,
+                foreign_language: false,
+                linguistics: false,
+                other: false
+
+            });
+            setSelectedSubject('');
+            
             //refresh itself so users do not need to refresh by hand
             refreshGroups();
         });
@@ -174,12 +210,12 @@ export default function Home(){
         <div className='homepage'>
             
             <NavBar/>
-            <h2 className="welcome-message">{"Welcome to StudyNest " + userName + "!"}</h2>
+            <h2>{"Welcome to StudyNest " + currUser}</h2>
             <Container>
             <div>
                 <h1 class="section-title">Groups you're in</h1>
                 {Array.isArray(groupsYoureIn) &&
-                    <WidgetFeed groups={groupsYoureIn} />
+                    <Widget_Feed groups={groupsYoureIn} />
                 }
             </div>
             <div>
@@ -188,7 +224,7 @@ export default function Home(){
                 <Button variant="info" onClick={handleCreateNewGroup} style={{marginBottom: '24px'}}>Create new group</Button>
 
                 {Array.isArray(groupsYoureIn) &&
-                    <WidgetFeed groups={groupsYoureIn.filter(group => group.ownersName === currUser)} />
+                    <Widget_Feed groups={groupsYoureIn.filter(group => group.ownersName == currUser)} />
                 }
 
                 {/*Array.isArray(groupsYoureIn) && groupsYoureIn
@@ -300,6 +336,9 @@ export default function Home(){
                 <option value="other">Other</option>
 
             </select>
+            <p>Selected Subject: {Object.keys(subjectClassification).find((subject) => subjectClassification[subject])}</p>
+            
+
             </div>
 
             <p></p>
