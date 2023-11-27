@@ -6,7 +6,7 @@
 2) cd into study-nest
    `cd study-nest`
 3) go into the frontend folder using `cd frontend`
-4) use `npm install` or `npm i` to install the reuired npm features
+4) use `npm install` or `npm i` to install the required npm features
 
 ## Connecting to Backend Database
 We are using MongoDB atlas to run our database. 
@@ -55,4 +55,4 @@ Shriya Char [https://github.com/Shriya8]
 
 Joy Cheng [https://github.com/joy-y-cheng]
 
-Hannah Kendell [https://github.com/hannahkendall04]
+Hannah Kendall [https://github.com/hannahkendall04]
