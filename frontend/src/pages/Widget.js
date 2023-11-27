@@ -141,7 +141,9 @@ export default function Widget({groupName, subject, time, creator, days, subject
         });*/
     }
 
-    const link= '/images/'+ subjectClass + '.jpeg';
+    //const link= '/images/'+ subjectClass + '.jpeg';
+    const link = '/images/' + (subjectClass ?? 'other') + '.jpeg';
+
 
     return(
         <>
