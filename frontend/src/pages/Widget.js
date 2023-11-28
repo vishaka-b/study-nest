@@ -178,7 +178,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     Course: {subject}
                     
                     <div>
-                    Subject: {subjectMapping[subjectClass]}
+                    Subject: {subjectMapping[subjectClass] ?? 'Other'}
                     </div>                   
                      <br />
                     Meeting days: {Array.isArray(days) ? days.join(', ') : days}
