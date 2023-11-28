@@ -143,6 +143,20 @@ export default function Widget({groupName, subject, time, creator, days, subject
 
     //const link= '/images/'+ subjectClass + '.jpeg';
     const link = '/images/' + (subjectClass ?? 'other') + '.jpeg';
+    const subjectMapping = {
+        "computer_science": "Computer Science",
+        "math": "Math",
+        "history": "History",
+        "english": "English",
+        "chemistry": "Chemistry",
+        "physics": "Physics",
+        "biology": "Biology",
+        "engineering": "Engineering",
+        "business": "Business",
+        "foreign_language": "Foreign Language",
+        "linguistics": "Linguistics",
+        "other": "Other"
+      };
 
 
     return(
@@ -164,7 +178,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     Course: {subject}
                     
                     <div>
-                    selectedSubject: {subjectClass}
+                    Subject: {subjectMapping[subjectClass]}
                     </div>                   
                      <br />
                     Meeting days: {Array.isArray(days) ? days.join(', ') : days}
