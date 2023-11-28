@@ -82,10 +82,48 @@ export default function Home(){
         //setSelectedSubject(e.target.value);
         setSelectedSubject(Object.keys(subjectClassification).find((subject) => subjectClassification[subject]))
         console.log("SUBJECT: ", selectedSubject)
-        setSubjectClassification((prevClassification) => ({
+
+        //new code
+      /*  setSubjectClassification((prevClassification) => {
+            const updatedClassification = {};
+        
+            // Set the selected subject to true
+            updatedClassification[selectedSubject] = true;
+        
+            // Set all other subjects to false
+            Object.keys(prevClassification).forEach((subject) => {
+              if (subject !== selectedSubject) {
+                updatedClassification[subject] = false;
+              }
+            });
+            return updatedClassification;
+            });*/
+
+        
+        //new code
+        let updatedClassification= {
+            computer_science: false,
+            math: false,
+            history: false,
+            english: false,
+            chemistry: false,
+            physics: false,
+            biology: false,
+            engineering: false,
+            business: false,
+            foreign_language: false,
+            linguistics: false,
+            other: false
+
+        }
+        updatedClassification [selectedSubject] = true;
+        setSubjectClassification(updatedClassification);
+
+        /*setSubjectClassification((prevClassification) => ({
           ...prevClassification,
           [selectedSubject]: true
-        }));
+        }));*/
+
       };
     //use Axios.post 
     //on backend read the body and add to database and then send a temp response back (200 = allgood)
