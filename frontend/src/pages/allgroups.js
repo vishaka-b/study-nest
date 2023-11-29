@@ -11,6 +11,8 @@ export default function AllGroups(){
     const [groupsYoureIn, setGroupsYoureIn] = useState("");
     const [searchText, setSearchText] = useState('');
     const [filteredGroups, setFilteredGroups] = useState([]);
+    const [sortOption, setSortOption] = useState('');
+
 
     const getGroupsYoureIn=async()=>{
         const response=await Axios.get("http://localhost:8888/mygroupslist");
@@ -29,12 +31,18 @@ export default function AllGroups(){
           group.courseName.toLowerCase().includes(searchText.toLowerCase())
         );
       });
+      console.log(sortOption)
       setFilteredGroups(filtered);
+      setSortOption('');
+
+
     };
+
 
     const handleShowAllGroups = () => {
       setSearchText('');
       setFilteredGroups(groupsYoureIn);
+      setSortOption('');
       console.log(groupsYoureIn);
 
     };
@@ -49,7 +57,7 @@ export default function AllGroups(){
         handleSearch();
       }
     };
-    
+  
     return (
     <div className="allgroups">
 
@@ -68,8 +76,14 @@ export default function AllGroups(){
         <button onClick={handleSearch} class="search-button">Search</button>
         <button onClick={handleShowAllGroups} class="show-all-button">Show All Groups</button>
     </div>
+
+    <div className="sort-buttons">
+        <button class="sort-button" onClick={() => setSortOption('groupName')}>Sort by Group Name</button>
+        <button class="sort-button" onClick={() => setSortOption('ownersName')}>Sort by Owner's Name</button>
+        <button class="sort-button" onClick={() => setSortOption('courseName')}>Sort by Course Name</button>
+      </div>
     
-    <Widget_Feed groups={filteredGroups}/>
+    <Widget_Feed groups={filteredGroups} sortOption={sortOption}/>
    
     </div>)
 }

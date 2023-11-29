@@ -253,7 +253,7 @@ export default function Home(){
             <div>
                 <h1 class="section-title">Groups you're in</h1>
                 {Array.isArray(groupsYoureIn) &&
-                    <Widget_Feed groups={groupsYoureIn} />
+                    <Widget_Feed groups={groupsYoureIn} sortOption = {''}/>
                 }
             </div>
             <div>
@@ -262,7 +262,7 @@ export default function Home(){
                 <Button variant="info" onClick={handleCreateNewGroup} style={{marginBottom: '24px'}}>Create new group</Button>
 
                 {Array.isArray(groupsYoureIn) &&
-                    <Widget_Feed groups={groupsYoureIn.filter(group => group.ownersName == currUser)} />
+                    <Widget_Feed groups={groupsYoureIn.filter(group => group.ownersName == currUser)} sortOption = {''} />
                 }
 
                 {/*Array.isArray(groupsYoureIn) && groupsYoureIn

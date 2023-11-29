@@ -26,6 +26,24 @@
     border-radius: 18px;
     cursor: pointer;
   }
+
+  .sort-button {
+    padding: 10px;
+    font-size: 12px;
+    background-color:rgb(2, 166, 255);
+    color: white;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+
+  .sort-buttons {
+    padding-bottom: 10px;
+    font-size: 10px;
+  }
+
   
   /* Add hover effect */
   .search-button:hover, .show-all-button:hover {

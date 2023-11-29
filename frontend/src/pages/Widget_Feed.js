@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Widget from './Widget';
 
-export default function WidgetFeed({groups}) {
+export default function WidgetFeed({groups, sortOption}) {
     const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     const subjectsArray = [
         'computer_science',
@@ -25,10 +25,28 @@ export default function WidgetFeed({groups}) {
     
     //console.log("GROUP 51", groups[51].groupName);
 
+    const applySorting = (groups) => {
+      if (sortOption === 'groupName') {
+        groups.sort((a, b) => a.groupName.localeCompare(b.groupName));
+      } else if (sortOption === 'ownersName') {
+        groups.sort((a, b) => a.ownersName.localeCompare(b.ownersName));
+      } else if (sortOption === 'courseName') {
+        groups.sort((a, b) => a.courseName.localeCompare(b.courseName));
+      }
+      // Add more sorting options if needed
+    };
+  
+    // Create a copy of the groups array to avoid mutating the original array
+    const sortedGroups = [...groups];
+  
+    // Apply sorting based on the selected option
+    applySorting(sortedGroups);
+    
+
     return (
         <Container>
           <Row xs={1} md={2} lg={3}>
-            {groups.map((group, index) => (
+            {sortedGroups.map((group, index) => (
               <Col key={index}>
                 <Widget
                   groupName={group.groupName}
@@ -37,7 +55,6 @@ export default function WidgetFeed({groups}) {
                   subject={group.courseName}
                   time={group.meetingTime} // Assuming you have a 'time' property in your group object
                   creator={group.ownersName}
-
                   subjectClass = {group.subjectClassification && (() => {
                         let stringValue = group.subjectClassification.toString();
                         let looper=stringValue.substring(1, group.subjectClassification.length - 1).split(",");
