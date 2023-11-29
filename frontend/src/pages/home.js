@@ -165,7 +165,7 @@ export default function Home(){
             currUser=""
         }
 
-    
+        const memberArray = [ownersName]
         // Send a POST request to the server
         fetch('http://localhost:8888/AddGroups', {
             method: "POST",
@@ -180,7 +180,8 @@ export default function Home(){
                 meetingDays: JSON.stringify(Object.values(meetingDays)),
                 subjectClassification: JSON.stringify(Object.values(subjectClassification)),
                 //selectedSubject: selectedSubject
-                selectedSubject: selectedSubject
+                selectedSubject: selectedSubject,
+                memberArray: memberArray
                 
             }),
         })
