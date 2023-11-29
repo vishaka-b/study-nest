@@ -42,7 +42,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 300px;
+    width: 390px;
     padding: 20px;
     background-color: rgb(104, 187, 232);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -51,17 +51,15 @@
   
   .popupForm label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
   }
   
   .popupForm input {
     width: 90%;
     outline-color: #000000;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 5px;
+    margin-bottom: 6px;
   }
-  
-
   
   .popupForm button.closeButton {
     position: absolute;
@@ -72,6 +70,7 @@
     padding: 5px 10px;
     border: none;
     cursor: pointer;
+    border-radius: 20px;
   }
 
   .popupForm button.closeButton:hover {
