@@ -84,6 +84,22 @@ app.get('/myuserlist',(request,reposnse)=>{
 
 })
 
+app.post('/addToGroup/', async (req,res) => {
+    try{
+        const groupID = req.body.groupName;
+        const newMember = req.body.user;
+       
+        database.collection("mygroupscollection").updateOne(
+            { groupName: groupID },
+            { $push: { members: newMember } }
+        );
+        res.json({ message: 'Succesfully joined :)' });    }
+
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
 //from mongoDB tutorial video
 /*
 app.delete('/backend/todoapp/DeleteNotes' ,(request,response)=>{

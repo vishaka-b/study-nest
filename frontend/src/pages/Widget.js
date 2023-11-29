@@ -30,6 +30,27 @@ function MoreModal(props) {
         });
     }*/
 
+    const handleJoin = (event) => {
+        event.preventDefault();
+      
+        // Replace 'new_value' with the actual value you want to add
+        const newElement = window.sessionStorage.getItem("myUser");
+      
+        fetch(`http://localhost:8888/addToGroup`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            groupName: props.name,
+            user: newElement
+          }
+          ),
+        })
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error('Error:', error));
+      };
         
     //vishaka code
     return (
@@ -58,7 +79,7 @@ function MoreModal(props) {
                 </p>
             </Modal.Body>
             <Modal.Footer>
-                <Button /*onClick={handleJoin}*/>Join</Button>
+                <Button onClick={handleJoin}>Join</Button>
             </Modal.Footer>
         </Modal>
     );
