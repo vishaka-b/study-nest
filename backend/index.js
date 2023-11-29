@@ -38,7 +38,7 @@ app.listen(8888,()=>{
     app.post('/AddGroups', (req, res) => {
         console.log(req.body); 
         // Assuming the data is sent as JSON in the request body
-        const { groupName, ownersName, subjectsName, meetingTime, meetingDays, subjectClassification, selectedSubject } = req.body;
+        const { groupName, ownersName, subjectsName, meetingTime, meetingDays, subjectClassification, selectedSubject, memberArray } = req.body;
         //console.log(groupName)
        
         database.collection("mygroupscollection").insertOne({
@@ -50,7 +50,8 @@ app.listen(8888,()=>{
             meetingDays: meetingDays,
             //subjectClassification: JSON.parse(subjectClassificationString), //subjectClassification,
             subjectClassification: subjectClassification,
-            selectedSubject: selectedSubject
+            selectedSubject: selectedSubject, 
+            memberArray: memberArray
             
             
         });
@@ -83,6 +84,22 @@ app.get('/myuserlist',(request,reposnse)=>{
 
 })
 
+app.post('/addToGroup/', async (req,res) => {
+    try{
+        const groupID = req.body.groupName;
+        const newMember = req.body.user;
+       
+        database.collection("mygroupscollection").updateOne(
+            { groupName: groupID },
+            { $push: { members: newMember } }
+        );
+        res.json({ message: 'Succesfully joined :)' });    }
+
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
 //from mongoDB tutorial video
 /*
 app.delete('/backend/todoapp/DeleteNotes' ,(request,response)=>{
