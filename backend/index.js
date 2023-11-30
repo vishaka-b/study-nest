@@ -38,7 +38,7 @@ app.listen(8888,()=>{
     app.post('/AddGroups', (req, res) => {
         console.log(req.body); 
         // Assuming the data is sent as JSON in the request body
-        const { groupName, ownersName, subjectsName, meetingTime, meetingDays, subjectClassification, selectedSubject, members } = req.body;
+        const { groupName, ownersName, subjectsName, meetingTime, meetingDays, subjectClassification, selectedSubject } = req.body;
         //console.log(groupName)
        
         database.collection("mygroupscollection").insertOne({
@@ -48,10 +48,9 @@ app.listen(8888,()=>{
             courseName : subjectsName,
             meetingTime: meetingTime,
             meetingDays: meetingDays,
-            //subjectClassification: JSON.parse(subjectClassificationString), //subjectClassification,
-            subjectClassification: subjectClassification,
-            selectedSubject: selectedSubject, 
-            members: members,
+            subjectClassification: JSON.parse(subjectClassification), //subjectClassification,
+            //subjectClassification: subjectClassification,
+            selectedSubject: selectedSubject
             
             
         });
@@ -84,22 +83,74 @@ app.get('/myuserlist',(request,reposnse)=>{
 
 })
 
+app.post('/checkMembership', async (req, res) => {
+    const { groupName, user } = req.body;
+  
+    const groupsCollection = database.collection('mygroupscollection');
+  
+    try {
+      const isMember = await groupsCollection.findOne({ groupName, members: user });
+      res.json({ isMember: !!isMember });
+    } catch (error) {
+      console.error('Error checking membership:', error);
+      res.status(500).json({ error: 'Error checking membership' });
+    }
+  });
+  
+
 app.post('/addToGroup/', async (req,res) => {
     try{
         const groupID = req.body.groupName;
         const newMember = req.body.user;
-       
-        database.collection("mygroupscollection").updateOne(
+        
+        const groupCollection = database.collection("mygroupscollection");
+
+        // Check if the member already exists in the array
+        const existingMember = await groupCollection.findOne({ groupName: groupID, members: newMember });
+
+        if (!existingMember) {
+        // Member doesn't exist, proceed with the update
+        await groupCollection.updateOne(
             { groupName: groupID },
             { $push: { members: newMember } }
         );
-        res.json({ message: 'Succesfully joined :)' });    }
+        res.json({ message: 'Successfully joined (meow):)' });
+        } else {
+        // Member already exists in the array
+        res.json({ message: 'You are already a member of this group' });
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+        }
+
+        /*if (database.collection("mygroupscollection").contains(newMember)){
+            console.error(error);
+        }*/
+        
+      /*  database.collection("mygroupscollection").updateOne(
+            { groupName: groupID },
+            { $addToSet: { members: newMember } },
+       // );
+       // res.json({ message: 'Succesfully joined :)' });    
+        (err, result) => {
+            if (err) {
+              res.status(500).json({ error: 'Error updating the database' });
+            } else {
+              if (result.modifiedCount > 0) {
+                res.json({ message: 'Successfully joined :)' });
+              } else {
+                res.json({ message: 'You are already a member of this group' });
+              }
+            }
+          }
+         );*/
+        }
 
     catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
+
 //from mongoDB tutorial video
 /*
 app.delete('/backend/todoapp/DeleteNotes' ,(request,response)=>{
