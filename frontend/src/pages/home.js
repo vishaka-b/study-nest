@@ -13,6 +13,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function Home(){
 
     const currUser = window.sessionStorage.getItem("myUser");
+    let userName = "";
+    if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
+        userName = currUser;
+    else
+        userName = window.sessionStorage.getItem("userName");
 
     console.log(currUser)
     const [groupsYoureIn, setGroupsYoureIn] = useState("");
@@ -254,7 +259,7 @@ export default function Home(){
         <div className='homepage'>
             
             <NavBar/>
-            <h2>{"Welcome to StudyNest " + currUser}</h2>
+            <h2 className="welcome-message">{"Welcome to StudyNest " + userName + "!"}</h2>
             <Container>
             <div>
                 <h1 class="section-title">Groups you're in</h1>
