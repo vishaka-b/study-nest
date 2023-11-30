@@ -11,6 +11,7 @@ import React, { useEffect, useState } from 'react';
 
 
 function MoreModal(props) {
+    
     const currUser = window.sessionStorage.getItem("myUser");
 
         //vishaka code
@@ -47,7 +48,10 @@ function MoreModal(props) {
           }
           ),
         })
-          .then(response => response.json())
+        .then(response => response.json(),
+        alert("Succesfully Joined: " +  props.name)
+        
+        )
           .then(data => console.log(data))
           .catch(error => console.error('Error:', error));
       };
@@ -80,6 +84,7 @@ function MoreModal(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={handleJoin}>Join</Button>
+                
             </Modal.Footer>
         </Modal>
     );
