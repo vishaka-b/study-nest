@@ -1,6 +1,6 @@
 //import React from 'react';
 import Card from 'react-bootstrap/Card';
-/* import './Widget.css'; */
+//import './Widget.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -36,6 +36,13 @@ function MoreModal(props) {
       
         // Replace 'new_value' with the actual value you want to add
         const newElement = window.sessionStorage.getItem("myUser");
+        /*if we want user name to be including along with email
+        let userName = "";
+        if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
+            userName = currUser;
+        else
+            userName = window.sessionStorage.getItem("userName");
+        */
       
         fetch(`http://localhost:8888/addToGroup`, {
           method: 'POST',
@@ -44,7 +51,8 @@ function MoreModal(props) {
           },
           body: JSON.stringify({
             groupName: props.name,
-            user: newElement
+            user: newElement,
+            //username: userName
           }
           ),
         })
@@ -65,21 +73,21 @@ function MoreModal(props) {
             centered
         >
             <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
+                <Modal.Title id="contained-modal-title-vcenter" style={{"font-weight": "bolder"}}>
                     {props.name}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <p>
-                    Course: {props.course}
+                    <div style={{"font-weight": "bolder"}}>Course:</div> {props.course} 
                     <br />
-                    Meeting days: {Array.isArray(props.days) ? props.days.join(', ') : props.days}
+                    <div style={{"font-weight": "bolder"}} >Meeting days:</div> {Array.isArray(props.days) ? props.days.join(', ') : props.days}
                     <br />
-                    Meeting time: {props.time}
+                    <div style={{"font-weight": "bolder"}} >Meeting time:</div> {props.time}
                     <br />
-                    Creator: {props.creator}
+                    <div style={{"font-weight": "bolder"}} >Creator:</div> {props.creator}
                     <br />
-                    Member(s): {Array.isArray(props.members) ? props.members.join(', ') : props.members}
+                    <div style={{"font-weight": "bolder"}} >Member(s):</div> {Array.isArray(props.members) ? props.members.join(', ') : props.members}
                 </p>
             </Modal.Body>
             <Modal.Footer>
