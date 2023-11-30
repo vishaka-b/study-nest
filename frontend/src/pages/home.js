@@ -165,7 +165,7 @@ export default function Home(){
             currUser=""
         }
 
-        const memberArray = [ownersName]
+        const members = [ownersName]
         // Send a POST request to the server
         fetch('http://localhost:8888/AddGroups', {
             method: "POST",
@@ -181,7 +181,7 @@ export default function Home(){
                 subjectClassification: JSON.stringify(Object.values(subjectClassification)),
                 //selectedSubject: selectedSubject
                 selectedSubject: selectedSubject,
-                memberArray: memberArray
+                members: members
                 
             }),
         })
