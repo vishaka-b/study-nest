@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Widget from './Widget';
 
-export default function WidgetFeed({groups, sortOption}) {
+export default function WidgetFeed({groups, sortOption, refresh}) {
     const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     const subjectsArray = [
         'computer_science',
@@ -57,19 +57,19 @@ export default function WidgetFeed({groups, sortOption}) {
                   creator={group.ownersName}
                   members={group.members}
                   subjectClass = {group.subjectClassification && (() => {
-                        let stringValue = group.subjectClassification.toString();
-                        let looper=stringValue.substring(1, group.subjectClassification.length - 1).split(",");
+                        {/*let stringValue = group.subjectClassification.toString();*/}
+                        {/*let looper=stringValue.substring(1, group.subjectClassification.length - 1).split(",");*/}
                         for (let i = 0; i < subjectsArray.length; i++) {
                             //console.log("FOR LOOP ", subjectsArray[i]);
                             //console.log("FOR LOOP looper", looper[i])
-                            if (looper[i] === 'true') {
+                            if (group.subjectClassification[i] === 'true') {
                                 console.log("ITH INDEX ", subjectsArray[i]);
                                 return subjectsArray[i];
                             }
                         }
                         return 'other';
                         })()}
-                
+                  refresh={refresh}
                   /*subjectClass={
                     if (group.subjectClassification===null) return null;
                     for (int i = 0; i<subjectsArray.length; i++){
@@ -101,7 +101,7 @@ export default function WidgetFeed({groups, sortOption}) {
                   //subjectClass={group.subjectClassification[0]}*/
 
 
-                  days={group.meetingDays.substring(1, group.meetingDays.length - 1).split(",").map(function (day, index) {
+                  days={group.meetingDays.map(function (day, index) {
                     if (day === "true")
                         return daysOfWeek[index]
                     else
