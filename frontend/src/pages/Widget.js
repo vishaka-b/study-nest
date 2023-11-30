@@ -49,13 +49,39 @@ function MoreModal(props) {
           ),
         })
         .then(response => response.json(),
-        alert("Succesfully Joined: " +  props.name)
-        
+        alert("Succesfully Joined: " +  props.name),
+        props.refresh
+
         )
           .then(data => console.log(data))
           .catch(error => console.error('Error:', error));
-      };
-        
+    };
+    
+    const handleDelete = (event) => {
+        event.preventDefault();
+      
+        // Replace 'new_value' with the actual value you want to add
+        const newElement = window.sessionStorage.getItem("myUser");
+      
+        fetch(`http://localhost:8888/addToGroup`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            groupName: props.name,
+            user: newElement
+          }
+          ),
+        })
+        .then(response => response.json(),
+        alert("Succesfully Joined: " +  props.name)
+
+        )
+          .then(data => console.log(data))
+          .catch(error => console.error('Error:', error));
+    };
+
     //vishaka code
     return (
         <Modal
@@ -84,7 +110,7 @@ function MoreModal(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={handleJoin}>Join</Button>
-                
+                <Button onClick={handleDelete}>Delete</Button>
             </Modal.Footer>
         </Modal>
     );
@@ -96,7 +122,7 @@ function MoreModal(props) {
        /* backgroundImage:`url(${imageUrl})`,*/
        //  backgroundImage: "url('./historynew.avif')"
       //}; */
-export default function Widget({groupName, subject, time, creator, days, subjectClass, members, selSub}) {
+export default function Widget({groupName, subject, time, creator, days, subjectClass, members, refresh, selSub}) {
     //console.log("SUBJECT CLASS, ",subjectClass);
 
     /*const [selectedSubject, updateSelectedSubject] = useState('history');
@@ -196,6 +222,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                 time={time}
                 creator={creator}
                 members={members}
+                refresh={refresh}
             />
             <Card className="card-with-background" style={{marginBottom: '24px'}}>
                 <Card.Img variant="top" src={link} class="card-img-top" />

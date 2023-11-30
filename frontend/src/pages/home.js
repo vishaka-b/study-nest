@@ -6,11 +6,114 @@ import NavBar from '../Navbar'
 import Widget from './Widget'
 import Widget_Feed from './Widget_Feed';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
+import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+function FormModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Create new group
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3">
+                <Form.Label>Group:</Form.Label>
+                <Form.Control type="text" placeholder="Enter group name" />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+                <Form.Label>Course:</Form.Label>
+                <Form.Control type="text" placeholder="Enter course name" />
+            </Form.Group>
+
+            
+            
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Label>Meeting days:</Form.Label>
+                {['checkbox'].map((type) => (
+                <div key={`inline-${type}`} className="mb-3">
+                    <Form.Check
+                        inline
+                        label="Mon"
+                        name="group1"
+                        type={type}
+                        id={`inline-${type}-1`}
+                    />
+                    <Form.Check
+                        inline
+                        label="Tue"
+                        name="group1"
+                        type={type}
+                        id={`inline-${type}-2`}
+                    />
+                    <Form.Check
+                        inline
+                        label="Wed"
+                        name="group1"
+                        type={type}
+                        id={`inline-${type}-2`}
+                    />
+                    <Form.Check
+                        inline
+                        label="Thu"
+                        name="group1"
+                        type={type}
+                        id={`inline-${type}-2`}
+                    />
+                    <Form.Check
+                        inline
+                        label="Fri"
+                        name="group1"
+                        type={type}
+                        id={`inline-${type}-2`}
+                    />
+                    <Form.Check
+                        inline
+                        label="Sat"
+                        name="group1"
+                        type={type}
+                        id={`inline-${type}-2`}
+                    />
+                    <Form.Check
+                        inline
+                        label="Sun"
+                        name="group1"
+                        type={type}
+                        id={`inline-${type}-2`}
+                    />
+                </div>
+              ))}
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+                <Form.Label>Meeting time:</Form.Label>
+                <Form.Control type="time" placeholder="Enter course name" />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+            </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button>Submit</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
 export default function Home(){
+
+    const [modalShow, setModalShow] = React.useState(false);
 
     const currUser = window.sessionStorage.getItem("myUser");
 
@@ -29,7 +132,7 @@ export default function Home(){
     const refreshGroups= async()=>{
         const response=await Axios.get("http://localhost:8888/mygroupslist");
         setGroupsYoureIn(response.data);
-        console.log(response.data)
+        console.log(response.data);
     }
 
     useEffect(()=> {
@@ -183,8 +286,8 @@ export default function Home(){
                 meetingDays: Array.from(Object.values(meetingDays)),
                 subjectClassification: Array.from(Object.values(subjectClassification)),
                 */
-                meetingDays: JSON.stringify(Object.values(meetingDays)),
-                subjectClassification: JSON.stringify(Object.values(subjectClassification)),
+                meetingDays: Array.from(Object.values(meetingDays)),
+                subjectClassification: Array.from(Object.values(subjectClassification)),
                 //selectedSubject: selectedSubject
                 selectedSubject: selectedSubject,
                 members: members,
@@ -259,14 +362,22 @@ export default function Home(){
             <div>
                 <h1 class="section-title">Groups you're in</h1>
                 {Array.isArray(groupsYoureIn) &&
-                    <Widget_Feed groups={groupsYoureIn} sortOption = {''}/>
+                    <Widget_Feed groups={groupsYoureIn} sortOption = {''} refresh={refreshGroups}/>
                 }
             </div>
             <div>
                 <h1 class="section-title">Groups you've made</h1>
                 {/* <button type="button" className="createNewGroup" onClick={handleCreateNewGroup}>+</button> */}
                 <Button variant="info" onClick={handleCreateNewGroup} style={{marginBottom: '24px'}}>Create new group</Button>
+                <br />
+                <Button variant="primary" onClick={() => setModalShow(true)}>
+                Modal form
+                </Button>
 
+                <FormModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                />
                 {Array.isArray(groupsYoureIn) &&
                     <Widget_Feed groups={groupsYoureIn.filter(group => group.ownersName == currUser)} sortOption = {''} />
                 }
@@ -289,6 +400,7 @@ export default function Home(){
             </div>
             
             </Container>
+            
             {showForm && (
         <div className="popupForm">
           <button className="closeButton" type="button" onClick={handleCloseForm}>X</button>
@@ -396,9 +508,10 @@ export default function Home(){
             <button className="submitButton" type="submit">Submit</button>
           </form>
         </div>
+        
       )}
              
-            </div>
+    </div>
        
     )
 } 
