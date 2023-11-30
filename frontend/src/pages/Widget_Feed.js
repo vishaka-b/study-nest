@@ -62,7 +62,7 @@ export default function WidgetFeed({groups, sortOption, refresh}) {
                         for (let i = 0; i < subjectsArray.length; i++) {
                             //console.log("FOR LOOP ", subjectsArray[i]);
                             //console.log("FOR LOOP looper", looper[i])
-                            if (group.subjectClassification[i] === 'true') {
+                            if (group.subjectClassification[i] === true) {
                                 console.log("ITH INDEX ", subjectsArray[i]);
                                 return subjectsArray[i];
                             }
@@ -102,7 +102,7 @@ export default function WidgetFeed({groups, sortOption, refresh}) {
 
 
                   days={group.meetingDays.map(function (day, index) {
-                    if (day === "true")
+                    if (day === true)
                         return daysOfWeek[index]
                     else
                         return null
