@@ -116,7 +116,7 @@ export default function Home(){
             other: false
 
         }
-        updatedClassification [selectedSubject] = true;
+        updatedClassification[selectedSubject] = true;
         setSubjectClassification(updatedClassification);
 
         /*setSubjectClassification((prevClassification) => ({
@@ -153,10 +153,11 @@ export default function Home(){
     const handleFormSubmit = (event) => {
         //ensures we are at home page (have to add reload screen)
         event.preventDefault();
-        if (!groupName || !ownersName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day)) {
+        if (!groupName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day)) {
             alert("Please fill in all fields before submitting.");
             return;
         }
+        /*
         if (ownersName !== currUser){
             alert("Owner Name does not match: " + currUser);
            return; 
@@ -164,8 +165,9 @@ export default function Home(){
         if (currUser==null){
             currUser=""
         }
+        */
 
-        const members = [ownersName]
+        const members = [currUser]
         // Send a POST request to the server
         fetch('http://localhost:8888/AddGroups', {
             method: "POST",
@@ -174,15 +176,18 @@ export default function Home(){
             },
             body: JSON.stringify({
                 groupName: groupName,
-                ownersName: ownersName,
+                ownersName: currUser,
                 subjectsName: subjectsName,
                 meetingTime: meetingTime,
+                /*
+                meetingDays: Array.from(Object.values(meetingDays)),
+                subjectClassification: Array.from(Object.values(subjectClassification)),
+                */
                 meetingDays: JSON.stringify(Object.values(meetingDays)),
                 subjectClassification: JSON.stringify(Object.values(subjectClassification)),
                 //selectedSubject: selectedSubject
                 selectedSubject: selectedSubject,
-                members: members
-                
+                members: members,
             }),
         })
         .then(response => response.json())
@@ -288,16 +293,38 @@ export default function Home(){
         <div className="popupForm">
           <button className="closeButton" type="button" onClick={handleCloseForm}>X</button>
           <form onSubmit={handleFormSubmit} >
-            <label className="textName">Group Name:
+            <label className="textName">Group:
               <input type="text" name="groupName" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
             </label>
-            <label className="textName">Owner's Name:
+            {/*<label className="textName">Owner name:
               <input type="text" name="ownerName" value={ownersName} onChange={(e) => setOwnersName(e.target.value)} />
-            </label>
-            <label className="textName">Course's Name:
+            </label>*/}
+            <label className="textName">Course:
               <input type="text" value={subjectsName} onChange={(e) => setSubjectsName(e.target.value)} />
             </label>
-            <label className="meetingDays">Meeting Days:</label>
+
+            <div>
+            <label htmlFor="subjectDropdown">Subject:</label>
+            <select id="subjectDropdown" onChange={handleSubjectDropdownChange} style={{ width: '232px', height: '40px' }}>
+                <option value="">Select...</option>
+                <option value="computer_science">Computer Science</option>
+                <option value="math">Math</option>
+                <option value="history">History</option>
+                <option value="english">English</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="physics">Physics</option>
+                <option value="biology">Biology</option>
+                <option value="engineering">Engineering</option>
+                <option value="business">Business</option>
+                <option value="foreign_language">Foreign Language</option>
+                <option value="linguistics">Linguistics</option>
+                <option value="other">Other</option>
+
+            </select>
+            {/*<p>Selected Subject: {Object.keys(subjectClassification).find((subject) => subjectClassification[subject])}</p>*/}
+            </div>
+            <p></p>
+            <label className="meetingDays">Meeting days:</label>
             <div className="daysOfWeek">
                 <label className="dayOfWeek">
                     <input
@@ -313,7 +340,7 @@ export default function Home(){
                     checked={meetingDays.tuesday}
                     onChange={(e) => setMeetingDays({ ...meetingDays, tuesday: e.target.checked })}
                     />
-                    Tues
+                    Tue
                 </label>
                 <label className="dayOfWeek">
                     <input
@@ -329,7 +356,7 @@ export default function Home(){
                     checked={meetingDays.thursday}
                     onChange={(e) => setMeetingDays({ ...meetingDays, thursday: e.target.checked })}
                     />
-                    Thurs
+                    Thu
                 </label>
                 <label className="dayOfWeek">
                     <input
@@ -357,32 +384,9 @@ export default function Home(){
                 </label>
             </div>
 
-            <div>
-            <label htmlFor="subjectDropdown">Select a Subject:</label>
-            <select id="subjectDropdown" onChange={handleSubjectDropdownChange} style={{ width: '232px', height: '40px' }}>
-                <option value="">Select...</option>
-                <option value="computer_science">Computer Science</option>
-                <option value="math">Math</option>
-                <option value="history">History</option>
-                <option value="english">English</option>
-                <option value="chemistry">Chemistry</option>
-                <option value="physics">Physics</option>
-                <option value="biology">Biology</option>
-                <option value="engineering">Engineering</option>
-                <option value="business">Business</option>
-                <option value="foreign_language">Foreign Language</option>
-                <option value="linguistics">Linguistics</option>
-                <option value="other">Other</option>
-
-            </select>
-            <p>Selected Subject: {Object.keys(subjectClassification).find((subject) => subjectClassification[subject])}</p>
-            
-
-            </div>
-
             <p></p>
 
-            <label>Hour of the Day:
+            <label>Meeting time:
                 <input
                     type="time"
                     value={meetingTime}
