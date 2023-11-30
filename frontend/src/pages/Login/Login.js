@@ -14,15 +14,15 @@ function Login(props)
     event.preventDefault();
 
     if (email === "" && password === "") {
-      alert("Please enter both email and password");
+      alert("Please enter both an email and a password.");
       return;
     }
     if (email === "") {
-      alert("Please enter email");
+      alert("Please enter an email.");
       return;
     }
     if (password === "") {
-      alert("Please enter password");
+      alert("Please enter a password.");
       return;
     }
 
@@ -35,7 +35,7 @@ function Login(props)
       console.log(trueUser)
 
       if (!trueUser) {
-        alert('User not found. Please check your email.');
+        alert('User not found. Please check that you entered your email correctly.');
         return;
       }
       

@@ -55,6 +55,7 @@ export default function WidgetFeed({groups, sortOption}) {
                   subject={group.courseName}
                   time={group.meetingTime} // Assuming you have a 'time' property in your group object
                   creator={group.ownersName}
+                  members={group.members}
                   subjectClass = {group.subjectClassification && (() => {
                         let stringValue = group.subjectClassification.toString();
                         let looper=stringValue.substring(1, group.subjectClassification.length - 1).split(",");

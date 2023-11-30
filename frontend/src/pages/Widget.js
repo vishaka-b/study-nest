@@ -79,7 +79,7 @@ function MoreModal(props) {
                     <br />
                     Creator: {props.creator}
                     <br />
-                    Member(s): {props.members}
+                    Member(s): {Array.isArray(props.members) ? props.members.join(', ') : props.members}
                 </p>
             </Modal.Body>
             <Modal.Footer>
@@ -96,7 +96,7 @@ function MoreModal(props) {
        /* backgroundImage:`url(${imageUrl})`,*/
        //  backgroundImage: "url('./historynew.avif')"
       //}; */
-export default function Widget({groupName, subject, time, creator, days, subjectClass, selSub}) {
+export default function Widget({groupName, subject, time, creator, days, subjectClass, members, selSub}) {
     //console.log("SUBJECT CLASS, ",subjectClass);
 
     /*const [selectedSubject, updateSelectedSubject] = useState('history');
@@ -195,6 +195,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                 days={days}
                 time={time}
                 creator={creator}
+                members={members}
             />
             <Card className="card-with-background" style={{marginBottom: '24px'}}>
                 <Card.Img variant="top" src={link} class="card-img-top" />
@@ -202,11 +203,9 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     <Card.Title>{groupName}</Card.Title>
                     <Card.Text>
                     Course: {subject}
-                    
-                    <div>
-                    Subject: {subjectMapping[subjectClass] ?? 'Other'}
-                    </div>                   
-                     <br />
+                    <br />
+                    Subject: {subjectMapping[subjectClass] ?? 'Other'}                
+                    <br />
                     Meeting days: {Array.isArray(days) ? days.join(', ') : days}
                     <br />
                     Meeting time: {time}
