@@ -35,7 +35,8 @@ function MoreModal(props) {
         event.preventDefault();
       
         // Replace 'new_value' with the actual value you want to add
-        const newElement = window.sessionStorage.getItem("myUser");
+        const newElement = window.sessionStorage.getItem("myUser");  
+
         /*if we want user name to be including along with email
         let userName = "";
         if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
@@ -43,8 +44,58 @@ function MoreModal(props) {
         else
             userName = window.sessionStorage.getItem("userName");
         */
-      
-        fetch(`http://localhost:8888/addToGroup`, {
+
+        // Check if the member already exists in the group
+        fetch(`http://localhost:8888/checkMembership`, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            groupName: props.name,
+            user: newElement,
+            //username: userName
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.isMember) {
+            // Member already exists
+            alert("You are already a member of this group");
+            } else {
+            // Member doesn't exist, proceed with the join
+            fetch(`http://localhost:8888/addToGroup`, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                groupName: props.name,
+                user: newElement,
+                //username: userName
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Successfully Joined: " + props.name);
+                console.log(data);
+            })
+            .catch(error => console.error('Error:', error));
+            }
+        })
+        .catch(error => console.error('Error checking membership:', error));
+        };
+    
+
+        /*if we want user name to be including along with email
+        let userName = "";
+        if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
+            userName = currUser;
+        else
+            userName = window.sessionStorage.getItem("userName");
+        */
+        
+        /*fetch(`http://localhost:8888/addToGroup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -57,39 +108,14 @@ function MoreModal(props) {
           ),
         })
         .then(response => response.json(),
-        alert("Succesfully Joined: " +  props.name),
-        props.refresh
-
-        )
-          .then(data => console.log(data))
-          .catch(error => console.error('Error:', error));
-    };
-    
-    const handleDelete = (event) => {
-        event.preventDefault();
-      
-        // Replace 'new_value' with the actual value you want to add
-        const newElement = window.sessionStorage.getItem("myUser");
-      
-        fetch(`http://localhost:8888/addToGroup`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            groupName: props.name,
-            user: newElement
-          }
-          ),
-        })
-        .then(response => response.json(),
         alert("Succesfully Joined: " +  props.name)
-
+        
         )
           .then(data => console.log(data))
           .catch(error => console.error('Error:', error));
-    };
-
+      };
+      */
+        
     //vishaka code
     return (
         <Modal
@@ -118,11 +144,12 @@ function MoreModal(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={handleJoin}>Join</Button>
-                <Button onClick={handleDelete}>Delete</Button>
+                
             </Modal.Footer>
         </Modal>
     );
 }
+
 
 
 //const Widget = ({imageUrl},{groupName}) => {
@@ -130,7 +157,7 @@ function MoreModal(props) {
        /* backgroundImage:`url(${imageUrl})`,*/
        //  backgroundImage: "url('./historynew.avif')"
       //}; */
-export default function Widget({groupName, subject, time, creator, days, subjectClass, members, refresh, selSub}) {
+export default function Widget({groupName, subject, time, creator, days, subjectClass, members, selSub}) {
     //console.log("SUBJECT CLASS, ",subjectClass);
 
     /*const [selectedSubject, updateSelectedSubject] = useState('history');
@@ -230,7 +257,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                 time={time}
                 creator={creator}
                 members={members}
-                refresh={refresh}
+
             />
             <Card className="card-with-background" style={{marginBottom: '24px'}}>
                 <Card.Img variant="top" src={link} class="card-img-top" />
