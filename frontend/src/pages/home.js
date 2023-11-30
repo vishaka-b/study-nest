@@ -367,7 +367,7 @@ export default function Home(){
             <div>
                 <h1 class="section-title">Groups you're in</h1>
                 {Array.isArray(groupsYoureIn) &&
-                    <Widget_Feed groups={groupsYoureIn} sortOption = {''} refresh={refreshGroups}/>
+                    <Widget_Feed groups={groupsYoureIn.filter(group => group.members.includes(currUser) && group.ownersName !== currUser)} sortOption={''} />
                 }
             </div>
             <div>
