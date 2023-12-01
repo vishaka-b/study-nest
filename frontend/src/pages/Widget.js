@@ -229,7 +229,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
     }
 
     //const link= '/images/'+ subjectClass + '.jpeg';
-    const link = '/images/' + (selSub ?? 'other') + '.jpeg';
+    const link = '/images/' + (subjectClass ?? 'other') + '.jpeg';
     const subjectMapping = {
         "computer_science": "Computer Science",
         "math": "Math",
@@ -266,7 +266,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     <Card.Text>
                     Course: {subject}
                     <br />
-                    Subject: {subjectMapping[selSub] ?? 'Other'}                
+                    Subject: {subjectMapping[subjectClass] ?? 'Other'}                
                     <br />
                     Meeting days: {Array.isArray(days) ? days.join(', ') : days}
                     <br />
