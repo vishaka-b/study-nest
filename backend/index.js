@@ -49,7 +49,7 @@ app.listen(8888,()=>{
             meetingTime: meetingTime,
             meetingDays: meetingDays,
            // subjectClassification: JSON.parse(subjectClassification), //subjectClassification,
-            //subjectClassification: subjectClassification,
+            subjectClassification: subjectClassification,
             selectedSubject: selectedSubject,
             members: members
             
