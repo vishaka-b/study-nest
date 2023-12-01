@@ -309,7 +309,7 @@ export default function Home(){
                 subjectClassification: Array.from(Object.values(subjectClassification)),
                 //selectedSubject: selectedSubject
                 selectedSubject: selectedSubject,
-                members: members,
+                members: members
             }),
         })
         .then(response => response.json())
@@ -398,7 +398,7 @@ export default function Home(){
                     onHide={() => setModalShow(false)}
                 />
                 {Array.isArray(groupsYoureIn) &&
-                    <Widget_Feed groups={groupsYoureIn.filter(group => group.ownersName == currUser)} sortOption = {''} />
+                    <Widget_Feed groups={groupsYoureIn.filter(group => group.ownersName === currUser)} sortOption = {''} />
                 }
 
                 {/*Array.isArray(groupsYoureIn) && groupsYoureIn
