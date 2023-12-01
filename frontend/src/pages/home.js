@@ -25,19 +25,33 @@ function FormModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form id="groupForm">
             <Form.Group className="mb-3">
                 <Form.Label>Group:</Form.Label>
                 <Form.Control type="text" placeholder="Enter group name" />
             </Form.Group>
-
             <Form.Group className="mb-3">
                 <Form.Label>Course:</Form.Label>
                 <Form.Control type="text" placeholder="Enter course name" />
             </Form.Group>
-
-            
-            
+            <Form.Group className="mb-3">
+                <Form.Label>Subject:</Form.Label>
+                <Form.Select aria-label="Default select example">
+                    <option>Choose subject</option>
+                    <option value="computer_science">Computer Science</option>
+                    <option value="math">Math</option>
+                    <option value="history">History</option>
+                    <option value="english">English</option>
+                    <option value="chemistry">Chemistry</option>
+                    <option value="physics">Physics</option>
+                    <option value="biology">Biology</option>
+                    <option value="engineering">Engineering</option>
+                    <option value="business">Business</option>
+                    <option value="foreign_language">Foreign Language</option>
+                    <option value="linguistics">Linguistics</option>
+                    <option value="other">Other</option>
+                </Form.Select>
+                </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Label>Meeting days:</Form.Label>
                 {['checkbox'].map((type) => (
@@ -99,13 +113,13 @@ function FormModal(props) {
                 <Form.Label>Meeting time:</Form.Label>
                 <Form.Control type="time" placeholder="Enter course name" />
             </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
+            
             </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button>Submit</Button>
+            <Button form="groupForm" variant="primary" type="submit">
+                Submit
+            </Button>
         </Modal.Footer>
       </Modal>
     );
@@ -365,7 +379,7 @@ export default function Home(){
             <h2 className="welcome-message">{"Welcome to StudyNest " + userName + "!"}</h2>
             <Container>
             <div>
-                <h1 class="section-title">Groups you're in</h1>
+                <h1 class="section-title">Groups you've joined</h1>
                 {Array.isArray(groupsYoureIn) &&
                     <Widget_Feed groups={groupsYoureIn.filter(group => group.members.includes(currUser) && group.ownersName !== currUser)} sortOption={''} />
                 }
