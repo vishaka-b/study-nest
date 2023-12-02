@@ -13,6 +13,10 @@
 
 }
 
+.small-text{
+  font-size: 15px;
+}
+
 .login-button{
   cursor: pointer;
   display: block;
