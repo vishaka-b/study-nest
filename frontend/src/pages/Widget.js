@@ -88,14 +88,19 @@ function MoreModal(props) {
 
         const currUser = window.sessionStorage.getItem("myUser");
         let actionButton
+        let numMembers = props.members.length
+        let spotsLeft = props.members.length < 15 ? 15 - props.members.length : 0
         if (props.creator === currUser) {
             actionButton = <Button>Delete group</Button>
         }
         else if (props.members.includes(currUser)) {
             actionButton = <Button>Leave group</Button>
         }
-        else {
+        else if (numMembers < 15) {
             actionButton = <Button onClick={handleJoin}>Join group</Button>
+        }
+        else {
+            actionButton = <Button disabled>Full</Button>
         }
 
         /*if we want user name to be including along with email
@@ -152,6 +157,8 @@ function MoreModal(props) {
                     <b>Creator:</b> {props.creator}
                     <br />
                     <b>Member(s):</b> {Array.isArray(props.members) ? props.members.join(', ') : props.members}
+                    <br />
+                    <b>Spot(s) left:</b> {spotsLeft}/15
                 </p>
             </Modal.Body>
             <Modal.Footer>
