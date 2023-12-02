@@ -1,10 +1,8 @@
 import NavBar from '../Navbar';
-import Widget from './Widget'
 import './allgroups.css';
-//import React from 'react';
 import Axios from "axios";
 import React, { useEffect, useState } from 'react';
-import Widget_Feed from './Widget_Feed';
+import WidgetFeed from './Widget_Feed';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -54,8 +52,6 @@ export default function AllGroups(){
     useEffect(()=> {
         getGroupsYoureIn()
     }, []);
-    const [groupsYouveMade, setGroupsYouveMade] = useState("");
-
     const handleKeyPress = (event) => {
       if (event.key === 'Enter') {
         handleSearch();
@@ -114,7 +110,7 @@ export default function AllGroups(){
         <button class="sort-button" onClick={() => setSortOption('courseName')}>Sort by Course Name</button>
       </div>*/}
     
-    <Widget_Feed groups={filteredGroups} sortOption={sortOption}/>
+    <WidgetFeed groups={filteredGroups} sortOption={sortOption}/>
    </Container>
     </div>)
 }

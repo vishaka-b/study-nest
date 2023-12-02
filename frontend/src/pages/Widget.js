@@ -1,49 +1,19 @@
-//import React from 'react';
 import Card from 'react-bootstrap/Card';
-//import './Widget.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 
 
 
 function MoreModal(props) {
-    
-    const currUser = window.sessionStorage.getItem("myUser");
-
-        //vishaka code
-       /* const handleJoin = (event) => {
-            console.log("REACHED")
-            // Make a POST request to your backend to add the current user to the members array
-        axios.post('http://localhost:8888/AddMember', {
-                groupName: props.name, // Assuming props.name is the group name
-                newMember: currUser,
-        })
-
-        .then(data => {
-            console.log(data); // Handle the response from the backend as needed
-        })
-        .catch(error => {
-            console.error('Error joining group:', error);
-        });
-    }*/
 
     const handleJoin = (event) => {
         event.preventDefault();
       
         // Replace 'new_value' with the actual value you want to add
         const newElement = window.sessionStorage.getItem("myUser");  
-
-        /*if we want user name to be including along with email
-        let userName = "";
-        if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
-            userName = currUser;
-        else
-            userName = window.sessionStorage.getItem("userName");
-        */
 
         // Check if the member already exists in the group
         fetch(`http://localhost:8888/checkMembership`, {
@@ -54,7 +24,6 @@ function MoreModal(props) {
             body: JSON.stringify({
             groupName: props.name,
             user: newElement,
-            //username: userName
             }),
         })
         .then(response => response.json())
@@ -71,8 +40,7 @@ function MoreModal(props) {
                 },
                 body: JSON.stringify({
                 groupName: props.name,
-                user: newElement,
-                //username: userName
+                user: newElement
                 }),
             })
             .then(response => response.json())
@@ -86,38 +54,66 @@ function MoreModal(props) {
         })
         .catch(error => console.error('Error checking membership:', error));
         };
-    
 
-        /*if we want user name to be including along with email
-        let userName = "";
-        if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
-            userName = currUser;
-        else
-            userName = window.sessionStorage.getItem("userName");
-        */
-        
-        /*fetch(`http://localhost:8888/addToGroup`, {
-          method: 'POST',
-          headers: {
+        const handleLeave = (event) => {
+            event.preventDefault();
+
+            const user = window.sessionStorage.getItem("myUser");
+            fetch('http://localhost:8888/checkOwnership', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    groupName: props.name,
+                    user: user
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+            if (data.isOwner) {
+            alert("You are not the owner of this group. Please 'Delete Group' instead");
+            } else {
+            fetch(`http://localhost:8888/checkMembership`, {
+            method: 'POST',
+            headers: {
             'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+            },
+            body: JSON.stringify({
             groupName: props.name,
-            user: newElement,
-            //username: userName
-          }
-          ),
+            user: user
+            }),
         })
-        .then(response => response.json(),
-        alert("Succesfully Joined: " +  props.name)
+        .then(response => response.json())
+        .then(data => {
+            if (!data.isMember) {
+            alert("You are not a member of this group");
+            } else {
         
-        )
-          .then(data => console.log(data))
-          .catch(error => console.error('Error:', error));
-      };
-      */
-        
-    //vishaka code
+            fetch(`http://localhost:8888/leaveGroup`, {
+                method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            groupName: props.name,
+            user: user
+            })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Successfully Left: " + props.name);
+                console.log(data);
+                
+            })
+            .catch(error => console.error('Error leaving group:', error));
+            }
+        })
+        .catch(error => console.error('Error checking membership:', error));
+    }})
+    .catch(error => console.error('Error checking ownership:', error));
+};
+    
     return (
         <Modal
             {...props}
@@ -127,7 +123,7 @@ function MoreModal(props) {
             centered
         >
             <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter" style={{"font-weight": "bolder"}}>
+                <Modal.Title id="contained-modal-title-vcenter" style={{"fontWeight": "bolder"}}>
                     {props.name}
                 </Modal.Title>
             </Modal.Header>
@@ -146,6 +142,7 @@ function MoreModal(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={handleJoin}>Join</Button>
+                <Button onClick={handleLeave}>Leave Group</Button>
                 
             </Modal.Footer>
         </Modal>
@@ -153,84 +150,10 @@ function MoreModal(props) {
 }
 
 
-
-//const Widget = ({imageUrl},{groupName}) => {
-    /*const widgetStyle = {
-       /* backgroundImage:`url(${imageUrl})`,*/
-       //  backgroundImage: "url('./historynew.avif')"
-      //}; */
-export default function Widget({groupName, subject, time, creator, days, subjectClass, members, selSub}) {
-    //console.log("SUBJECT CLASS, ",subjectClass);
-
-    /*const [selectedSubject, updateSelectedSubject] = useState('history');
-    const [subjectKeys, setSubjectKeys]= useState([])
-
-    //const selectedSubject = 'history';
-    //const subjectKeys= null;
-    if (!subjectClass || typeof subjectClass !== 'object') {
-        
-
-    }else{
-        setSubjectKeys(Object.keys(subjectClass));
-        updateSelectedSubject(Object.keys(subjectClass).find((subject) => subjectClass[subject]));
-    }*/
-
-    const [imageExists, setImageExists] = useState(true);
-    //const selectedSubject = subjectClass && Object.keys(subjectClass).find((subject) => subjectClass[subject]);
-
-    /*return (
-        <div id="widget-container">
-            <div id="title-bar">
-                <h2>{groupName}</h2>
-                
-            </div>
-            <div id="course-bar">
-            <h3>{subject}</h3>
-            </div>
-            <div id="button-container">
-                <button>+</button>
-            </div>
-            {/* Your widget content goes here *///}
-       /* </div>      
-    );*/
-
-   /* const backgroundImages = {
-        computer_science: '/images/cs.jpeg',
-        math: '/images/math.jpeg',
-        history: '/images/history.jpeg',
-        // Add more mappings as needed
-      };*/
-
-     /* useEffect(() => {
-        const imagePath = `/images/${subjectClass}.jpeg`; // Adjust the path accordingly
-    
-        // Use the imageExists state to determine whether the image exists
-        const img = new Image();
-        img.onload = () => setImageExists(true);
-        img.onerror = () => setImageExists(false);
-        img.src = imagePath;
-      }, [subjectClass]);*/
-
-      
-
-      //const defaultSubject = selectedSubject;
+export default function Widget({groupName, subject, time, creator, days, subjectClass, members}) {
 
 
     const [modalShow, setModalShow] = React.useState(false);
-
-    const renderSubjects = () => {
-      /*  if (!subjectClass || typeof subjectClass !== 'object') {
-            return null; // or any default content if subjectClass is undefined or not an object
-          }
-        return Object.entries(subjectClass).map(([subject, isSelected]) => {
-          if (isSelected) {
-            return <div key={subject}>{subject}</div>;
-          }
-          return null; // or any other default content when the subject is not selected
-        });*/
-    }
-
-    //const link= '/images/'+ subjectClass + '.jpeg';
     const link = '/images/' + (subjectClass ?? 'other') + '.jpeg';
     const subjectMapping = {
         "computer_science": "Computer Science",
@@ -262,9 +185,9 @@ export default function Widget({groupName, subject, time, creator, days, subject
 
             />
             <Card className="card-with-background" style={{marginBottom: '24px'}}>
-                <Card.Img variant="top" src={link} class="card-img-top" />
+                <Card.Img variant="top" src={link} className="card-img-top" />
                 <Card.Body>
-                    <Card.Title style={{"font-weight": "bolder"}}>{groupName}</Card.Title>
+                    <Card.Title style={{"fontWeight": "bolder"}}>{groupName}</Card.Title>
                     <Card.Text>
                     <b>Course:</b> {subject}
                     <br />
@@ -282,4 +205,3 @@ export default function Widget({groupName, subject, time, creator, days, subject
     );
    }
 
-//export default Widget;
