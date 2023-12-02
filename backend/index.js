@@ -110,15 +110,38 @@ app.post('/checkOwnership',  async (req, res) => {
       }    
   });
 
-  app.post('/leaveGroup', (req, res) => {
+  app.delete('/deleteGroup', async (req, res) => {
+    const { groupName } = req.body;
+  
+    const groupsCollection = database.collection('mygroupscollection');
+  
+    try {
+      const result = await groupsCollection.deleteOne({ groupName} );
+      res.json({ message: {result} });
+    } catch (error) {
+      res.status(404).json({ message: {groupName} }); 
+    }
+    
+});
+
+
+
+app.post('/leaveGroup', (req, res) => {
     const {groupName, user} = req.body;
     console.log(groupName)
     console.log(user)
-
-    database.collection("mygroupscollection").updateOne({
-        $pull: {groupName: {members: user}}
-    });
-    res.json({ message: 'Succesfully left group:', groupName });
+    
+    try {
+      const result = database.collection("mygroupscollection").updateOne(
+        { groupName: groupName },
+        { $pull: { members: user } }
+        );
+      
+      res.json({ message: 'Succesfully left group:', groupName });
+    } catch (error) {
+      res.status(404).json({message: "Error!"})
+    }
+    
     }
   );
   

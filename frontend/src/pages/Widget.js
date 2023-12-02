@@ -9,6 +9,29 @@ import React from 'react';
 
 function MoreModal(props) {
 
+    const handleDelete = (event) => {
+        event.preventDefault();
+        const confirmDelete = window.confirm('Are you sure you want to delete this group?');
+        if (confirmDelete) {
+            fetch(`http://localhost:8888/deleteGroup`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    groupName: props.name,
+                }),                        
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Successfully Deleted: " + props.name + ". Please refresh page.");
+                console.log(data);
+            })
+            .catch(error => console.error('Error checking membership:', error));
+        };
+            
+    }
+
     const handleJoin = (event) => {
         event.preventDefault();
       
@@ -36,16 +59,16 @@ function MoreModal(props) {
             fetch(`http://localhost:8888/addToGroup`, {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                groupName: props.name,
-                user: newElement
+                    groupName: props.name,
+                    user: newElement
                 }),
             })
             .then(response => response.json())
             .then(data => {
-                alert("Successfully Joined: " + props.name);
+                alert("Successfully Joined: " + props.name + ". Please refresh page.");
                 console.log(data);
                 
             })
@@ -72,7 +95,7 @@ function MoreModal(props) {
             })
             .then(response => response.json())
             .then(data => {
-                alert("Successfully Left: " + props.name);
+                alert("Successfully Left: " + props.name + ". Please refresh page.");
                 console.log(data);
                 
             })
@@ -84,7 +107,7 @@ function MoreModal(props) {
         let numMembers = props.members.length
         let spotsLeft = props.members.length < 15 ? 15 - props.members.length : 0
         if (props.creator === currUser) {
-            actionButton = <Button>Delete group</Button>
+            actionButton = <Button onClick={handleDelete}>Delete group</Button>
         }
         else if (props.members.includes(currUser)) {
             actionButton = <Button onClick={handleLeave}>Leave group</Button>
