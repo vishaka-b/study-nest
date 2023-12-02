@@ -114,7 +114,9 @@ function MoreModal(props) {
                 <p>
                     <b>Course:</b> {props.course} 
                     <br />
-                    <b>Meeting days:</b> {Array.isArray(props.days) ? props.days.join(', ') : props.days}
+                    <b>Subject:</b> {props.subject} 
+                    <br />
+                    <b>Meeting day(s):</b> {Array.isArray(props.days) ? props.days.join(', ') : props.days}
                     <br />
                     <b>Meeting time:</b> {props.time}
                     <br />
@@ -125,8 +127,7 @@ function MoreModal(props) {
                     <b>Spot(s) left:</b> {spotsLeft}/15
                 </p>
             </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={handleJoin}>Join</Button>                
+            <Modal.Footer>          
                 {actionButton}
             </Modal.Footer>
         </Modal>
@@ -162,6 +163,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                 onHide={() => setModalShow(false)}
                 name={groupName}
                 course={subject}
+                subject={subjectMapping[subjectClass] ?? 'Other'}
                 days={days}
                 time={time}
                 creator={creator}
@@ -177,7 +179,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     <br />
                     <b>Subject:</b> {subjectMapping[subjectClass] ?? 'Other'}                
                     <br />
-                    <b>Meeting days:</b> {Array.isArray(days) ? days.join(', ') : days}
+                    <b>Meeting day(s):</b> {Array.isArray(days) ? days.join(', ') : days}
                     <br />
                     <b>Meeting time:</b> {time}
                     </Card.Text>
