@@ -75,6 +75,8 @@ body {
 
   .login-wrapper .login-msg {
     font-size: 30px;
+    margin-top: 12px;
+    margin-bottom: 12px;
   }
 
   .sign-up {
