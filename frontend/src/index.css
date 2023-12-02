@@ -118,3 +118,23 @@ We are setting a background color, and padding so that they links are nec to eac
   object-fit: cover;
 }
 
+/* Bootstrap */
+
+.navbar-title {
+  font-size: 3rem !important;
+  font-family: Impact;
+  color: white !important;
+}
+
+.navbar-body {
+  background-color: rgb(2, 166, 255) !important;
+  color: white !important;
+}
+
+.navbar-item a {
+  color: white !important;
+}
+
+.navbar-nav li a {
+  color: white !important;
+  }

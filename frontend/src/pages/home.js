@@ -262,6 +262,7 @@ export default function Home(){
             
             <NavBar/>
             <Container>
+            <div class="navbar-spacer"></div>
             <h1 class="welcome-message">{"Welcome to Study Nest, " + userName + "!"}</h1>
             
             <div>
@@ -287,22 +288,22 @@ export default function Home(){
                     centered
                 >
                     <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
+                    <Modal.Title style={{"font-weight": "bolder"}} id="contained-modal-title-vcenter">
                         Create new group
                     </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                     <Form id="groupForm" onSubmit={handleFormSubmit}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Group:</Form.Label>
+                            <Form.Label><b>Group:</b></Form.Label>
                             <Form.Control type="text" placeholder="Enter group name" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Course:</Form.Label>
+                            <Form.Label><b>Course:</b></Form.Label>
                             <Form.Control type="text" placeholder="Enter course name" value={subjectsName} onChange={(e) => setSubjectsName(e.target.value)} />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Subject:</Form.Label>
+                            <Form.Label><b>Subject:</b></Form.Label>
                             <Form.Select aria-label="Default select example" onChange={handleSubjectDropdownChange}>
                                 <option>Choose subject</option>
                                 <option value="computer_science">Computer Science</option>
@@ -320,7 +321,7 @@ export default function Home(){
                             </Form.Select>
                             </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Label>Meeting days:</Form.Label>
+                            <Form.Label><b>Meeting days:</b></Form.Label>
                             <div className="mb-3">
                                 <Form.Check
                                     inline
@@ -375,7 +376,7 @@ export default function Home(){
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Meeting time:</Form.Label>
+                            <Form.Label><b>Meeting time:</b></Form.Label>
                             <Form.Control type="time" value={meetingTime} onChange={(e) => setMeetingTime(e.target.value)}/>
                         </Form.Group>
                         

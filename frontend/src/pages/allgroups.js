@@ -67,6 +67,7 @@ export default function AllGroups(){
 
     <NavBar />
     <Container>
+    <div class="navbar-spacer"></div>
     <h1 className='section-title'>All groups</h1>
     
 
