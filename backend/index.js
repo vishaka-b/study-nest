@@ -90,12 +90,37 @@ app.post('/checkMembership', async (req, res) => {
   
     try {
       const isMember = await groupsCollection.findOne({ groupName, members: user });
-      res.json({ isMember: !!isMember });
+      res.json({ isMember: !!isMember});
     } catch (error) {
       console.error('Error checking membership:', error);
       res.status(500).json({ error: 'Error checking membership' });
     }
   });
+
+app.post('/checkOwnership',  async (req, res) => {
+    const { groupName, user } = req.body;
+  
+    const groupsCollection = database.collection('mygroupscollection');
+    try {
+        const isOwner = await groupsCollection.findOne({ groupName, ownersName: user });
+        res.json({ isOwner: !!isOwner});
+      } catch (error) {
+        console.error('Error checking ownership:', error);
+        res.status(500).json({ error: 'Error checking ownership' });
+      }    
+  });
+
+  app.post('/leaveGroup', (req, res) => {
+    const {groupName, user} = req.body;
+    console.log(groupName)
+    console.log(user)
+
+    database.collection("mygroupscollection").updateOne({
+        $pull: {groupName: {members: user}}
+    });
+    res.json({ message: 'Succesfully left group:', groupName });
+    }
+  );
   
 
 app.post('/addToGroup/', async (req,res) => {

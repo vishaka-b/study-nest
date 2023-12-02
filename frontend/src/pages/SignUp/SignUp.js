@@ -21,7 +21,7 @@ function SignUp(props) {
   else if (userExists) {
     alert('Email already exists. Please choose a different one.');
   } 
-  else if (reTypepwd != pwd){
+  else if (reTypepwd !== pwd){
     alert('Both passwords to not match. Please try again')
   }
   else {

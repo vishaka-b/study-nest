@@ -2,7 +2,7 @@ import Axios from "axios";
 import React, { useEffect, useState } from 'react';
 import './home.css';
 import NavBar from '../Navbar'
-import Widget_Feed from './Widget_Feed';
+import WidgetFeed from './Widget_Feed';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
@@ -42,8 +42,6 @@ export default function Home(){
         refreshGroups()
     }, []);
     
-    const [groupsYouveMade, setGroupsYouveMade] = useState("");
-
     const [showForm, setShowForm] = useState(false);
     const [groupName, setGroupName] = useState('');
     const [ownersName, setOwnersName] = useState('');
@@ -75,38 +73,11 @@ export default function Home(){
       });
     const [selectedSubject, setSelectedSubject] = useState('other')
 
-    const handleCreateNewGroup = () => {
-        setShowForm(true);
-    }
-
-    const handleCloseForm = () => {
-        setShowForm(false);
-    }
-
     const handleSubjectDropdownChange = (e) => {
         const selectedSubject = e.target.value;
-        //setSelectedSubject(e.target.value);
         setSelectedSubject(Object.keys(subjectClassification).find((subject) => subjectClassification[subject]))
         console.log("SUBJECT: ", selectedSubject)
 
-        //new code
-      /*  setSubjectClassification((prevClassification) => {
-            const updatedClassification = {};
-        
-            // Set the selected subject to true
-            updatedClassification[selectedSubject] = true;
-        
-            // Set all other subjects to false
-            Object.keys(prevClassification).forEach((subject) => {
-              if (subject !== selectedSubject) {
-                updatedClassification[subject] = false;
-              }
-            });
-            return updatedClassification;
-            });*/
-
-        
-        //new code
         let updatedClassification= {
             computer_science: false,
             math: false,
@@ -124,37 +95,8 @@ export default function Home(){
         }
         updatedClassification[selectedSubject] = true;
         setSubjectClassification(updatedClassification);
-
-        /*setSubjectClassification((prevClassification) => ({
-          ...prevClassification,
-          [selectedSubject]: true
-        }));*/
-
       };
-    //use Axios.post 
-    //on backend read the body and add to database and then send a temp response back (200 = allgood)
 
- const handleJoin = (event) => {
-    console.log("REACHED")
-    // Make a POST request to your backend to add the current user to the members array
-    fetch('http://localhost:8888/AddMember', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            groupName: "test", // Assuming props.name is the group name
-            newMember: currUser,
-        }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); // Handle the response from the backend as needed
-    })
-    .catch(error => {
-        console.error('Error joining group:', error);
-    });
-};
 
     const handleFormSubmit = (event) => {
         //ensures we are at home page (have to add reload screen)
@@ -163,15 +105,6 @@ export default function Home(){
             alert("Please fill in all fields before submitting.");
             return;
         }
-        /*
-        if (ownersName !== currUser){
-            alert("Owner Name does not match: " + currUser);
-           return; 
-        }
-        if (currUser==null){
-            currUser=""
-        }
-        */
 
         const members = [currUser]
         // Send a POST request to the server
@@ -185,13 +118,8 @@ export default function Home(){
                 ownersName: currUser,
                 subjectsName: subjectsName,
                 meetingTime: meetingTime,
-                /*
                 meetingDays: Array.from(Object.values(meetingDays)),
                 subjectClassification: Array.from(Object.values(subjectClassification)),
-                */
-                meetingDays: Array.from(Object.values(meetingDays)),
-                subjectClassification: Array.from(Object.values(subjectClassification)),
-                //selectedSubject: selectedSubject
                 selectedSubject: selectedSubject,
                 members: members
             }),
@@ -241,43 +169,20 @@ export default function Home(){
             setModalShow(false);
         });
     };
-
-    /*
-    const getGroupsYouveMade=async()=>{
-        const response=await Axios.get("http://localhost:8888/getGroupsYouveMade");
-        setGroupsYouveMade(response.data);
-    }
-
-    useEffect(()=> {
-        getGroupsYouveMade()
-    }, []);
-    */
-   //        <Widget imageUrl={'./chemistryimg.jpeg'}/>
-
-   //<h3> {} ... </h3> is where widgets should go 
-   //<Button variant="primary" onClick={handleCreateNewGroup}>+</Button>
     
    return (
         <div className='homepage'>
             
             <NavBar/>
             <Container>
-            <div class="navbar-spacer"></div>
-            <h1 class="welcome-message">{"Welcome to Study Nest, " + userName + "!"}</h1>
+            <div className="navbar-spacer"></div>
+            <h1 className="welcome-message">{"Welcome to Study Nest, " + userName + "!"}</h1>
             
             <div>
-                <h1 class="section-title">Groups you've created</h1>
-                {/* <button type="button" className="createNewGroup" onClick={handleCreateNewGroup}>+</button> */}
+                <h1 className="section-title">Groups you've created</h1>
                 <Button variant="primary" className="large-button" size="lg" onClick={() => setModalShow(true)}>
                 Create new group
                 </Button>
-
-                {/*<FormModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    onSubmit={handleFormSubmit}
-
-                />*/}
 
                 <Modal
                     show={modalShow}
@@ -288,7 +193,7 @@ export default function Home(){
                     centered
                 >
                     <Modal.Header closeButton>
-                    <Modal.Title style={{"font-weight": "bolder"}} id="contained-modal-title-vcenter">
+                    <Modal.Title style={{"fontWeight": "bolder"}} id="contained-modal-title-vcenter">
                         Create new group
                     </Modal.Title>
                     </Modal.Header>
@@ -391,17 +296,17 @@ export default function Home(){
 
 
                 {Array.isArray(groupsYoureIn) &&
-                    <Widget_Feed groups={groupsYoureIn.filter(group => group.ownersName === currUser)} sortOption = {''} />
+                    <WidgetFeed groups={groupsYoureIn.filter(group => group.ownersName === currUser)} sortOption = {''} />
                 }
 
             </div>
             <div>
-                <h1 class="section-title">Groups you've joined</h1>
+                <h1 className="section-title">Groups you've joined</h1>
                 <Button variant="primary" href="/allgroups" className="large-button" size="lg">
                 Find more groups to join
                 </Button>
                 {Array.isArray(groupsYoureIn) &&
-                    <Widget_Feed groups={groupsYoureIn.filter(group => group.members.includes(currUser) && group.ownersName !== currUser)} sortOption={''} />
+                    <WidgetFeed groups={groupsYoureIn.filter(group => group.members.includes(currUser) && group.ownersName !== currUser)} sortOption={''} />
                 }
             </div>
             
@@ -411,28 +316,3 @@ export default function Home(){
        
     )
 } 
-
-/*import NavBar from '../Navbar';
-import React from 'react';
-export default function Home(){
-    return (
-    <div className='homepage'>
-        <NavBar />
-        <h1>StudyNest</h1>
-        <div className="groups-in">
-            <h2 className="homeBody">Groups you're in:</h2>
-        
-            <Widget name={"Code Crackin' Chicks"} course={"COM SCI 35L"} time={"Mon 5:00-7:00pm"}></Widget>
-        </div>
-        <div className="groups-made"> 
-            
-            <h2 className="homeBody">Groups you've made:</h2>
-            <div>
-                <button type="button" className="createNewGroup"> + </button>
-            </div>
-            
-            </div>
-       
-        
-        </div>)
-}*/
