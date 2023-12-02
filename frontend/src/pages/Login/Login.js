@@ -73,12 +73,12 @@ function Login(props)
     <div>
       <div className="title-block">
         <div className="welcome">
-          welcome to the
+          Welcome to
         </div>
-        StudyNest!
+        Study Nest!
       </div>
     <div className="login-wrapper">
-      <h1 className="login-msg">Please Log In</h1>
+      <h1 className="login-msg">Please log in</h1>
         <form action='/Home' onSubmit={handleLogin}>
           <label className="text">
             <div>Email</div>
@@ -90,11 +90,11 @@ function Login(props)
           </label>
           <div>
             <button className="login-button" type="submit">
-              Log In
+              Log in
             </button>
           </div>
         </form>
-        <div className="sign-up">Not a member? <a className="sign-up" href="/SignUp">Sign Up</a></div>
+        <div className="sign-up">Not a member? <a className="sign-up" href="/SignUp">Sign up</a></div>
       </div>
     </div>
   );
