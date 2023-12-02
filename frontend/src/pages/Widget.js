@@ -55,57 +55,10 @@ function MoreModal(props) {
         .catch(error => console.error('Error checking membership:', error));
         };
 
-
-        const currUser = window.sessionStorage.getItem("myUser");
-        let actionButton
-        let numMembers = props.members.length
-        let spotsLeft = props.members.length < 15 ? 15 - props.members.length : 0
-        if (props.creator === currUser) {
-            actionButton = <Button>Delete group</Button>
-        }
-        else if (props.members.includes(currUser)) {
-            actionButton = <Button>Leave group</Button>
-        }
-        else if (numMembers < 15) {
-            actionButton = <Button onClick={handleJoin}>Join group</Button>
-        }
-        else {
-            actionButton = <Button disabled>Full</Button>
-        }
         const handleLeave = (event) => {
             event.preventDefault();
 
-            const user = window.sessionStorage.getItem("myUser");
-            fetch('http://localhost:8888/checkOwnership', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    groupName: props.name,
-                    user: user
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-            if (data.isOwner) {
-            alert("You are not the owner of this group. Please 'Delete Group' instead");
-            } else {
-            fetch(`http://localhost:8888/checkMembership`, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-            groupName: props.name,
-            user: user
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (!data.isMember) {
-            alert("You are not a member of this group");
-            } else {
+            const user = window.sessionStorage.getItem("myUser");  
         
             fetch(`http://localhost:8888/leaveGroup`, {
                 method: 'POST',
@@ -124,12 +77,25 @@ function MoreModal(props) {
                 
             })
             .catch(error => console.error('Error leaving group:', error));
-            }
-        })
-        .catch(error => console.error('Error checking membership:', error));
-    }})
-    .catch(error => console.error('Error checking ownership:', error));
 };
+
+        const currUser = window.sessionStorage.getItem("myUser");
+        let actionButton
+        let numMembers = props.members.length
+        let spotsLeft = props.members.length < 15 ? 15 - props.members.length : 0
+        if (props.creator === currUser) {
+            actionButton = <Button>Delete group</Button>
+        }
+        else if (props.members.includes(currUser)) {
+            actionButton = <Button onClick={handleLeave}>Leave group</Button>
+        }
+        else if (numMembers < 15) {
+            actionButton = <Button onClick={handleJoin}>Join group</Button>
+        }
+        else {
+            actionButton = <Button disabled>Full</Button>
+        }
+        
     
     return (
         <Modal
@@ -160,9 +126,7 @@ function MoreModal(props) {
                 </p>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={handleJoin}>Join</Button>
-                <Button onClick={handleLeave}>Leave Group</Button>
-                
+                <Button onClick={handleJoin}>Join</Button>                
                 {actionButton}
             </Modal.Footer>
         </Modal>
