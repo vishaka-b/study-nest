@@ -397,7 +397,7 @@ export default function Home(){
             </div>
             <div>
                 <h1 class="section-title">Groups you've joined</h1>
-                <Button variant="primary" className="large-button" size="lg">
+                <Button variant="primary" href="/allgroups" className="large-button" size="lg">
                 Find more groups to join
                 </Button>
                 {Array.isArray(groupsYoureIn) &&
