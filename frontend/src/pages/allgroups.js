@@ -5,6 +5,10 @@ import './allgroups.css';
 import Axios from "axios";
 import React, { useEffect, useState } from 'react';
 import Widget_Feed from './Widget_Feed';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 export default function AllGroups(){
 
@@ -59,12 +63,38 @@ export default function AllGroups(){
     };
   
     return (
-    <div className="allgroups">
+    <div className="allgroups" >
 
     <NavBar />
-    <h1 className='allgroups-title'>All Groups</h1>
+    <Container>
+    <h1 className='section-title'>All groups</h1>
+    
 
-    <div class="search-container">
+    <div className="side-by-side">
+      <InputGroup>
+        <Form.Control size="lg" type="text" placeholder="Search for group, course, or creator..." value={searchText} onChange={(e) => setSearchText(e.target.value)} onKeyPress={handleKeyPress}/>
+        <Button size="lg" variant="primary" onClick={handleSearch}>
+          Search
+        </Button>
+      </InputGroup>
+      <Button size="lg" variant="primary" className="ms-3" onClick={handleShowAllGroups}>
+        All
+      </Button>
+    </div>
+    <div style={{"margin-bottom": "24px"}}>
+      <Button variant="primary" className="sorter mt-3" onClick={() => setSortOption('groupName')}>
+        Sort by group
+      </Button>
+      <Button variant="primary" className="sorter mt-3" onClick={() => setSortOption('ownersName')}>
+        Sort by owner
+      </Button>
+      <Button variant="primary" className="sorter mt-3" onClick={() => setSortOption('courseName')}>
+        Sort by course
+      </Button>
+    </div>
+
+
+    {/*<div class="search-container">
       <input
         class="search-input"
         type="text"
@@ -81,9 +111,9 @@ export default function AllGroups(){
         <button class="sort-button" onClick={() => setSortOption('groupName')}>Sort by Group Name</button>
         <button class="sort-button" onClick={() => setSortOption('ownersName')}>Sort by Owner's Name</button>
         <button class="sort-button" onClick={() => setSortOption('courseName')}>Sort by Course Name</button>
-      </div>
+      </div>*/}
     
     <Widget_Feed groups={filteredGroups} sortOption={sortOption}/>
-   
+   </Container>
     </div>)
 }

@@ -44,7 +44,7 @@ export default function WidgetFeed({groups, sortOption, refresh}) {
     
 
     return (
-        <Container>
+        
           <Row xs={1} md={2} lg={3}>
             {sortedGroups.map((group, index) => (
               <Col key={index}>
@@ -111,7 +111,7 @@ export default function WidgetFeed({groups, sortOption, refresh}) {
               </Col>
             ))}
           </Row>
-        </Container>
+        
     );
     /*return (
         <Container>

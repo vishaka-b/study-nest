@@ -96,7 +96,7 @@ We are setting a background color, and padding so that they links are nec to eac
 .groups-made .createNewGroup{
   cursor: pointer;
   height: fit-content;
-  background-color: rgb(104, 187, 232);
+  background-color: rgb(2, 166, 255);
   font-size: 2rem;
   gap: 2rem;
   padding: 0 1rem;
@@ -117,3 +117,4 @@ We are setting a background color, and padding so that they links are nec to eac
   height: 200px;
   object-fit: cover;
 }
+

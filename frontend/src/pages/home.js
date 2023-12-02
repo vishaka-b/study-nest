@@ -1,9 +1,7 @@
 import Axios from "axios";
 import React, { useEffect, useState } from 'react';
-import Feed from './Feed.js'
 import './home.css';
 import NavBar from '../Navbar'
-import Widget from './Widget'
 import Widget_Feed from './Widget_Feed';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -263,12 +261,13 @@ export default function Home(){
         <div className='homepage'>
             
             <NavBar/>
-            <h2 className="welcome-message">{"Welcome to Study Nest, " + userName + "!"}</h2>
             <Container>
+            <h1 class="welcome-message">{"Welcome to Study Nest, " + userName + "!"}</h1>
+            
             <div>
                 <h1 class="section-title">Groups you've created</h1>
                 {/* <button type="button" className="createNewGroup" onClick={handleCreateNewGroup}>+</button> */}
-                <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
+                <Button variant="primary" className="large-button" size="lg" onClick={() => setModalShow(true)}>
                 Create new group
                 </Button>
 
@@ -397,6 +396,9 @@ export default function Home(){
             </div>
             <div>
                 <h1 class="section-title">Groups you've joined</h1>
+                <Button variant="primary" className="large-button" size="lg">
+                Find more groups to join
+                </Button>
                 {Array.isArray(groupsYoureIn) &&
                     <Widget_Feed groups={groupsYoureIn.filter(group => group.members.includes(currUser) && group.ownersName !== currUser)} sortOption={''} />
                 }

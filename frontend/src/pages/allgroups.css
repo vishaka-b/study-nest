@@ -57,4 +57,41 @@
   }
   
 
-  
+  h1 {
+    margin-top: 48px;
+    margin-bottom: 24px;
+  }
+  .section-title {
+    margin-top: 48px;
+    margin-bottom: 24px;
+    font-weight: bolder;
+  }
+
+  .large-button {
+    margin-bottom: 24px;
+  }
+
+.btn-primary {
+    background-color: rgb(2, 166, 255) !important;
+    border-color: rgb(2, 166, 255) !important;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: rgb(0, 136, 209) !important;
+    border-color: rgb(0, 136, 209) !important;
+}
+
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+}
+
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+}
+
+.sorter {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}

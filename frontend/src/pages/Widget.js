@@ -79,6 +79,7 @@ function MoreModal(props) {
             .then(data => {
                 alert("Successfully Joined: " + props.name);
                 console.log(data);
+                
             })
             .catch(error => console.error('Error:', error));
             }
@@ -132,15 +133,15 @@ function MoreModal(props) {
             </Modal.Header>
             <Modal.Body>
                 <p>
-                    <div style={{"font-weight": "bolder"}}>Course:</div> {props.course} 
+                    <b>Course:</b> {props.course} 
                     <br />
-                    <div style={{"font-weight": "bolder"}} >Meeting days:</div> {Array.isArray(props.days) ? props.days.join(', ') : props.days}
+                    <b>Meeting days:</b> {Array.isArray(props.days) ? props.days.join(', ') : props.days}
                     <br />
-                    <div style={{"font-weight": "bolder"}} >Meeting time:</div> {props.time}
+                    <b>Meeting time:</b> {props.time}
                     <br />
-                    <div style={{"font-weight": "bolder"}} >Creator:</div> {props.creator}
+                    <b>Creator:</b> {props.creator}
                     <br />
-                    <div style={{"font-weight": "bolder"}} >Member(s):</div> {Array.isArray(props.members) ? props.members.join(', ') : props.members}
+                    <b>Member(s):</b> {Array.isArray(props.members) ? props.members.join(', ') : props.members}
                 </p>
             </Modal.Body>
             <Modal.Footer>
@@ -263,15 +264,15 @@ export default function Widget({groupName, subject, time, creator, days, subject
             <Card className="card-with-background" style={{marginBottom: '24px'}}>
                 <Card.Img variant="top" src={link} class="card-img-top" />
                 <Card.Body>
-                    <Card.Title>{groupName}</Card.Title>
+                    <Card.Title style={{"font-weight": "bolder"}}>{groupName}</Card.Title>
                     <Card.Text>
-                    Course: {subject}
+                    <b>Course:</b> {subject}
                     <br />
-                    Subject: {subjectMapping[subjectClass] ?? 'Other'}                
+                    <b>Subject:</b> {subjectMapping[subjectClass] ?? 'Other'}                
                     <br />
-                    Meeting days: {Array.isArray(days) ? days.join(', ') : days}
+                    <b>Meeting days:</b> {Array.isArray(days) ? days.join(', ') : days}
                     <br />
-                    Meeting time: {time}
+                    <b>Meeting time:</b> {time}
                     </Card.Text>
                 
                     <Button variant="primary" onClick={() => setModalShow(true)}>More</Button>
