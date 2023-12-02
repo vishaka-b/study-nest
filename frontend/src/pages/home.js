@@ -263,19 +263,11 @@ export default function Home(){
         <div className='homepage'>
             
             <NavBar/>
-            <h2 className="welcome-message">{"Welcome to StudyNest " + userName + "!"}</h2>
+            <h2 className="welcome-message">{"Welcome to Study Nest, " + userName + "!"}</h2>
             <Container>
             <div>
-                <h1 class="section-title">Groups you've joined</h1>
-                {Array.isArray(groupsYoureIn) &&
-                    <Widget_Feed groups={groupsYoureIn.filter(group => group.members.includes(currUser) && group.ownersName !== currUser)} sortOption={''} />
-                }
-            </div>
-            <div>
-                <h1 class="section-title">Groups you've made</h1>
+                <h1 class="section-title">Groups you've created</h1>
                 {/* <button type="button" className="createNewGroup" onClick={handleCreateNewGroup}>+</button> */}
-                <Button variant="info" onClick={handleCreateNewGroup} style={{marginBottom: '24px'}}>Create new group</Button>
-                <br />
                 <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
                 Create new group
                 </Button>
@@ -403,8 +395,11 @@ export default function Home(){
                 }
 
             </div>
-            <div className='groups'>
-                <h3>{groupsYouveMade}</h3>
+            <div>
+                <h1 class="section-title">Groups you've joined</h1>
+                {Array.isArray(groupsYoureIn) &&
+                    <Widget_Feed groups={groupsYoureIn.filter(group => group.members.includes(currUser) && group.ownersName !== currUser)} sortOption={''} />
+                }
             </div>
             
             </Container>
