@@ -81,7 +81,7 @@ function SignUp(props) {
             </button>
           </div>
         </form>
-        <div className="login-link">Already a member? <a className="login-link" href="/">Log In</a></div>
+        <div className="login-link">Already a member? <a className="login-link" href="/">Log in</a></div>
       </div>
     </div>
   );
