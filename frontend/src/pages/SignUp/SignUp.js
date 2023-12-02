@@ -52,12 +52,12 @@ function SignUp(props) {
     <div>
       <div className="title-block">
         <div className="welcome">
-          welcome to the
+          Welcome to
         </div>
-        StudyNest!
+        Study Nest!
       </div>
     <div className="login-wrapper">
-      <h1 className="login-msg">Sign Up</h1>
+      <h1 className="login-msg">Sign up</h1>
         <form action='/' onSubmit={handleUserSubmit} >
         <label className="text">
             <div>Name</div>
@@ -72,12 +72,12 @@ function SignUp(props) {
             <input type="password" value={pwd} onChange={(e) => setPwd(e.target.value)}/>
           </label>
           <label className="text">
-            <div>Re-Enter Password</div>
+            <div>Re-enter password</div>
             <input type="password" value={reTypepwd} onChange={(e) => setReTypePwd(e.target.value)}/>
           </label>
           <div>
             <button className="login-button" type="submit" >
-              Sign Up
+              Sign up
             </button>
           </div>
         </form>
