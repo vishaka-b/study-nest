@@ -11,8 +11,6 @@ import React, { useEffect, useState } from 'react';
 
 
 function MoreModal(props) {
-    
-    const currUser = window.sessionStorage.getItem("myUser");
 
         //vishaka code
        /* const handleJoin = (event) => {
@@ -88,6 +86,18 @@ function MoreModal(props) {
         };
     
 
+        const currUser = window.sessionStorage.getItem("myUser");
+        let actionButton
+        if (props.creator === currUser) {
+            actionButton = <Button>Delete group</Button>
+        }
+        else if (props.members.includes(currUser)) {
+            actionButton = <Button>Leave group</Button>
+        }
+        else {
+            actionButton = <Button onClick={handleJoin}>Join group</Button>
+        }
+
         /*if we want user name to be including along with email
         let userName = "";
         if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
@@ -145,8 +155,7 @@ function MoreModal(props) {
                 </p>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={handleJoin}>Join</Button>
-                
+                {actionButton}
             </Modal.Footer>
         </Modal>
     );
