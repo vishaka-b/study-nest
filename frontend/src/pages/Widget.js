@@ -120,6 +120,7 @@ function MoreModal(props) {
     return (
         <Modal
             {...props}
+            scrollable={true}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered

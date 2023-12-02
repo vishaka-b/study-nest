@@ -11,120 +11,6 @@ import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function FormModal(props) {
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Create new group
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form id="groupForm">
-            <Form.Group className="mb-3">
-                <Form.Label>Group:</Form.Label>
-                <Form.Control type="text" placeholder="Enter group name" />
-            </Form.Group>
-            <Form.Group className="mb-3">
-                <Form.Label>Course:</Form.Label>
-                <Form.Control type="text" placeholder="Enter course name" />
-            </Form.Group>
-            <Form.Group className="mb-3">
-                <Form.Label>Subject:</Form.Label>
-                <Form.Select aria-label="Default select example">
-                    <option>Choose subject</option>
-                    <option value="computer_science">Computer Science</option>
-                    <option value="math">Math</option>
-                    <option value="history">History</option>
-                    <option value="english">English</option>
-                    <option value="chemistry">Chemistry</option>
-                    <option value="physics">Physics</option>
-                    <option value="biology">Biology</option>
-                    <option value="engineering">Engineering</option>
-                    <option value="business">Business</option>
-                    <option value="foreign_language">Foreign Language</option>
-                    <option value="linguistics">Linguistics</option>
-                    <option value="other">Other</option>
-                </Form.Select>
-                </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Label>Meeting days:</Form.Label>
-                {['checkbox'].map((type) => (
-                <div key={`inline-${type}`} className="mb-3">
-                    <Form.Check
-                        inline
-                        label="Mon"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-1`}
-                    />
-                    <Form.Check
-                        inline
-                        label="Tue"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-2`}
-                    />
-                    <Form.Check
-                        inline
-                        label="Wed"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-2`}
-                    />
-                    <Form.Check
-                        inline
-                        label="Thu"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-2`}
-                    />
-                    <Form.Check
-                        inline
-                        label="Fri"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-2`}
-                    />
-                    <Form.Check
-                        inline
-                        label="Sat"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-2`}
-                    />
-                    <Form.Check
-                        inline
-                        label="Sun"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-2`}
-                    />
-                </div>
-              ))}
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-                <Form.Label>Meeting time:</Form.Label>
-                <Form.Control type="time" placeholder="Enter course name" />
-            </Form.Group>
-            
-            </Form>
-        </Modal.Body>
-        <Modal.Footer>
-            <Button form="groupForm" variant="primary" type="submit">
-                Submit
-            </Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
-
 export default function Home(){
 
     const [modalShow, setModalShow] = React.useState(false);
@@ -249,7 +135,7 @@ export default function Home(){
       };
     //use Axios.post 
     //on backend read the body and add to database and then send a temp response back (200 = allgood)
- ///dfsfdsfdd
+
  const handleJoin = (event) => {
     console.log("REACHED")
     // Make a POST request to your backend to add the current user to the members array
@@ -271,7 +157,7 @@ export default function Home(){
         console.error('Error joining group:', error);
     });
 };
-///dfsdfsfd    
+
     const handleFormSubmit = (event) => {
         //ensures we are at home page (have to add reload screen)
         event.preventDefault();
@@ -354,6 +240,7 @@ export default function Home(){
             
             //refresh itself so users do not need to refresh by hand
             refreshGroups();
+            setModalShow(false);
         });
     };
 
@@ -389,29 +276,131 @@ export default function Home(){
                 {/* <button type="button" className="createNewGroup" onClick={handleCreateNewGroup}>+</button> */}
                 <Button variant="info" onClick={handleCreateNewGroup} style={{marginBottom: '24px'}}>Create new group</Button>
                 <br />
-                <Button variant="primary" onClick={() => setModalShow(true)}>
-                Modal form
+                <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
+                Create new group
                 </Button>
 
-                <FormModal
+                {/*<FormModal
                     show={modalShow}
                     onHide={() => setModalShow(false)}
-                />
+                    onSubmit={handleFormSubmit}
+
+                />*/}
+
+                <Modal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    scrollable={true}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                >
+                    <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Create new group
+                    </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <Form id="groupForm" onSubmit={handleFormSubmit}>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Group:</Form.Label>
+                            <Form.Control type="text" placeholder="Enter group name" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Course:</Form.Label>
+                            <Form.Control type="text" placeholder="Enter course name" value={subjectsName} onChange={(e) => setSubjectsName(e.target.value)} />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Subject:</Form.Label>
+                            <Form.Select aria-label="Default select example" onChange={handleSubjectDropdownChange}>
+                                <option>Choose subject</option>
+                                <option value="computer_science">Computer Science</option>
+                                <option value="math">Math</option>
+                                <option value="history">History</option>
+                                <option value="english">English</option>
+                                <option value="chemistry">Chemistry</option>
+                                <option value="physics">Physics</option>
+                                <option value="biology">Biology</option>
+                                <option value="engineering">Engineering</option>
+                                <option value="business">Business</option>
+                                <option value="foreign_language">Foreign Language</option>
+                                <option value="linguistics">Linguistics</option>
+                                <option value="other">Other</option>
+                            </Form.Select>
+                            </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                            <Form.Label>Meeting days:</Form.Label>
+                            <div className="mb-3">
+                                <Form.Check
+                                    inline
+                                    label="Mon"
+                                    type={'checkbox'}
+                                    checked={meetingDays.monday}
+                                    onChange={(e) => setMeetingDays({ ...meetingDays, monday: e.target.checked })}
+                                />
+                                <Form.Check
+                                    inline
+                                    label="Tue"
+                                    type={'checkbox'}
+                                    checked={meetingDays.tuesday}
+                                    onChange={(e) => setMeetingDays({ ...meetingDays, tuesday: e.target.checked })}
+                                />
+                                <Form.Check
+                                    inline
+                                    label="Wed"
+                                    type={'checkbox'}
+                                    checked={meetingDays.wednesday}
+                                    onChange={(e) => setMeetingDays({ ...meetingDays, wednesday: e.target.checked })}
+                                />
+                                <Form.Check
+                                    inline
+                                    label="Thu"
+                                    type={'checkbox'}
+                                    checked={meetingDays.thursday}
+                                    onChange={(e) => setMeetingDays({ ...meetingDays, thursday: e.target.checked })}
+                                />
+                                <Form.Check
+                                    inline
+                                    label="Fri"
+                                    type={'checkbox'}
+                                    checked={meetingDays.friday}
+                                    onChange={(e) => setMeetingDays({ ...meetingDays, friday: e.target.checked })}
+                                />
+                                <Form.Check
+                                    inline
+                                    label="Sat"
+                                    type={'checkbox'}
+                                    checked={meetingDays.saturday}
+                                    onChange={(e) => setMeetingDays({ ...meetingDays, saturday: e.target.checked })}
+                                />
+                                <Form.Check
+                                    inline
+                                    label="Sun"
+                                    type={'checkbox'}
+                                    checked={meetingDays.sunday}
+                                    onChange={(e) => setMeetingDays({ ...meetingDays, sunday: e.target.checked })}
+                                />
+                            </div>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Meeting time:</Form.Label>
+                            <Form.Control type="time" value={meetingTime} onChange={(e) => setMeetingTime(e.target.value)}/>
+                        </Form.Group>
+                        
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button form="groupForm" variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+
                 {Array.isArray(groupsYoureIn) &&
                     <Widget_Feed groups={groupsYoureIn.filter(group => group.ownersName === currUser)} sortOption = {''} />
                 }
-
-                {/*Array.isArray(groupsYoureIn) && groupsYoureIn
-                
-                .filter(group => group.ownersName == currUser)
-                .map((group, index) => (
-                    <div key={index}>
-                <h3 className = "output" >Name: {group.groupName} </h3>
-                <h3 className = "output" >Owner: {group.ownersName} </h3>
-                
-                </div>
-                )) */}
-
 
             </div>
             <div className='groups'>
@@ -419,116 +408,6 @@ export default function Home(){
             </div>
             
             </Container>
-            
-            {showForm && (
-        <div className="popupForm">
-          <button className="closeButton" type="button" onClick={handleCloseForm}>X</button>
-          <form onSubmit={handleFormSubmit} >
-            <label className="textName">Group:
-              <input type="text" name="groupName" value={groupName} onChange={(e) => setGroupName(e.target.value)} />
-            </label>
-            {/*<label className="textName">Owner name:
-              <input type="text" name="ownerName" value={ownersName} onChange={(e) => setOwnersName(e.target.value)} />
-            </label>*/}
-            <label className="textName">Course:
-              <input type="text" value={subjectsName} onChange={(e) => setSubjectsName(e.target.value)} />
-            </label>
-
-            <div>
-            <label htmlFor="subjectDropdown">Subject:</label>
-            <select id="subjectDropdown" onChange={handleSubjectDropdownChange} style={{ width: '232px', height: '40px' }}>
-                <option value="">Select...</option>
-                <option value="computer_science">Computer Science</option>
-                <option value="math">Math</option>
-                <option value="history">History</option>
-                <option value="english">English</option>
-                <option value="chemistry">Chemistry</option>
-                <option value="physics">Physics</option>
-                <option value="biology">Biology</option>
-                <option value="engineering">Engineering</option>
-                <option value="business">Business</option>
-                <option value="foreign_language">Foreign Language</option>
-                <option value="linguistics">Linguistics</option>
-                <option value="other">Other</option>
-
-            </select>
-            {/*<p>Selected Subject: {Object.keys(subjectClassification).find((subject) => subjectClassification[subject])}</p>*/}
-            </div>
-            <p></p>
-            <label className="meetingDays">Meeting days:</label>
-            <div className="daysOfWeek">
-                <label className="dayOfWeek">
-                    <input
-                    type="checkbox"
-                    checked={meetingDays.monday}
-                    onChange={(e) => setMeetingDays({ ...meetingDays, monday: e.target.checked })}
-                    />
-                    Mon
-                </label>
-                <label className="dayOfWeek">
-                    <input
-                    type="checkbox"
-                    checked={meetingDays.tuesday}
-                    onChange={(e) => setMeetingDays({ ...meetingDays, tuesday: e.target.checked })}
-                    />
-                    Tue
-                </label>
-                <label className="dayOfWeek">
-                    <input
-                    type="checkbox"
-                    checked={meetingDays.wednesday}
-                    onChange={(e) => setMeetingDays({ ...meetingDays, wednesday: e.target.checked })}
-                    />
-                    Wed
-                </label>
-                <label className="dayOfWeek">
-                    <input
-                    type="checkbox"
-                    checked={meetingDays.thursday}
-                    onChange={(e) => setMeetingDays({ ...meetingDays, thursday: e.target.checked })}
-                    />
-                    Thu
-                </label>
-                <label className="dayOfWeek">
-                    <input
-                    type="checkbox"
-                    checked={meetingDays.friday}
-                    onChange={(e) => setMeetingDays({ ...meetingDays, friday: e.target.checked })}
-                    />
-                    Fri
-                </label>
-                <label className="dayOfWeek">
-                    <input
-                    type="checkbox"
-                    checked={meetingDays.saturday}
-                    onChange={(e) => setMeetingDays({ ...meetingDays, saturday: e.target.checked })}
-                    />
-                    Sat
-                </label>
-                <label className="dayOfWeek">
-                    <input
-                    type="checkbox"
-                    checked={meetingDays.sunday}
-                    onChange={(e) => setMeetingDays({ ...meetingDays, sunday: e.target.checked })}
-                    />
-                    Sun
-                </label>
-            </div>
-
-            <p></p>
-
-            <label>Meeting time:
-                <input
-                    type="time"
-                    value={meetingTime}
-                    onChange={(e) => setMeetingTime(e.target.value)}
-                />
-            </label>
-            <button className="submitButton" type="submit">Submit</button>
-          </form>
-        </div>
-        
-      )}
              
     </div>
        
