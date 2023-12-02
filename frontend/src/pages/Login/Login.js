@@ -70,43 +70,7 @@ function Login(props)
     alert('An error occurred during login. Please try again.');
     }
   }
-  /*return (
-    <div>
-      <div className="title-block">
-        <div className="welcome">
-          Welcome to
-        </div>
-        Study Nest!
-      </div>
-      <div className="login-wrapper">
-        <h1 className="login-msg">Please log in</h1>
-        <form action='/Home' onSubmit={handleLogin}>
-          <label className="text">
-            <div>Email</div>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </label>
-          <label className="text">
-            <div>Password</div>
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <span onClick={() => setShowPassword(!showPassword)}>
-            
-              <EyeIcon />
-            </span>
-          </label>
-          <div>
-            <button className="login-button" type="submit">
-              Log in
-            </button>
-          </div>
-        </form>
-        <div className="sign-up">Not a member? <a className="sign-up" href="/SignUp">Sign up</a></div>
-      </div>
-    </div>
-  );*/
+  
     
   return (
     <div>
@@ -155,35 +119,7 @@ function Login(props)
 
   
   
-   /* return (
-    <div>
-      <div className="title-block">
-        <div className="welcome">
-          Welcome to
-        </div>
-        Study Nest!
-      </div>
-    <div className="login-wrapper">
-      <h1 className="login-msg">Please log in</h1>
-        <form action='/Home' onSubmit={handleLogin}>
-          <label className="text">
-            <div>Email</div>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-          </label>
-          <label className="text">
-            <div>Password</div>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-          </label>
-          <div>
-            <button className="login-button" type="submit">
-              Log in
-            </button>
-          </div>
-        </form>
-        <div className="sign-up">Not a member? <a className="sign-up" href="/SignUp">Sign up</a></div>
-      </div>
-    </div>
-  );*/
+   
 }
 
 /*
