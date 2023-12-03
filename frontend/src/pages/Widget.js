@@ -70,29 +70,30 @@ export default function Widget({groupName, subject, time, creator, days, subject
             // Member already exists
             alert("You are already a member of this group");
             } else {
-            // Member doesn't exist, proceed with the join
-            fetch(`http://localhost:8888/addToGroup`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    groupName: groupName,
-                    user: newElement
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Successfully joined " + groupName);
-                setModalShow(false);
-                window.location.reload(false);
-                console.log(data);
-                
-            })
-            .catch(error => console.error('Error:', error));
+                // Member doesn't exist, proceed with the join
+                fetch(`http://localhost:8888/addToGroup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        groupName: groupName,
+                        user: newElement
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert("Successfully joined " + groupName);
+                    console.log(data);
+                    setModalShow(false);
+                    window.location.reload(false);
+                    
+                })
+                .catch(error => console.error('Error:', error));
             }
         })
         .catch(error => console.error('Error checking membership:', error));
+        
     };
 
     const handleLeave = (event) => {
@@ -113,10 +114,9 @@ export default function Widget({groupName, subject, time, creator, days, subject
         .then(response => response.json())
         .then(data => {
             alert("Successfully left " + groupName);
+            console.log(data);
             setModalShow(false);
             window.location.reload(false);
-            console.log(data);
-            
         })
         .catch(error => console.error('Error leaving group:', error));
     };

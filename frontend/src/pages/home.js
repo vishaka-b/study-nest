@@ -165,8 +165,10 @@ export default function Home(){
             setSelectedSubject('');
             
             //refresh itself so users do not need to refresh by hand
-            refreshGroups();
+            // refreshGroups();
+            
             setModalShow(false);
+            window.location.reload(false);
         });
     };
     
