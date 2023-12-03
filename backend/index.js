@@ -34,71 +34,30 @@ app.listen(8888,()=>{
 
 })
 
-app.post('/AddResource', async (req, res) => {
-    console.log(req.body);
 
-    try {
-        // Connect to the MongoDB database
-        const collection = database.collection('mygroupscollection');
-    
-        // Assuming you have a groupId in the request body and a resource to add
-        const { groupId, resource } = req.body;
-    
-        // Find the group document by its _id (assuming groupId is the _id)
-        const group = await collection.findOne({ _id: ObjectId(groupId) });
-    
-        if (!group) {
-          // Group not found
-          return res.status(404).json({ message: 'Group not found' });
-        }
-    
-        // Add the resource to the resources array
-        group.resources.push(resource);
-    
-        // Update the group document in the database
-        const result = await collection.updateOne(
-          { _id: ObjectId(groupId) },
-          { $set: { resources: group.resources } }
-        );
-    
-        if (result.modifiedCount === 1) {
-          // Resource added successfully
-          res.json({ message: 'Resource added successfully' });
-        } else {
-          // Resource addition failed
-          res.json({ message: 'Failed to add resource' });
-        }
-      } catch (error) {
-        console.error('Error adding resource:', error);
-        res.status(500).json({ message: 'Internal server error' });
-      } 
-});
-
-app.post('/AddGroups', (req, res) => {
-    console.log(req.body); 
-    // Assuming the data is sent as JSON in the request body
-    const { groupName, ownersName, subjectsName, meetingTime, meetingDays, subjectClassification, selectedSubject } = req.body;
-    //console.log(groupName)
-    
-    database.collection("mygroupscollection").insertOne({
-        
-        groupName : groupName,
-        ownersName: ownersName ,
-        courseName : subjectsName,
-        meetingTime: meetingTime,
-        meetingDays: meetingDays,
-        subjectClassification: JSON.parse(subjectClassification), //subjectClassification,
-        
-        //subjectClassification: subjectClassification,
-        resources: new Array(),
-        selectedSubject: selectedSubject
-        
-        
+    app.post('/AddGroups', (req, res) => {
+        console.log(req.body); 
+        // Assuming the data is sent as JSON in the request body
+        const { groupName, ownersName, subjectsName, meetingTime, meetingDays, subjectClassification, selectedSubject, members, maxMembers } = req.body;
+        //console.log(groupName)
+       
+        database.collection("mygroupscollection").insertOne({
+            
+            groupName : groupName,
+            ownersName: ownersName ,
+            courseName : subjectsName,
+            meetingTime: meetingTime,
+            meetingDays: meetingDays,
+            subjectClassification: subjectClassification,
+            selectedSubject: selectedSubject,
+            members: members,
+            maxMembers: maxMembers,
+            resources: new Array()
+        });
+        //console.log("IND SUBG:",console.log(selectedSubject))
+        // Send a response back to the client
+        res.json({ message: 'Succesfully created new Group' });
     });
-    //console.log("IND SUBG:",console.log(selectedSubject))
-    // Send a response back to the client
-    res.json({ message: 'Succesfully created new Group' });
-});
 app.post('/createNewUser', (req, res)=>{
     console.log(req.body); 
     const {email, pwd, name} = req.body;
@@ -126,20 +85,112 @@ app.get('/myuserlist',(request,reposnse)=>{
 
 app.post('/checkMembership', async (req, res) => {
     const { groupName, user } = req.body;
-    console.log("GOT HERE");
   
     const groupsCollection = database.collection('mygroupscollection');
   
     try {
       const isMember = await groupsCollection.findOne({ groupName, members: user });
-      res.json({ isMember: !!isMember });
+      res.json({ isMember: !!isMember});
     } catch (error) {
       console.error('Error checking membership:', error);
       res.status(500).json({ error: 'Error checking membership' });
     }
   });
-  
 
+app.post('/checkOwnership',  async (req, res) => {
+    const { groupName, user } = req.body;
+  
+    const groupsCollection = database.collection('mygroupscollection');
+    try {
+        const isOwner = await groupsCollection.findOne({ groupName, ownersName: user });
+        res.json({ isOwner: !!isOwner});
+      } catch (error) {
+        console.error('Error checking ownership:', error);
+        res.status(500).json({ error: 'Error checking ownership' });
+      }    
+  });
+
+  app.delete('/deleteGroup', async (req, res) => {
+    const { groupName } = req.body;
+  
+    const groupsCollection = database.collection('mygroupscollection');
+  
+    try {
+      const result = await groupsCollection.deleteOne({ groupName} );
+      res.json({ message: {result} });
+    } catch (error) {
+      res.status(404).json({ message: {groupName} }); 
+    }
+    
+});
+
+
+
+app.post('/leaveGroup', (req, res) => {
+    const {groupName, user} = req.body;
+    console.log(groupName)
+    console.log(user)
+    
+    try {
+      const result = database.collection("mygroupscollection").updateOne(
+        { groupName: groupName },
+        { $pull: { members: user } }
+        );
+      
+      res.json({ message: 'Succesfully left group:', groupName });
+    } catch (error) {
+      res.status(404).json({message: "Error!"})
+    }
+    
+    }
+  );
+  
+app.post('/AddResource', async (req, res) => {
+    console.log(req.body);
+ 
+ 
+    try {
+        // Connect to the MongoDB database
+        const collection = database.collection('mygroupscollection');
+   
+        // Assuming you have a groupId in the request body and a resource to add
+        const { groupID, resource } = req.body;
+   
+        // Find the group document by its _id (assuming groupId is the _id)
+        const group = await collection.findOne({ groupName: groupID });
+   
+       /* if (!group) {
+          // Group not found
+          return res.status(404).json({ message: 'Group not found' });
+        }*/
+   
+        // Add the resource to the resources array
+        if (group.resources==null){
+            group.resources=new Array();
+        }
+
+        group.resources.push(resource);
+   
+        // Update the group document in the database
+        const result = await collection.updateOne(
+          { groupName: groupID },
+          { $set: { resources: group.resources } }
+        );
+   
+        if (result.modifiedCount === 1) {
+          // Resource added successfully
+          res.json({ message: 'Resource added successfully' });
+        } else {
+          // Resource addition failed
+          res.json({ message: 'Failed to add resource' });
+        }
+      } catch (error) {
+        console.error('Error adding resource:', error);
+        res.status(500).json({ message: 'Internal server error' });
+      }
+ });
+
+ 
 app.post('/addToGroup/', async (req,res) => {
     try{
         const groupID = req.body.groupName;

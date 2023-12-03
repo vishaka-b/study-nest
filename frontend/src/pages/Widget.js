@@ -41,7 +41,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                 },
                 body: JSON.stringify({
                     groupName: groupName,
-                    resource: newResource,
+                    resource: addResourceTextBoxValue,
                 }),                        
             })
             .then(response => response.json())
