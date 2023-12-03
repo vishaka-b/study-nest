@@ -102,11 +102,16 @@ export default function Home(){
     const handleFormSubmit = (event) => {
         //ensures we are at home page (have to add reload screen)
         event.preventDefault();
+        
         if (!groupName || !subjectsName || !meetingTime || !Object.values(meetingDays).some(day => day)) {
             alert("Please fill in all fields before submitting.");
             return;
         }
-
+        const g = groupsYoureIn.filter(group => group.groupName === groupName)
+        if (g.length !== 0){
+            alert("Group Name Already Exists. Please Change Name to make a new group");
+            return;
+        }
         const members = [currUser]
         // Send a POST request to the server
         fetch('http://localhost:8888/AddGroups', {

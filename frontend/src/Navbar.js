@@ -16,7 +16,7 @@ export default function NavBar(){
             <li className="active">  <a href = "/">Log out</a> </li>
         </ul>
     </nav>*/
-    <Navbar collapseOnSelect fixed="top" expand="lg" className="navbar-body" variant="dark">
+    <Navbar collapseOnSelect fixed="top" expand="lg" className="navbar-body" variant="dark" >
     <Container>
       <Navbar.Brand href="/Home" className="navbar-title">Study Nest</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
