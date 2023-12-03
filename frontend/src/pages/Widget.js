@@ -46,7 +46,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
             })
             .then(response => response.json())
             .then(data => {
-                alert("Successfully added resource " + groupName);
+                alert("Successfully added resource to " + groupName);
                 setSecondModalShow(false);
                 window.location.reload(false);
                 console.log(data);
