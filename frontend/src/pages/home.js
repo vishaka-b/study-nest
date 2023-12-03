@@ -218,17 +218,17 @@ export default function Home(){
                             <Form.Label><b>Subject:</b></Form.Label>
                             <Form.Select aria-label="Default select example" onChange={handleSubjectDropdownChange}>
                                 <option>Choose subject</option>
-                                <option value="computer_science">Computer Science</option>
-                                <option value="math">Math</option>
-                                <option value="history">History</option>
-                                <option value="english">English</option>
-                                <option value="chemistry">Chemistry</option>
-                                <option value="physics">Physics</option>
                                 <option value="biology">Biology</option>
-                                <option value="engineering">Engineering</option>
                                 <option value="business">Business</option>
+                                <option value="chemistry">Chemistry</option>
+                                <option value="computer_science">Computer Science</option>
+                                <option value="engineering">Engineering</option>
+                                <option value="english">English</option>
                                 <option value="foreign_language">Foreign Language</option>
+                                <option value="history">History</option>
                                 <option value="linguistics">Linguistics</option>
+                                <option value="math">Math</option>
+                                <option value="physics">Physics</option>
                                 <option value="other">Other</option>
                             </Form.Select>
                             </Form.Group>
