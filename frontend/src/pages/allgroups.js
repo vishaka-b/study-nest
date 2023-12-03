@@ -79,13 +79,13 @@ export default function AllGroups(){
       </Button>
     </div>
     <div style={{"margin-bottom": "24px"}}>
-      <Button variant="primary" className="sorter mt-3" onClick={() => setSortOption('groupName')}>
+      <Button variant="primary" className="inline-button mt-3" onClick={() => setSortOption('groupName')}>
         Sort by group
       </Button>
-      <Button variant="primary" className="sorter mt-3" onClick={() => setSortOption('ownersName')}>
+      <Button variant="primary" className="inline-button mt-3" onClick={() => setSortOption('ownersName')}>
         Sort by owner
       </Button>
-      <Button variant="primary" className="sorter mt-3" onClick={() => setSortOption('courseName')}>
+      <Button variant="primary" className="inline-button mt-3" onClick={() => setSortOption('courseName')}>
         Sort by course
       </Button>
     </div>

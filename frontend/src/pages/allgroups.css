@@ -88,12 +88,7 @@
   flex-direction: row;
 }
 
-.side-by-side {
-  display: flex;
-  flex-direction: row;
-}
-
-.sorter {
+.inline-button {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }

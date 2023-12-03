@@ -170,12 +170,12 @@ export default function Widget({groupName, subject, time, creator, days, subject
     if (creator === currUser) {
         actionButton = <Button onClick={handleDelete}>Delete group</Button>
         resourceButton=<Button onClick={handleAddResource}>Add resource</Button>
-        resourceDisplayButton= <Button variant="primary" style={{"margin": "1%"}} onClick={toggleSecondModal}>Resources</Button>
+        resourceDisplayButton= <Button variant="primary" className="inline-button" onClick={toggleSecondModal}>Resources</Button>
     }
     else if (members.includes(currUser)) {
         actionButton = <Button onClick={handleLeave}>Leave group</Button>
         resourceButton=<Button onClick={handleAddResource}>Add resource</Button>
-        resourceDisplayButton= <Button variant="primary" style={{"margin": "1%"}} onClick={toggleSecondModal}>Resources</Button>
+        resourceDisplayButton= <Button variant="primary" className="inline-button" onClick={toggleSecondModal}>Resources</Button>
 
     }
     else if (numMembers < maxMembers) {
@@ -216,7 +216,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     <b>Meeting time:</b> {time}
                     </Card.Text>
                 
-                    <Button variant="primary" style={{"margin": "1%"}} onClick={() => setModalShow(true)}>More</Button>
+                    <Button variant="primary" className="inline-button" onClick={() => setModalShow(true)}>More</Button>
                     {resourceDisplayButton}
 
                 </Card.Body>
