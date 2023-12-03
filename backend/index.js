@@ -38,7 +38,7 @@ app.listen(8888,()=>{
     app.post('/AddGroups', (req, res) => {
         console.log(req.body); 
         // Assuming the data is sent as JSON in the request body
-        const { groupName, ownersName, subjectsName, meetingTime, meetingDays, subjectClassification, selectedSubject, members, maxMembers } = req.body;
+        const { groupName, ownersName, subjectsName, meetingTime, meetingDays, subjectClassification, selectedSubject, members, maxMembers, resources} = req.body;
         //console.log(groupName)
        
         database.collection("mygroupscollection").insertOne({
@@ -154,15 +154,18 @@ app.post('/AddResource', async (req, res) => {
         const collection = database.collection('mygroupscollection');
    
         // Assuming you have a groupId in the request body and a resource to add
-        const { groupID, resource } = req.body;
+        //const { groupID, resource } = req.body;
+        const groupID=req.body.groupName;
+        const resource=req.body.resource;
    
         // Find the group document by its _id (assuming groupId is the _id)
         const group = await collection.findOne({ groupName: groupID });
+        //console.log("GROUP", group);
    
-       /* if (!group) {
+        if (!group) {
           // Group not found
           return res.status(404).json({ message: 'Group not found' });
-        }*/
+        }
    
         // Add the resource to the resources array
         if (group.resources==null){
@@ -170,11 +173,12 @@ app.post('/AddResource', async (req, res) => {
         }
 
         group.resources.push(resource);
+        console.log(group.resources);
    
         // Update the group document in the database
         const result = await collection.updateOne(
           { groupName: groupID },
-          { $set: { resources: group.resources } }
+          { $push: { resources: resource } }
         );
    
         if (result.modifiedCount === 1) {

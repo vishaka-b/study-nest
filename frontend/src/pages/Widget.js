@@ -246,9 +246,9 @@ export default function Widget({groupName, subject, time, creator, days, subject
                 <Modal.Body>
                     <p>
                     <h4>All Resources:</h4>
-                    <ul>
-                        
-                    </ul>
+                    {resources && resources.map((resource, index) => (
+                        <li key={index}>{resource}</li>
+                    ))}
                     <input
                         type="text"
                         placeholder="Add Resource Link"
