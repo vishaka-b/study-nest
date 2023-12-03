@@ -155,21 +155,33 @@ export default function Widget({groupName, subject, time, creator, days, subject
 
     const currUser = window.sessionStorage.getItem("myUser");
     let actionButton
+    let resourceDisplayButton
     let numMembers = members.length
     let spotsLeft = members.length < maxMembers ? maxMembers - members.length : 0
+    let resourceButton
+
     if (creator === currUser) {
         actionButton = <Button onClick={handleDelete}>Delete group</Button>
+        resourceButton=<Button onClick={handleAddResource}>Add Resource </Button>
+        resourceDisplayButton= <Button variant="primary" onClick={toggleSecondModal}>Resources</Button>
     }
     else if (members.includes(currUser)) {
         actionButton = <Button onClick={handleLeave}>Leave group</Button>
+        resourceButton=<Button onClick={handleAddResource}>Add Resource </Button>
+        resourceDisplayButton= <Button variant="primary" onClick={toggleSecondModal}>Resources</Button>
+
     }
     else if (numMembers < 15) {
         actionButton = <Button onClick={handleJoin}>Join group</Button>
     }
     else {
         actionButton = <Button disabled>Full</Button>
+        resourceDisplayButton=<Button disabled>Resources </Button>
+
+        
     }
-    let resourceButton = <Button onClick={handleAddResource}>Add Resource </Button>
+    
+   
     
 
     return (
@@ -189,7 +201,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     </Card.Text>
                 
                     <Button variant="primary" onClick={() => setModalShow(true)}>More</Button>
-                    <Button variant="primary" onClick={toggleSecondModal}>Resources</Button>
+                    {resourceDisplayButton}
 
                 </Card.Body>
             </Card>
