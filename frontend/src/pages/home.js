@@ -14,11 +14,7 @@ export default function Home(){
     const [modalShow, setModalShow] = React.useState(false);
 
     const currUser = window.sessionStorage.getItem("myUser");
-    let userName = "";
-    if (window.sessionStorage.getItem("userName") === undefined || window.sessionStorage.getItem("userName") === "")
-        userName = currUser;
-    else
-        userName = window.sessionStorage.getItem("userName");
+    const userName = window.sessionStorage.getItem("userName");
 
     console.log(currUser)
     const [groupsYoureIn, setGroupsYoureIn] = useState("");
@@ -113,6 +109,7 @@ export default function Home(){
             return;
         }
         const members = [currUser]
+        const usernames = [userName];
         // Send a POST request to the server
         fetch('http://localhost:8888/AddGroups', {
             method: "POST",
@@ -128,7 +125,8 @@ export default function Home(){
                 subjectClassification: Array.from(Object.values(subjectClassification)),
                 selectedSubject: selectedSubject,
                 members: members,
-                maxMembers: maxMembers
+                maxMembers: maxMembers,
+                usernames: usernames
             }),
         })
         .then(response => response.json())

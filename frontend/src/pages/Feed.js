@@ -30,6 +30,8 @@ function MoreModal(props) {
                     Creator: {props.creator}
                     <br />
                     Members: {props.members}
+                    <br />
+                    Usernames: {props.usernames}
                 </p>
             </Modal.Body>
             <Modal.Footer>

@@ -34,8 +34,7 @@ export default function WidgetFeed({groups, sortOption}) {
     const sortedGroups = [...groups];
   
     // Apply sorting based on the selected option
-    applySorting(sortedGroups);
-    
+    applySorting(sortedGroups);    
 
     return (
         
@@ -50,6 +49,7 @@ export default function WidgetFeed({groups, sortOption}) {
                   time={group.meetingTime} // Assuming you have a 'time' property in your group object
                   creator={group.ownersName}
                   members={group.members}
+                  usernames={group.usernames}
                   subjectClass = {group.subjectClassification && (() => {
                         for (let i = 0; i < subjectsArray.length; i++) {
                             if (group.subjectClassification[i] === true) {

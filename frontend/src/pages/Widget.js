@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 
-export default function Widget({groupName, subject, time, creator, days, subjectClass, members, maxMembers,resources}) {
+export default function Widget({groupName, subject, time, creator, days, subjectClass, members, maxMembers,resources, usernames}) {
     const [modalShow, setModalShow] = React.useState(false);
     const [secondModalShow, setSecondModalShow] = React.useState(false);
     const [addResourceTextBoxValue, setAddResourceTextBoxValue] = React.useState('');
@@ -32,7 +32,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
 
     const handleAddResource = (event) =>{
         event.preventDefault();
-        const newResource = window.sessionStorage.getItem("myResource");  // Assuming you have a session storage variable for the resource
+        //const newResource = window.sessionStorage.getItem("myResource");  // Assuming you have a session storage variable for the resource
 
         fetch(`http://localhost:8888/AddResource`, {
                 method: 'POST',
@@ -83,7 +83,9 @@ export default function Widget({groupName, subject, time, creator, days, subject
         event.preventDefault();
       
         // Replace 'new_value' with the actual value you want to add
-        const newElement = window.sessionStorage.getItem("myUser");  
+        const newElement = window.sessionStorage.getItem("myUser"); 
+        const username = window.sessionStorage.getItem("userName");
+
 
         // Check if the member already exists in the group
         fetch(`http://localhost:8888/checkMembership`, {
@@ -94,6 +96,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
             body: JSON.stringify({
             groupName: groupName,
             user: newElement,
+            username: username
             }),
         })
         .then(response => response.json())
@@ -110,7 +113,8 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     },
                     body: JSON.stringify({
                         groupName: groupName,
-                        user: newElement
+                        user: newElement,
+                        username: username
                     }),
                 })
                 .then(response => response.json())
@@ -131,7 +135,8 @@ export default function Widget({groupName, subject, time, creator, days, subject
     const handleLeave = (event) => {
         event.preventDefault();
 
-        const user = window.sessionStorage.getItem("myUser");  
+        const user = window.sessionStorage.getItem("myUser"); 
+        const username = window.sessionStorage.getItem("userName") ;
     
         fetch(`http://localhost:8888/leaveGroup`, {
             method: 'POST',
@@ -140,7 +145,8 @@ export default function Widget({groupName, subject, time, creator, days, subject
         },
         body: JSON.stringify({
         groupName: groupName,
-        user: user
+        user: user,
+        username: username
         })
         })
         .then(response => response.json())
@@ -159,16 +165,17 @@ export default function Widget({groupName, subject, time, creator, days, subject
     let numMembers = members.length
     let spotsLeft = members.length < maxMembers ? maxMembers - members.length : 0
     let resourceButton
+    let numUsers = usernames != null ? usernames.length : 0;
 
     if (creator === currUser) {
         actionButton = <Button onClick={handleDelete}>Delete group</Button>
         resourceButton=<Button onClick={handleAddResource}>Add Resource </Button>
-        resourceDisplayButton= <Button variant="primary" onClick={toggleSecondModal}>Resources</Button>
+        resourceDisplayButton= <Button variant="primary" style={{"margin": "1%"}} onClick={toggleSecondModal}>Resources</Button>
     }
     else if (members.includes(currUser)) {
         actionButton = <Button onClick={handleLeave}>Leave group</Button>
         resourceButton=<Button onClick={handleAddResource}>Add Resource </Button>
-        resourceDisplayButton= <Button variant="primary" onClick={toggleSecondModal}>Resources</Button>
+        resourceDisplayButton= <Button variant="primary" style={{"margin": "1%"}} onClick={toggleSecondModal}>Resources</Button>
 
     }
     else if (numMembers < 15) {
@@ -176,13 +183,25 @@ export default function Widget({groupName, subject, time, creator, days, subject
     }
     else {
         actionButton = <Button disabled>Full</Button>
-        resourceDisplayButton=<Button disabled>Resources </Button>
+        resourceDisplayButton=<Button disabled style={{"margin": "1%"}}>Resources </Button>
 
         
     }
     
    
-    
+    let display = "";
+    for (let i = 0; i < numUsers; i++){
+        display += usernames[i];
+        display += " (";
+        display += members[i];
+        if (i === numUsers -1)
+            display += ") ";
+        else
+            display += "), "
+    }
+
+    if (display === "")
+        display = Array.isArray(members) ? members.join(', ') : members;
 
     return (
         <>
@@ -200,12 +219,11 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     <b>Meeting time:</b> {time}
                     </Card.Text>
                 
-                    <Button variant="primary" onClick={() => setModalShow(true)}>More</Button>
+                    <Button variant="primary" style={{"margin": "1%"}} onClick={() => setModalShow(true)}>More</Button>
                     {resourceDisplayButton}
 
                 </Card.Body>
             </Card>
-
             <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -213,7 +231,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
-            >
+            >   
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter" style={{"fontWeight": "bolder"}}>
                         {groupName}
@@ -231,7 +249,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                         <br />
                         <b>Creator:</b> {creator}
                         <br />
-                        <b>Member(s):</b> {Array.isArray(members) ? members.join(', ') : members}
+                        <b>Member(s):</b> {display}
                         <br />
                         <b>Spot(s) left:</b> {spotsLeft}/{maxMembers}
                     </p>

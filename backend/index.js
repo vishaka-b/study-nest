@@ -38,7 +38,7 @@ app.listen(8888,()=>{
     app.post('/AddGroups', (req, res) => {
         console.log(req.body); 
         // Assuming the data is sent as JSON in the request body
-        const { groupName, ownersName, subjectsName, meetingTime, meetingDays, subjectClassification, selectedSubject, members, maxMembers, resources} = req.body;
+        const { groupName, ownersName, subjectsName, meetingTime, meetingDays, subjectClassification, selectedSubject, members, maxMembers, usernames, resources} = req.body;
         //console.log(groupName)
        
         database.collection("mygroupscollection").insertOne({
@@ -52,8 +52,10 @@ app.listen(8888,()=>{
             selectedSubject: selectedSubject,
             members: members,
             maxMembers: maxMembers,
+            usernames: usernames,
             resources: new Array()
         });
+        console.log(usernames);
         //console.log("IND SUBG:",console.log(selectedSubject))
         // Send a response back to the client
         res.json({ message: 'Succesfully created new Group' });
@@ -130,11 +132,12 @@ app.post('/leaveGroup', (req, res) => {
     const {groupName, user} = req.body;
     console.log(groupName)
     console.log(user)
-    
+    let index = members.indexOf(user);
+    database.collection("mygroupscollection").usernames.splice(index, 1);
     try {
       const result = database.collection("mygroupscollection").updateOne(
         { groupName: groupName },
-        { $pull: { members: user } }
+        { $pull: { members: user } },
         );
       
       res.json({ message: 'Succesfully left group:', groupName });
@@ -199,6 +202,7 @@ app.post('/addToGroup/', async (req,res) => {
     try{
         const groupID = req.body.groupName;
         const newMember = req.body.user;
+        const username = req.body.username;
         
         const groupCollection = database.collection("mygroupscollection");
 
@@ -206,10 +210,12 @@ app.post('/addToGroup/', async (req,res) => {
         const existingMember = await groupCollection.findOne({ groupName: groupID, members: newMember });
 
         if (!existingMember) {
+
         // Member doesn't exist, proceed with the update
         await groupCollection.updateOne(
             { groupName: groupID },
-            { $push: { members: newMember } }
+            { $push: { members: newMember } },
+            { $push: {usernames: username}}
         );
         res.json({ message: 'Successfully joined (meow):)' });
         } else {
@@ -219,27 +225,7 @@ app.post('/addToGroup/', async (req,res) => {
         res.status(500).json({ message: 'Internal Server Error' });
         }
 
-        /*if (database.collection("mygroupscollection").contains(newMember)){
-            console.error(error);
-        }*/
         
-      /*  database.collection("mygroupscollection").updateOne(
-            { groupName: groupID },
-            { $addToSet: { members: newMember } },
-       // );
-       // res.json({ message: 'Succesfully joined :)' });    
-        (err, result) => {
-            if (err) {
-              res.status(500).json({ error: 'Error updating the database' });
-            } else {
-              if (result.modifiedCount > 0) {
-                res.json({ message: 'Successfully joined :)' });
-              } else {
-                res.json({ message: 'You are already a member of this group' });
-              }
-            }
-          }
-         );*/
         }
 
     catch (error) {
@@ -247,14 +233,3 @@ app.post('/addToGroup/', async (req,res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
-
-//from mongoDB tutorial video
-/*
-app.delete('/backend/todoapp/DeleteNotes' ,(request,response)=>{
-    database.collection("todoappcollection").deleteOne({
-        id:request.query.id
-
-    });
-    response.json("deleted succesfully");
-})
-*/
