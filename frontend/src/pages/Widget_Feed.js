@@ -67,6 +67,7 @@ export default function WidgetFeed({groups, sortOption}) {
                         return null
                   }).filter(n => n)}
                   maxMembers={group.maxMembers}
+                  resources={group.resources}
                 />
               </Col>
             ))}

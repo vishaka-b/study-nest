@@ -4,8 +4,16 @@ import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 
-export default function Widget({groupName, subject, time, creator, days, subjectClass, members, maxMembers}) {
+export default function Widget({groupName, subject, time, creator, days, subjectClass, members, maxMembers,resources}) {
     const [modalShow, setModalShow] = React.useState(false);
+    const [secondModalShow, setSecondModalShow] = React.useState(false);
+    const [addResourceTextBoxValue, setAddResourceTextBoxValue] = React.useState('');
+
+
+    const toggleSecondModal = () => {
+        setSecondModalShow(!secondModalShow);
+      };
+
     const link = '/images/' + (subjectClass ?? 'other') + '.jpeg';
     const subjectMapping = {
         "computer_science": "Computer Science",
@@ -22,6 +30,30 @@ export default function Widget({groupName, subject, time, creator, days, subject
         "other": "Other"
       };
 
+    const handleAddResource = (event) =>{
+        event.preventDefault();
+        const newResource = window.sessionStorage.getItem("myResource");  // Assuming you have a session storage variable for the resource
+
+        fetch(`http://localhost:8888/AddResource`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    groupName: groupName,
+                    resource: newResource,
+                }),                        
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Successfully added resource " + groupName);
+                setSecondModalShow(false);
+                window.location.reload(false);
+                console.log(data);
+            })
+            .catch(error => console.error('Error checking membership:', error));
+        };
+    
     const handleDelete = (event) => {
         event.preventDefault();
         const confirmDelete = window.confirm('Are you sure you want to delete this group?');
@@ -137,6 +169,8 @@ export default function Widget({groupName, subject, time, creator, days, subject
     else {
         actionButton = <Button disabled>Full</Button>
     }
+    let resourceButton = <Button onClick={handleAddResource}>Add Resource </Button>
+    
 
     return (
         <>
@@ -155,6 +189,8 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     </Card.Text>
                 
                     <Button variant="primary" onClick={() => setModalShow(true)}>More</Button>
+                    <Button variant="primary" onClick={toggleSecondModal}>Resources</Button>
+
                 </Card.Body>
             </Card>
 
@@ -191,6 +227,40 @@ export default function Widget({groupName, subject, time, creator, days, subject
                 <Modal.Footer>          
                     {actionButton}
                 </Modal.Footer>
+            </Modal>
+            <Modal
+                show={secondModalShow}
+                onHide={() => setSecondModalShow(false)}
+                scrollable={true}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                // Other modal configurations
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter" style={{"fontWeight": "bolder"}}>
+                        Resources for {groupName}
+                        
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>
+                    <h4>All Resources:</h4>
+                    <ul>
+                        
+                    </ul>
+                    <input
+                        type="text"
+                        placeholder="Add Resource Link"
+                        value={addResourceTextBoxValue}
+                        onChange={(e) => setAddResourceTextBoxValue(e.target.value)}
+                    />
+                    </p>
+                </Modal.Body>
+                <Modal.Footer>          
+                    {resourceButton}
+                </Modal.Footer>
+                {/* Second Modal Content */}
             </Modal>
         </>
     );
