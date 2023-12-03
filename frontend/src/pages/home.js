@@ -46,6 +46,7 @@ export default function Home(){
     const [groupName, setGroupName] = useState('');
     const [ownersName, setOwnersName] = useState('');
     const [subjectsName, setSubjectsName] = useState('');
+    const [maxMembers, setMaxMembers] = useState('');
     const [meetingTime, setMeetingTime] = useState('');
     const [meetingDays, setMeetingDays] = useState({
         monday: false,
@@ -121,7 +122,8 @@ export default function Home(){
                 meetingDays: Array.from(Object.values(meetingDays)),
                 subjectClassification: Array.from(Object.values(subjectClassification)),
                 selectedSubject: selectedSubject,
-                members: members
+                members: members,
+                maxMembers: maxMembers
             }),
         })
         .then(response => response.json())
@@ -163,7 +165,7 @@ export default function Home(){
 
             });
             setSelectedSubject('');
-            
+            setMaxMembers('');
             //refresh itself so users do not need to refresh by hand
             // refreshGroups();
             
@@ -285,6 +287,11 @@ export default function Home(){
                         <Form.Group className="mb-3">
                             <Form.Label><b>Meeting time:</b></Form.Label>
                             <Form.Control type="time" value={meetingTime} onChange={(e) => setMeetingTime(e.target.value)}/>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label><b>Maximum group size:</b></Form.Label>
+                            <Form.Control type="number" min="2" max="16" value={maxMembers} onChange={(e) => setMaxMembers(e.target.value)}/>
                         </Form.Group>
                         
                         </Form>

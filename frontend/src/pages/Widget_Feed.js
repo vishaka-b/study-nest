@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Widget from './Widget';
 
-export default function WidgetFeed({groups, sortOption, refresh}) {
+export default function WidgetFeed({groups, sortOption}) {
     const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     const subjectsArray = [
         'computer_science',
@@ -59,7 +59,6 @@ export default function WidgetFeed({groups, sortOption, refresh}) {
                         }
                         return 'other';
                         })()}
-                  refresh={refresh}
 
                   days={group.meetingDays.map(function (day, index) {
                     if (day === true)
@@ -67,6 +66,7 @@ export default function WidgetFeed({groups, sortOption, refresh}) {
                     else
                         return null
                   }).filter(n => n)}
+                  maxMembers={group.maxMembers}
                 />
               </Col>
             ))}

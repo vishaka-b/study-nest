@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 
-export default function Widget({groupName, subject, time, creator, days, subjectClass, members}) {
+export default function Widget({groupName, subject, time, creator, days, subjectClass, members, maxMembers}) {
     const [modalShow, setModalShow] = React.useState(false);
     const link = '/images/' + (subjectClass ?? 'other') + '.jpeg';
     const subjectMapping = {
@@ -124,7 +124,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
     const currUser = window.sessionStorage.getItem("myUser");
     let actionButton
     let numMembers = members.length
-    let spotsLeft = members.length < 15 ? 15 - members.length : 0
+    let spotsLeft = members.length < maxMembers ? maxMembers - members.length : 0
     if (creator === currUser) {
         actionButton = <Button onClick={handleDelete}>Delete group</Button>
     }
@@ -185,7 +185,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                         <br />
                         <b>Member(s):</b> {Array.isArray(members) ? members.join(', ') : members}
                         <br />
-                        <b>Spot(s) left:</b> {spotsLeft}/15
+                        <b>Spot(s) left:</b> {spotsLeft}/{maxMembers}
                     </p>
                 </Modal.Body>
                 <Modal.Footer>          
