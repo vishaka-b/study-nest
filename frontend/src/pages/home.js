@@ -99,7 +99,7 @@ export default function Home(){
         //ensures we are at home page (have to add reload screen)
         event.preventDefault();
         
-        if (!groupName || !subjectsName || !meetingTime || !maxMembers || !Object.values(meetingDays).some(day => day) || !maxMembers) {
+        if (!groupName || !subjectsName || !meetingTime || !maxMembers || !Object.values(meetingDays).some(day => day)) {
             alert("Please fill in all fields before submitting.");
             return;
         }

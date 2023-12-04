@@ -282,7 +282,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                 <Modal.Body>
                     {resourceMessage}
                     {resources && resources.map((resource, index) => (
-                        <li key={index}><a href={resource}>{resource}</a></li>
+                        <li key={index}><a href={resource} rel="noreferrer" target="_blank">{resource}</a></li>
                     ))}
                 </Modal.Body>
                 <Modal.Footer>          
