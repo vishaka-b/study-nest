@@ -178,7 +178,6 @@ export default function Widget({groupName, subject, time, creator, days, subject
         actionButton = <Button onClick={handleLeave}>Leave group</Button>
         resourceButton=<Button onClick={handleAddResource}>Add resource</Button>
         resourceDisplayButton= <Button variant="primary" className="inline-button" onClick={toggleSecondModal}>Resources</Button>
-
     }
     else if (numMembers < maxMembers) {
         actionButton = <Button onClick={handleJoin}>Join group</Button>
@@ -188,13 +187,15 @@ export default function Widget({groupName, subject, time, creator, days, subject
     }
 
     let resourceMessage
-    if (resources.length === 0) {
-        resourceMessage="No resources added yet!"
+    if (members.includes(currUser))
+    {
+        if (resources.length === 0) {
+            resourceMessage="No resources added yet!"
+        }
+        else {
+            resourceMessage=<b>All resources:</b>
+        }
     }
-    else {
-        resourceMessage=<b>All resources:</b>
-    }
-    
    
     let display = "";
     for (let i = 0; i < numUsers; i++){
