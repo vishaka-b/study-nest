@@ -132,8 +132,8 @@ app.post('/leaveGroup', (req, res) => {
     const {groupName, user} = req.body;
     console.log(groupName)
     console.log(user)
-   // let index = members.indexOf(user);
-   // database.collection("mygroupscollection").usernames.splice(index, 1);
+   /* let index = members.indexOf(user);
+    database.collection("mygroupscollection").usernames.splice(index, 1);*/
     try {
       const result = database.collection("mygroupscollection").updateOne(
         { groupName: groupName },
