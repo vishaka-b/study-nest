@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 export default function Widget({groupName, subject, time, creator, days, subjectClass, members, maxMembers,resources, usernames}) {
     const [modalShow, setModalShow] = React.useState(false);
@@ -184,6 +186,14 @@ export default function Widget({groupName, subject, time, creator, days, subject
     else {
         actionButton = <Button disabled>Full</Button>        
     }
+
+    let resourceMessage
+    if (resources.length === 0) {
+        resourceMessage="No resources added yet!"
+    }
+    else {
+        resourceMessage=<b>All resources:</b>
+    }
     
    
     let display = "";
@@ -235,7 +245,6 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>
                         <b>Course:</b> {subject} 
                         <br />
                         <b>Subject:</b> {subjectMapping[subjectClass] ?? 'Other'} 
@@ -249,7 +258,6 @@ export default function Widget({groupName, subject, time, creator, days, subject
                         <b>Member(s):</b> {display}
                         <br />
                         <b>Spot(s) left:</b> {spotsLeft}/{maxMembers}
-                    </p>
                 </Modal.Body>
                 <Modal.Footer>          
                     {actionButton}
@@ -271,21 +279,23 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>
-                    <h4>All Resources:</h4>
+                    {resourceMessage}
                     {resources && resources.map((resource, index) => (
-                        <li key={index}>{resource}</li>
+                        <li key={index}><a href={resource}>{resource}</a></li>
                     ))}
-                    <input
-                        type="text"
-                        placeholder="Add Resource Link"
-                        value={addResourceTextBoxValue}
-                        onChange={(e) => setAddResourceTextBoxValue(e.target.value)}
-                    />
-                    </p>
                 </Modal.Body>
                 <Modal.Footer>          
-                    {resourceButton}
+                    {/*<Form>
+                        <Form.Group className="mb-3">
+                            <Form.Control type="text" placeholder="Add resource link..." value={addResourceTextBoxValue} onChange={(e) => setAddResourceTextBoxValue(e.target.value)} />
+                        </Form.Group>
+                    </Form>
+                    {resourceButton}*/}
+
+                    <InputGroup>
+                        <Form.Control type="text" placeholder="Enter full URL..." value={addResourceTextBoxValue} onChange={(e) => setAddResourceTextBoxValue(e.target.value)} />
+                        {resourceButton}
+                    </InputGroup>
                 </Modal.Footer>
                 {/* Second Modal Content */}
             </Modal>

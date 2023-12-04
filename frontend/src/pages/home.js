@@ -292,7 +292,7 @@ export default function Home(){
                             <Form.Control type="time" value={meetingTime} onChange={(e) => setMeetingTime(e.target.value)}/>
                         </Form.Group>
 
-                        <Form.Group className="mb-3">
+                        <Form.Group>
                             <Form.Label><b>Maximum group size:</b></Form.Label>
                             <Form.Control type="number" min="2" max="16" value={maxMembers} onChange={(e) => setMaxMembers(e.target.value)}/>
                         </Form.Group>
