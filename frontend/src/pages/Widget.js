@@ -167,7 +167,6 @@ export default function Widget({groupName, subject, time, creator, days, subject
     let numMembers = members.length
     let spotsLeft = members.length < maxMembers ? maxMembers - members.length : 0
     let resourceButton
-    let numUsers = usernames != null ? usernames.length : 0;
 
     if (creator === currUser) {
         actionButton = <Button onClick={handleDelete}>Delete group</Button>
@@ -196,20 +195,8 @@ export default function Widget({groupName, subject, time, creator, days, subject
             resourceMessage=<b>All resources:</b>
         }
     }
-   
-    let display = "";
-    for (let i = 0; i < numUsers; i++){
-        display += usernames[i];
-        display += " (";
-        display += members[i];
-        if (i === numUsers -1)
-            display += ") ";
-        else
-            display += "), "
-    }
-
-    if (display === "")
-        display = Array.isArray(members) ? members.join(', ') : members;
+    
+    let display = Array.isArray(members) ? members.join(', ') : members;
 
     return (
         <>
