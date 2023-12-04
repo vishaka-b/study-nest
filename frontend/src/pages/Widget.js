@@ -170,12 +170,12 @@ export default function Widget({groupName, subject, time, creator, days, subject
 
     if (creator === currUser) {
         actionButton = <Button onClick={handleDelete}>Delete group</Button>
-        resourceButton=<Button onClick={handleAddResource}>Add resource</Button>
+        resourceButton=<Button onClick={handleAddResource}>Add</Button>
         resourceDisplayButton= <Button variant="primary" className="inline-button" onClick={toggleSecondModal}>Resources</Button>
     }
     else if (members.includes(currUser)) {
         actionButton = <Button onClick={handleLeave}>Leave group</Button>
-        resourceButton=<Button onClick={handleAddResource}>Add resource</Button>
+        resourceButton=<Button onClick={handleAddResource}>Add</Button>
         resourceDisplayButton= <Button variant="primary" className="inline-button" onClick={toggleSecondModal}>Resources</Button>
     }
     else if (numMembers < maxMembers) {
@@ -269,7 +269,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                 <Modal.Body>
                     {resourceMessage}
                     {resources && resources.map((resource, index) => (
-                        <li key={index}><a href={resource} rel="noreferrer" target="_blank">{resource}</a></li>
+                        <li key={index}>{resource}</li>
                     ))}
                 </Modal.Body>
                 <Modal.Footer>          
@@ -281,7 +281,7 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     {resourceButton}*/}
 
                     <InputGroup>
-                        <Form.Control type="text" placeholder="Enter full URL..." value={addResourceTextBoxValue} onChange={(e) => setAddResourceTextBoxValue(e.target.value)} />
+                        <Form.Control type="text" placeholder="Enter resource..." value={addResourceTextBoxValue} onChange={(e) => setAddResourceTextBoxValue(e.target.value)} />
                         {resourceButton}
                     </InputGroup>
                 </Modal.Footer>
