@@ -38,9 +38,7 @@ export default function Home(){
         refreshGroups()
     }, []);
     
-    const [showForm, setShowForm] = useState(false);
     const [groupName, setGroupName] = useState('');
-    const [ownersName, setOwnersName] = useState('');
     const [subjectsName, setSubjectsName] = useState('');
     const [maxMembers, setMaxMembers] = useState('');
     const [meetingTime, setMeetingTime] = useState('');
@@ -96,16 +94,16 @@ export default function Home(){
 
 
     const handleFormSubmit = (event) => {
-        //ensures we are at home page (have to add reload screen)
+        // Ensure we are at home page
         event.preventDefault();
         
         if (!groupName || !subjectsName || !meetingTime || !maxMembers || !Object.values(meetingDays).some(day => day)) {
-            alert("Please fill in all fields before submitting.");
+            alert("Please fill in all fields before submitting");
             return;
         }
         const g = groupsYoureIn.filter(group => group.groupName === groupName)
         if (g.length !== 0){
-            alert("Group Name Already Exists. Please Change Name to make a new group");
+            alert("Group name already exists; please change name to make a new group");
             return;
         }
         const members = [currUser]
@@ -138,9 +136,7 @@ export default function Home(){
         })
         .finally(() => {
             // Close the form and reset fields regardless of success or failure
-            setShowForm(false);
             setGroupName('');
-            setOwnersName('');
             setSubjectsName('');
             setMeetingTime('');
             setMeetingDays({
@@ -169,8 +165,6 @@ export default function Home(){
             });
             setSelectedSubject('');
             setMaxMembers('');
-            //refresh itself so users do not need to refresh by hand
-            // refreshGroups();
             
             setModalShow(false);
             window.location.reload(false);

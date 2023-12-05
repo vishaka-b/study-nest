@@ -18,13 +18,13 @@ function SignUp(props) {
     const userData = await response.json();
     const userExists = userData.find(user => user.email === email);
   if(name === "" || email === "" || pwd === "" || reTypepwd === "")  {
-    alert("Please fill out all fields to Sign Up")
+    alert("Please fill out all fields to sign up")
   }
   else if (userExists) {
-    alert('Email already exists. Please choose a different one.');
+    alert('Email already exists; please choose a different one');
   } 
   else if (reTypepwd !== pwd){
-    alert('Both passwords to not match. Please try again')
+    alert('Passwords must match')
   }
   else {
     fetch('http://localhost:8888/createNewUser', {
@@ -79,7 +79,7 @@ function SignUp(props) {
                   checked={showPassword}
                   onChange={() => setShowPassword(!showPassword)}
                 />
-                 <span className="small-text"> Show Password</span>
+                 <span className="small-text"> Show password</span>
               </span>
           
           </label>
@@ -94,7 +94,7 @@ function SignUp(props) {
                   checked={showPassword2}
                   onChange={() => setShowPassword2(!showPassword2)}
                 />
-                 <span className="small-text"> Show Password</span>
+                 <span className="small-text"> Show password</span>
               </span>
           
           
@@ -110,25 +110,5 @@ function SignUp(props) {
     </div>
   );
 }
-
-/*
-const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-    async function handleSubmit(e) {
-      e.preventDefualt();
-      const res = fetch('http://localhost:3000/');
-    }
-async function loginUser(email, password) {
-  // check email and password with database
-  // 0 = success, 1 = wrong password, 2 = email not found
-  const url = "http://localhost:5000/login";
-  let res = await fetch(url);
-  res = res.text();
-  console.log(res);
-  return res;
-}
-
-*/
 
 export default SignUp;

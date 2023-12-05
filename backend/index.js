@@ -13,10 +13,6 @@ var CONNECTION_STRING = "mongodb+srv://mbajji:mongoDB@cluster0.cpyo7ca.mongodb.n
 var DATABASENAME="mygroups";
 var database;
 
-
-
-
-
 const groupSchema = {
     title: String,
     content: String
@@ -27,7 +23,6 @@ app.listen(8888,()=>{
     Mongoclient.connect(CONNECTION_STRING,(error,client)=>{
 
         database=client.db(DATABASENAME);
-       // database.collection("mygroupscollection").createIndex( { ownersName: 1 }, { unique: true } )
 
         console.log("Succesfully connected to MongoDB");
     })
@@ -56,9 +51,8 @@ app.listen(8888,()=>{
             resources: new Array()
         });
         console.log(usernames);
-        //console.log("IND SUBG:",console.log(selectedSubject))
         // Send a response back to the client
-        res.json({ message: 'Succesfully created new Group' });
+        res.json({ message: 'Succesfully created new group' });
     });
 app.post('/createNewUser', (req, res)=>{
     console.log(req.body); 
@@ -68,7 +62,7 @@ app.post('/createNewUser', (req, res)=>{
         pwd: pwd,
         name: name
     });
-    res.json({ message: 'Succesfully created new User. Please Login with your newest data' });
+    res.json({ message: 'Succesfully created new user; please log in with your newest data' });
 })
 //pull all data into this link http://localhost:8888/mygroupslist
 app.get('/mygroupslist',(request,reposnse)=>{
@@ -132,8 +126,6 @@ app.post('/leaveGroup', (req, res) => {
     const {groupName, user} = req.body;
     console.log(groupName)
     console.log(user)
-   /* let index = members.indexOf(user);
-    database.collection("mygroupscollection").usernames.splice(index, 1);*/
     try {
       const result = database.collection("mygroupscollection").updateOne(
         { groupName: groupName },
@@ -156,8 +148,7 @@ app.post('/AddResource', async (req, res) => {
         // Connect to the MongoDB database
         const collection = database.collection('mygroupscollection');
    
-        // Assuming you have a groupId in the request body and a resource to add
-        //const { groupID, resource } = req.body;
+        // Assuming you have a groupID in the request body and a resource to add
         const groupID=req.body.groupName;
         const resource=req.body.resource;
       
@@ -165,9 +156,8 @@ app.post('/AddResource', async (req, res) => {
           alert("Please enter resource before adding");
           return;
         }
-        // Find the group document by its _id (assuming groupId is the _id)
+        // Find the group document by its _id (assuming groupID is the _id)
         const group = await collection.findOne({ groupName: groupID });
-        //console.log("GROUP", group);
    
         if (!group) {
           // Group not found
@@ -190,7 +180,7 @@ app.post('/AddResource', async (req, res) => {
    
         if (result.modifiedCount === 1) {
           // Resource added successfully
-          res.json({ message: 'Resource added successfully' });
+          res.json({ message: 'Successfully added resource' });
         } else {
           // Resource addition failed
           res.json({ message: 'Failed to add resource' });
@@ -215,25 +205,23 @@ app.post('/addToGroup/', async (req,res) => {
 
         if (!existingMember) {
 
-        // Member doesn't exist, proceed with the update
+        // Member doesn't exist, so proceed with the update
         await groupCollection.updateOne(
             { groupName: groupID },
             { $push: { members: newMember } },
             { $push: {usernames: username}}
         );
-        res.json({ message: 'Successfully joined (meow):)' });
+        res.json({ message: 'Successfully joined group' });
         } else {
         // Member already exists in the array
         res.json({ message: 'You are already a member of this group' });
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Internal server error' });
         }
-
-        
         }
 
     catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ message: 'Internal server error' });
     }
 });

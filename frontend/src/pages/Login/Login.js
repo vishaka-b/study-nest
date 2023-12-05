@@ -1,15 +1,7 @@
 import './Login.css';
-//import React, { useState } from 'react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-const myUser = '1234'
-const EyeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 2C6.48 2 2 7.33 2 12s4.48 10 10 10 10-4.33 10-10S17.52 2 12 2zm-1 6s2-3 5-3c1.99 0 4 1 4 3s-2 3-4 3c-1.99 0-5-1-5-3zm1 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
-  </svg>
-);
-
-function Login(props) 
+function Login() 
 {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,15 +12,15 @@ function Login(props)
     event.preventDefault();
 
     if (email === "" && password === "") {
-      alert("Please enter both an email and a password.");
+      alert("Please enter both an email and a password");
       return;
     }
     if (email === "") {
-      alert("Please enter an email.");
+      alert("Please enter an email");
       return;
     }
     if (password === "") {
-      alert("Please enter a password.");
+      alert("Please enter a password");
       return;
     }
 
@@ -41,7 +33,7 @@ function Login(props)
       console.log(trueUser)
 
       if (!trueUser) {
-        alert('User not found. Please check that you entered your email correctly.');
+        alert('User not found; please check that you entered your email correctly');
         return;
       }
       
@@ -61,13 +53,13 @@ function Login(props)
         window.location.href = '/Home';
       }
       else {
-        alert("Incorrect password. Please try again.");
+        alert("Incorrect password; please try again");
       }
       
       }
       catch (error) {
         console.error('Error during login:', error);
-    alert('An error occurred during login. Please try again.');
+    alert('An error occurred during login; please try again');
     }
   }
   
@@ -102,7 +94,7 @@ function Login(props)
                   checked={showPassword}
                   onChange={() => setShowPassword(!showPassword)}
                 />
-                 <span className="small-text"> Show Password</span>
+                 <span className="small-text"> Show password</span>
               </span>
             </div>
           </label>
@@ -116,30 +108,6 @@ function Login(props)
       </div>
     </div>
   );
-
-  
-  
-   
 }
-
-/*
-const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-    async function handleSubmit(e) {
-      e.preventDefualt();
-      const res = fetch('http://localhost:3000/');
-    }
-async function loginUser(email, password) {
-  // check email and password with database
-  // 0 = success, 1 = wrong password, 2 = email not found
-  const url = "http://localhost:5000/login";
-  let res = await fetch(url);
-  res = res.text();
-  console.log(res);
-  return res;
-}
-
-*/
 
 export default Login;
