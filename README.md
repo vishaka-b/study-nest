@@ -17,19 +17,19 @@ Then, start the backend and connect to the database by running `node index.js`. 
 Our backend will try to connect on (http://localhost:8888/). If you get an error saying port 8888 is already in use, change the code in index.js in the backend to an unused port in your server (e.g., 1234). Make sure to change links from http://localhost:8888/ to http://localhost:1234/ in the frontend files home.js, allgroups.js, Login.js, and SignUp.js to ensure the data are read from the correct places.
 
 ## Setting up and running the frontend
-Enter the frontend folder using `cd ../frontend`. Before running the code for the first time, make sure to install React Bootstrap and Axios with the following commands:
+Enter the Study Nest directory in a separate instance of the terminal and enter the frontend folder using `cd frontend`. Before running the code for the first time, make sure to install React Bootstrap and Axios with the following commands:
 - `npm install react-bootstrap bootstrap`
 - `npm install axios`
 
-Make sure you are connected to MongoDB before running the following steps (you should see "Succesfully connected to MongoDB" in the terminal).
+Make sure you are connected to MongoDB before running the following steps (you should see "Successfully connected to MongoDB" in the terminal).
 Run `npm start` in the frontend folder to run Study Nest on http://localhost:8888/.
 
 Have fun! :)
 
 ## Creators
 Study Nest is brought to you by:
-Maheswari Bajji [https://github.com/mbajji]
-Vishaka Bhat [https://github.com/vishaka-b]
-Shriya Char [https://github.com/Shriya8]
-Joy Cheng [https://github.com/joy-y-cheng]
-Hannah Kendall [https://github.com/hannahkendall04]
+- Maheswari Bajji [https://github.com/mbajji]
+- Vishaka Bhat [https://github.com/vishaka-b]
+- Shriya Char [https://github.com/Shriya8]
+- Joy Cheng [https://github.com/joy-y-cheng]
+- Hannah Kendall [https://github.com/hannahkendall04]
