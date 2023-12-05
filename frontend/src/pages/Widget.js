@@ -6,7 +6,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-export default function Widget({groupName, subject, time, creator, days, subjectClass, members, maxMembers,resources, usernames}) {
+export default function Widget({groupName, subject, time, creator, days, subjectClass, members, maxMembers, resources}) {
     const [modalShow, setModalShow] = React.useState(false);
     const [secondModalShow, setSecondModalShow] = React.useState(false);
     const [addResourceTextBoxValue, setAddResourceTextBoxValue] = React.useState('');
@@ -34,8 +34,10 @@ export default function Widget({groupName, subject, time, creator, days, subject
 
     const handleAddResource = (event) =>{
         event.preventDefault();
-        //const newResource = window.sessionStorage.getItem("myResource");  // Assuming you have a session storage variable for the resource
-
+        if (!addResourceTextBoxValue) {
+            alert("Please input a resource to add");
+            return;
+        }
         fetch(`http://localhost:8888/AddResource`, {
                 method: 'POST',
                 headers: {
@@ -48,16 +50,12 @@ export default function Widget({groupName, subject, time, creator, days, subject
             })
             .then(response => response.json())
             .then(data => {
-                if (!addResourceTextBoxValue){
-                    alert("Please input a resource to add");
-
-                } else {
                 alert("Successfully added resource to " + groupName);
                 setSecondModalShow(false);
                 window.location.reload(false);
                 console.log(data);
                 }
-            })
+            )
             .catch(error => console.error('Error checking membership:', error));
         };
     
@@ -278,19 +276,11 @@ export default function Widget({groupName, subject, time, creator, days, subject
                     ))}
                 </Modal.Body>
                 <Modal.Footer>          
-                    {/*<Form>
-                        <Form.Group className="mb-3">
-                            <Form.Control type="text" placeholder="Add resource link..." value={addResourceTextBoxValue} onChange={(e) => setAddResourceTextBoxValue(e.target.value)} />
-                        </Form.Group>
-                    </Form>
-                    {resourceButton}*/}
-
                     <InputGroup>
                         <Form.Control type="text" placeholder="Enter resource..." value={addResourceTextBoxValue} onChange={(e) => setAddResourceTextBoxValue(e.target.value)} />
                         {resourceButton}
                     </InputGroup>
                 </Modal.Footer>
-                {/* Second Modal Content */}
             </Modal>
         </>
     );

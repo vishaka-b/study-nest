@@ -82,33 +82,13 @@ export default function AllGroups(){
       <Button variant="primary" className="inline-button mt-3" onClick={() => setSortOption('groupName')}>
         Sort by group
       </Button>
-      <Button variant="primary" className="inline-button mt-3" onClick={() => setSortOption('ownersName')}>
-        Sort by owner
-      </Button>
       <Button variant="primary" className="inline-button mt-3" onClick={() => setSortOption('courseName')}>
         Sort by course
       </Button>
+      <Button variant="primary" className="inline-button mt-3" onClick={() => setSortOption('ownersName')}>
+        Sort by creator
+      </Button>
     </div>
-
-
-    {/*<div class="search-container">
-      <input
-        class="search-input"
-        type="text"
-        placeholder="Search for group, course, or owner..."
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        onKeyPress={handleKeyPress}
-      />
-        <button onClick={handleSearch} class="search-button">Search</button>
-        <button onClick={handleShowAllGroups} class="show-all-button">Show All Groups</button>
-    </div>
-
-    <div className="sort-buttons">
-        <button class="sort-button" onClick={() => setSortOption('groupName')}>Sort by Group Name</button>
-        <button class="sort-button" onClick={() => setSortOption('ownersName')}>Sort by Owner's Name</button>
-        <button class="sort-button" onClick={() => setSortOption('courseName')}>Sort by Course Name</button>
-      </div>*/}
     
     <WidgetFeed groups={filteredGroups} sortOption={sortOption}/>
    </Container>
