@@ -48,10 +48,15 @@ export default function Widget({groupName, subject, time, creator, days, subject
             })
             .then(response => response.json())
             .then(data => {
+                if (!addResourceTextBoxValue){
+                    alert("Please input a resource to add");
+
+                } else {
                 alert("Successfully added resource to " + groupName);
                 setSecondModalShow(false);
                 window.location.reload(false);
                 console.log(data);
+                }
             })
             .catch(error => console.error('Error checking membership:', error));
         };

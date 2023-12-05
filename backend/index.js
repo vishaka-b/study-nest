@@ -160,7 +160,11 @@ app.post('/AddResource', async (req, res) => {
         //const { groupID, resource } = req.body;
         const groupID=req.body.groupName;
         const resource=req.body.resource;
-   
+      
+        if (!resource) {
+          alert("Please enter resource before adding");
+          return;
+        }
         // Find the group document by its _id (assuming groupId is the _id)
         const group = await collection.findOne({ groupName: groupID });
         //console.log("GROUP", group);
