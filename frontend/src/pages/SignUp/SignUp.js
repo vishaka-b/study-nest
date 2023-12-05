@@ -8,6 +8,8 @@ function SignUp(props) {
   const [pwd, setPwd] = useState('');
   const [reTypepwd, setReTypePwd] = useState('');
   const [name, setName] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
 
   const handleUserSubmit= async (event) => {
     event.preventDefault();
@@ -69,11 +71,33 @@ function SignUp(props) {
           </label>
           <label className="text">
             <div>Password</div>
-            <input type="password" value={pwd} onChange={(e) => setPwd(e.target.value)}/>
+            <input type={showPassword ? "text" : "password"} value={pwd} onChange={(e) => setPwd(e.target.value)}/>
+            <br></br>
+            <span className="show-password-checkbox">
+                <input
+                  type="checkbox"
+                  checked={showPassword}
+                  onChange={() => setShowPassword(!showPassword)}
+                />
+                 <span className="small-text"> Show Password</span>
+              </span>
+          
           </label>
+
           <label className="text">
             <div>Re-enter password</div>
-            <input type="password" value={reTypepwd} onChange={(e) => setReTypePwd(e.target.value)}/>
+            <input type={showPassword2 ? "text" : "password"}  value={reTypepwd} onChange={(e) => setReTypePwd(e.target.value)}/>
+            <br></br>
+            <span className="show-password-checkbox">
+                <input
+                  type="checkbox"
+                  checked={showPassword2}
+                  onChange={() => setShowPassword2(!showPassword2)}
+                />
+                 <span className="small-text"> Show Password</span>
+              </span>
+          
+          
           </label>
           <div>
             <button className="login-button" type="submit" >
