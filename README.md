@@ -22,7 +22,7 @@ Enter the Study Nest directory in a separate instance of the terminal and enter 
 - `npm install axios`
 
 Make sure you are connected to MongoDB before running the following steps (you should see "Successfully connected to MongoDB" in the terminal).
-Run `npm start` in the frontend folder to run Study Nest on http://localhost:8888/.
+Run `npm start` in the frontend folder to run Study Nest on http://localhost:3000/.
 
 Have fun! :)
 
