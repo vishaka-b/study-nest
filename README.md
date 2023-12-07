@@ -16,6 +16,8 @@ Then, start the backend and connect to the database by running `node index.js`. 
 
 Our backend will try to connect on (http://localhost:8888/). If you get an error saying port 8888 is already in use, change the code in index.js in the backend to an unused port in your server (e.g., 1234). Make sure to change links from http://localhost:8888/ to http://localhost:1234/ in the frontend files home.js, allgroups.js, Login.js, and SignUp.js to ensure the data are read from the correct places.
 
+If you get an error cannot read properties of undefined (reading ‘db’) after doing node index.js, that means your connection to MongoDB timed out. Please try reconnecting using a faster wifi network such as hotspot or another server. 
+
 ## Setting up and running the frontend
 Enter the Study Nest directory in a separate instance of the terminal and enter the frontend folder using `cd frontend`. Before running the code for the first time, make sure to install React Bootstrap and Axios with the following commands:
 - `npm install react-bootstrap bootstrap`
