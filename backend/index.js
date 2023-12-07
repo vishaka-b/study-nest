@@ -65,16 +65,16 @@ app.post('/createNewUser', (req, res)=>{
     res.json({ message: 'Succesfully created new user; please log in with your newest data' });
 })
 //pull all data into this link http://localhost:8888/mygroupslist
-app.get('/mygroupslist',(request,reposnse)=>{
+app.get('/mygroupslist',(request,response)=>{
     database.collection("mygroupscollection").find({}).toArray((error,result)=>{
-        reposnse.send(result);
+        response.send(result);
     })
 
 })
 
-app.get('/myuserlist',(request,reposnse)=>{
+app.get('/myuserlist',(request,response)=>{
     database.collection("myusercollection").find({}).toArray((error,result)=>{
-        reposnse.send(result);
+        response.send(result);
     })
 
 })
